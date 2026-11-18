@@ -2,7 +2,7 @@
 window.TV_CONFIG = {
   // Google Sheet ID: jadval havolasidagi /d/ va /edit orasidagi qism.
   // Bo'sh qolsa, sahifa demo.js dagi namuna ma'lumotlarni ko'rsatadi.
-  SHEET_ID: "",
+  SHEET_ID: "1ZjSKOYk2xHNqrOZAyi7MoZ-nRlOn30H2Mz8dGb5N90Y",
 
   // Har bir slayd necha soniya turadi (Sheet'dagi "Sozlamalar" varag'i ustun keladi)
   SLIDE_SECONDS: 12,
