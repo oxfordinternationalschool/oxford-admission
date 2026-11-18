@@ -63,6 +63,10 @@
   .tel input { border-radius: 0 999px 999px 0 !important; padding-right: 20px; }
   .dd-btn { padding-left: 12px; padding-right: 20px; }
   .tile .box { padding-left: 14px; padding-right: 18px; }
+  .ilbl { display: inline-flex; align-items: center; gap: 7px; }
+  .ilbl svg.i { width: 17px; height: 17px; color: var(--blue); }
+  .ilbl .req { margin-left: -4px; }
+  .ctl.noico input { padding-left: 22px; }
   /* Dumaloq (pill) burchaklar */
   .langs, .langs button, .call, .btn { border-radius: 999px !important; }
   /* Logo: oq qutisiz, shaffof PNG */
@@ -406,13 +410,13 @@
             <div><h3 data-t="q1"></h3><p data-t="h1t"></p></div></div>
           <div class="fields two">
             <div class="field" data-f="ism">
-              <div class="lrow"><label for="ism"><span data-t="fn"></span><span class="req">*</span></label></div>
-              <div class="ctl"><svg class="i"><use href="#i-user"/></svg><input type="text" id="ism" autocomplete="given-name" data-ph="fnPh"></div>
+              <div class="lrow"><label for="ism" class="ilbl"><svg class="i"><use href="#i-user"/></svg><span data-t="fn"></span><span class="req">*</span></label></div>
+              <div class="ctl noico"><input type="text" id="ism" autocomplete="given-name" data-ph="fnPh"></div>
               <p class="err" data-t="eName" hidden></p>
             </div>
             <div class="field" data-f="familiya">
-              <div class="lrow"><label for="familiya"><span data-t="ln"></span><span class="req">*</span></label></div>
-              <div class="ctl"><svg class="i"><use href="#i-user"/></svg><input type="text" id="familiya" autocomplete="family-name" data-ph="lnPh"></div>
+              <div class="lrow"><label for="familiya" class="ilbl"><svg class="i"><use href="#i-user"/></svg><span data-t="ln"></span><span class="req">*</span></label></div>
+              <div class="ctl noico"><input type="text" id="familiya" autocomplete="family-name" data-ph="lnPh"></div>
               <p class="err" data-t="eName" hidden></p>
             </div>
           </div>
