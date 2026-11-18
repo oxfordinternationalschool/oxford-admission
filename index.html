@@ -88,6 +88,16 @@
   .dd-grid .chip:active { transform: scale(.96); }
   .dd-grid .chip[aria-selected="true"] { background: linear-gradient(135deg, var(--navy), var(--blue)); border-color: transparent; }
   .dd-grid .chip[aria-selected="true"] b, .dd-grid .chip[aria-selected="true"] small { color: #fff; }
+  /* Sinflar ro'yxati: ixcham, bir xil uslub */
+  .dd-list.dd-compact { padding: 6px; border-radius: 22px; max-height: none; }
+  .dd-compact .dd-opt { padding: 6px 14px 6px 6px; border-radius: 999px; min-height: 44px; }
+  .dd-compact .dd-opt + .dd-opt { margin-top: 2px; }
+  .dd-compact .dd-opt .oi { width: 32px; height: 32px; font-size: .88rem; background: var(--blue-soft); color: var(--blue); }
+  .dd-compact .dd-opt .t b { font-size: .95rem; font-weight: 600; }
+  .dd-compact .dd-opt .t small { display: none; }
+  .dd-compact .dd-opt.active { background: var(--soft); }
+  .dd-compact .dd-opt[aria-selected="true"] { background: var(--blue-soft); }
+  .dd-compact .dd-opt[aria-selected="true"] .oi { background: var(--blue); color: #fff; }
   /* Dumaloq (pill) burchaklar */
   .langs, .langs button, .call, .btn { border-radius: 999px !important; }
   /* Logo: oq qutisiz, shaffof PNG */
@@ -658,8 +668,9 @@
   Dropdown.prototype.isOpen = function () { return !this.list.hidden; };
   Dropdown.prototype.render = function () {
     var items = this.opts.items(), val = this.opts.get(), cur = null, html = '', lastGroup = null, id = this.root.id;
-    var grid = this.opts.grid;
+    var grid = this.opts.grid, compact = this.opts.compact;
     this.list.classList.toggle('dd-grid', !!grid);
+    this.list.classList.toggle('dd-compact', !!this.opts.compact);
     items.forEach(function (it, i) {
       if (it.v === val) cur = it;
       if (grid) {
@@ -667,7 +678,7 @@
           '<b>' + esc(it.num) + '</b><small>' + esc(it.word) + '</small></li>';
         return;
       }
-      if (it.group && it.group !== lastGroup) { html += '<li class="dd-group" role="presentation">' + esc(it.group) + '</li>'; lastGroup = it.group; }
+      if (it.group && it.group !== lastGroup && !compact) { html += '<li class="dd-group" role="presentation">' + esc(it.group) + '</li>'; lastGroup = it.group; }
       if (it.v === val) cur = it;
       html += '<li class="dd-opt" role="option" id="' + id + '-o' + i + '" data-i="' + i + '" aria-selected="' + (it.v === val) + '">' +
         it.icon + '<span class="t"><b>' + esc(it.label) + '</b>' + (it.sub ? '<small>' + esc(it.sub) + '</small>' : '') + '</span>' +
@@ -715,7 +726,7 @@
   };
 
   new Dropdown($('dd-sinf'), {
-    labelId: 'sinf-lbl', phIcon: 'cap', grid: true,
+    labelId: 'sinf-lbl', phIcon: 'cap', compact: true,
     placeholder: function () { return [t('gradePh'), t('gradePhSub')]; },
     items: function () {
       return GRADES.map(function (g) {
