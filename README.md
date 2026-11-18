@@ -7,3 +7,7 @@ Arizalar Google Apps Script orqali "Qabul arizalari" Google Sheets jadvaliga yoz
 - `logo.png`, `maktab.jpg` — logotip va maktab binosi rasmi
 
 Statik sayt: Vercel'da Framework Preset "Other", build buyrug'i kerak emas.
+
+## Reception TV (`/tv/`)
+Reception televizori uchun avtomatik slayd-shou: `https://oxford-admission.vercel.app/tv/`.
+Ma'lumotlar Google Sheet'dan olinadi (`tv/config.js` dagi `SHEET_ID`). Sheet ulanmagan bo'lsa, `tv/demo.js` namunasi ko'rsatiladi.
