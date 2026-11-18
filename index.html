@@ -78,6 +78,16 @@
   .dd-btn .chev { width: 36px; height: 36px; padding: 9px; border-radius: 50%; background: var(--soft); color: var(--blue); flex: none; }
   .dd.open .dd-btn .chev { background: var(--blue-soft); }
   .oi { border-radius: 50% !important; }
+  /* Sinflar: ixcham, bir xil tugmachalar to'ri */
+  .dd-list.dd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 10px; border-radius: 22px; }
+  .dd-grid .dd-opt.chip { margin: 0 !important; display: grid; justify-items: center; align-content: center; gap: 0; padding: 10px 4px; min-height: 64px;
+    border: 1.5px solid var(--line); border-radius: 16px; background: var(--surface); transition: border-color .15s, background .15s, transform .1s; }
+  .dd-grid .chip b { font-size: 1.35rem; font-weight: 800; color: var(--navy); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .dd-grid .chip small { font-size: .7rem; font-weight: 600; color: var(--muted); }
+  .dd-grid .chip.active { border-color: #b9c8f6; background: var(--blue-soft); }
+  .dd-grid .chip:active { transform: scale(.96); }
+  .dd-grid .chip[aria-selected="true"] { background: linear-gradient(135deg, var(--navy), var(--blue)); border-color: transparent; }
+  .dd-grid .chip[aria-selected="true"] b, .dd-grid .chip[aria-selected="true"] small { color: #fff; }
   /* Dumaloq (pill) burchaklar */
   .langs, .langs button, .call, .btn { border-radius: 999px !important; }
   /* Logo: oq qutisiz, shaffof PNG */
@@ -648,7 +658,15 @@
   Dropdown.prototype.isOpen = function () { return !this.list.hidden; };
   Dropdown.prototype.render = function () {
     var items = this.opts.items(), val = this.opts.get(), cur = null, html = '', lastGroup = null, id = this.root.id;
+    var grid = this.opts.grid;
+    this.list.classList.toggle('dd-grid', !!grid);
     items.forEach(function (it, i) {
+      if (it.v === val) cur = it;
+      if (grid) {
+        html += '<li class="dd-opt chip" role="option" id="' + id + '-o' + i + '" data-i="' + i + '" aria-selected="' + (it.v === val) + '">' +
+          '<b>' + esc(it.num) + '</b><small>' + esc(it.word) + '</small></li>';
+        return;
+      }
       if (it.group && it.group !== lastGroup) { html += '<li class="dd-group" role="presentation">' + esc(it.group) + '</li>'; lastGroup = it.group; }
       if (it.v === val) cur = it;
       html += '<li class="dd-opt" role="option" id="' + id + '-o' + i + '" data-i="' + i + '" aria-selected="' + (it.v === val) + '">' +
@@ -697,12 +715,13 @@
   };
 
   new Dropdown($('dd-sinf'), {
-    labelId: 'sinf-lbl', phIcon: 'cap',
+    labelId: 'sinf-lbl', phIcon: 'cap', grid: true,
     placeholder: function () { return [t('gradePh'), t('gradePhSub')]; },
     items: function () {
       return GRADES.map(function (g) {
         var band = g === 1 ? ['g-p', t('gP')] : g <= 9 ? ['g-m', t('gM')] : ['g-h', t('gH')];
-        return { v: g + '-sinf', label: t('grade')(g), btnSub: band[1], group: band[1], icon: '<span class="oi ' + band[0] + '">' + g + '</span>' };
+        var lbl = t('grade')(g);
+        return { v: g + '-sinf', label: lbl, num: String(g), word: lbl.replace(String(g), '').replace(/^[\s-]+|[\s-]+$/g, ''), btnSub: band[1], group: band[1], icon: '<span class="oi g-m">' + g + '</span>' };
       });
     },
     get: function () { return state.sinf; },
