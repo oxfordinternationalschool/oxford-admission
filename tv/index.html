@@ -17,204 +17,299 @@
   @font-face { font-family: "Inter"; src: url(fonts/Inter-SemiBold.otf); font-weight: 600; }
 
   :root {
-    --bg: #0b1030; --bg-2: #121a45;
+    --bg: #060a1c; --bg-2: #0b1230; --panel: #080d22;
     --gold: #e4b75a; --gold-2: #f6dc9c; --gold-deep: #b8862f;
-    --white: #ffffff; --ink-2: #c7cde6; --ink-3: #8790b8;
-    --glass: rgba(255,255,255,.055); --glass-line: rgba(255,255,255,.10);
+    --blue: #4f6bff; --blue-2: #8fa2ff;
+    --white: #ffffff; --ink-2: #c3c9e2; --ink-3: #7f88ad;
+    --line: rgba(255,255,255,.08); --line-2: rgba(255,255,255,.14);
     --green: #4fd69c;
     --serif: "Playfair", Georgia, serif;
     --sans: "Inter", "Segoe UI", system-ui, sans-serif;
     --caps: "Montserrat", "Segoe UI", sans-serif;
     --gold-grad: linear-gradient(135deg, #f6dc9c 0%, #e4b75a 45%, #b8862f 100%);
   }
-  h1, .g .num, .total b, .card .what, .ev .d b, .ev .t, .stat b, .bday .p b, .bigday, .brand b, .qrcard .ttl, .g.cta b, .avatar div { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
   html { font-size: min(calc(100vw / 120), calc(100vh / 67.5)); }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
-  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-rows: 8rem 1fr 4.6rem; height: 100vh; position: relative; }
+  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-columns: 21rem 1fr; height: 100vh; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+  svg.i { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
-  /* Jonli fon: sekin suzuvchi nurlar */
-  .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(120rem 70rem at 50% 120%, var(--bg-2), var(--bg)); }
-  .aurora i { position: absolute; border-radius: 50%; filter: blur(7rem); opacity: .55; animation: drift 40s ease-in-out infinite alternate; }
-  .aurora i:nth-child(1) { width: 60rem; height: 40rem; left: -15rem; top: -20rem; background: #2b3a9c; }
-  .aurora i:nth-child(2) { width: 45rem; height: 35rem; right: -12rem; top: 10rem; background: #6b4a12; opacity: .35; animation-duration: 55s; }
-  .aurora i:nth-child(3) { width: 50rem; height: 30rem; left: 30rem; bottom: -22rem; background: #1d2a7a; animation-duration: 47s; }
-  @keyframes drift { to { transform: translate(8rem, 5rem) scale(1.15); } }
-  .aurora::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 3.2rem 3.2rem; mask-image: linear-gradient(180deg, #000, transparent 70%); }
-
-  /* Yuqori panel */
-  header { display: flex; align-items: center; justify-content: space-between; padding: 0 4.5rem; position: relative; }
-  .brand { display: flex; align-items: center; gap: 1.5rem; }
-  .crest { width: 5rem; height: 5rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .25rem rgba(228,183,90,.35), 0 1rem 3rem rgba(0,0,0,.35); }
-  .crest img { height: 3.7rem; }
-  .brand b { display: block; font-family: var(--serif); font-weight: 700; font-size: 2.1rem; letter-spacing: .01em; line-height: 1.1; }
-  .brand small { display: block; font-family: var(--caps); font-size: .85rem; font-weight: 600; letter-spacing: .38em; text-transform: uppercase; color: var(--gold); margin-top: .35rem; }
-  .now { display: flex; align-items: center; gap: 2.4rem; }
-  .chip { display: flex; align-items: center; gap: .8rem; padding: .7rem 1.3rem; border-radius: 3rem; background: var(--glass); border: 1px solid var(--glass-line); font-size: 1.25rem; color: var(--ink-2); font-weight: 600; }
-  .chip .t { color: #fff; font-weight: 600; font-size: 1.5rem; }
-  .now .date { text-align: right; font-size: 1.15rem; color: var(--ink-2); font-weight: 500; line-height: 1.4; }
-  .now .date b { display: block; color: var(--gold); font-family: var(--caps); font-size: .9rem; letter-spacing: .25em; text-transform: uppercase; font-weight: 700; }
-  .now .clock { font-family: var(--caps); font-size: 3.6rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .02em; line-height: 1; }
-  .now .clock span { animation: blink 2s steps(1) infinite; }
+  /* ---------- Chap panel ---------- */
+  aside { position: relative; z-index: 3; display: flex; flex-direction: column; padding: 2.6rem 1.6rem 2rem; background: linear-gradient(180deg, rgba(10,15,38,.96), rgba(5,8,22,.98)); border-right: 1px solid var(--line); box-shadow: 1rem 0 4rem rgba(0,0,0,.35); }
+  .brand { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.1rem; }
+  .crest { width: 5.4rem; height: 5.4rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .3rem rgba(228,183,90,.28), 0 0 3rem rgba(228,183,90,.25); }
+  .crest img { height: 4rem; }
+  .brand b { font-family: var(--serif); font-weight: 600; font-size: 2rem; letter-spacing: .32em; margin-right: -.32em; line-height: 1; }
+  .brand small { font-family: var(--caps); font-size: .72rem; font-weight: 600; letter-spacing: .34em; margin-right: -.34em; text-transform: uppercase; color: var(--gold); }
+  nav { margin-top: 3.4rem; display: flex; flex-direction: column; gap: .55rem; }
+  nav .it { position: relative; display: flex; align-items: center; gap: 1.1rem; padding: 1rem 1.2rem; border-radius: 1.2rem; font-size: 1.3rem; font-weight: 500; color: var(--ink-3); border: 1px solid transparent; overflow: hidden; transition: color .6s, background .6s, border-color .6s; }
+  nav .it svg { font-size: 1.7rem; }
+  nav .it.on { color: #fff; background: linear-gradient(90deg, rgba(228,183,90,.20), rgba(228,183,90,.04)); border-color: rgba(228,183,90,.45); box-shadow: 0 0 2.4rem rgba(228,183,90,.12); }
+  nav .it.on svg { color: var(--gold); }
+  nav .it .pg { position: absolute; left: 1.2rem; right: 1.2rem; bottom: .35rem; height: .18rem; border-radius: 1rem; background: rgba(255,255,255,.08); opacity: 0; }
+  nav .it.on .pg { opacity: 1; }
+  nav .it .pg b { display: block; height: 100%; width: 0; border-radius: 1rem; background: var(--gold-grad); }
+  .side-bottom { margin-top: auto; }
+  .clockcard { padding: 1.6rem 1.4rem; border-radius: 1.6rem; background: linear-gradient(160deg, rgba(79,107,255,.22), rgba(79,107,255,.04) 60%); border: 1px solid rgba(143,162,255,.22); position: relative; overflow: hidden; }
+  .clockcard::before { content: ""; position: absolute; width: 14rem; height: 14rem; border-radius: 50%; right: -7rem; top: -7rem; background: radial-gradient(circle, rgba(79,107,255,.45), transparent 70%); }
+  .clockcard .clock { position: relative; font-family: var(--caps); font-size: 4.4rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+  .clockcard .clock span { animation: blink 2s steps(1) infinite; color: var(--gold); }
   @keyframes blink { 50% { opacity: .25; } }
+  .clockcard .day { position: relative; margin-top: .8rem; font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+  .clockcard .date { position: relative; margin-top: .3rem; font-size: 1.25rem; color: var(--ink-2); }
+  .motto { margin-top: 2rem; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.35rem; line-height: 1.35; color: var(--ink-2); }
+  .motto::after { content: ""; display: block; width: 3rem; height: 1px; background: var(--gold); margin-top: 1rem; box-shadow: 4rem 0 0 var(--gold); }
+  .skyline { display: block; width: 100%; margin-top: 1.4rem; color: rgba(228,183,90,.55); }
 
-  /* Hikoya uslubidagi progress (har slayd uchun bo'lak) */
-  .stories { position: absolute; left: 4.5rem; right: 4.5rem; bottom: 0; display: flex; gap: .6rem; }
-  .stories i { flex: 1; height: .28rem; border-radius: 1rem; background: rgba(255,255,255,.13); overflow: hidden; position: relative; }
-  .stories i b { position: absolute; inset: 0; width: 0; background: var(--gold-grad); border-radius: 1rem; }
-  .stories i.done b { width: 100%; }
+  /* ---------- Asosiy qism ---------- */
+  .main { position: relative; display: grid; grid-template-rows: 6.8rem 1fr 5.6rem; min-width: 0; overflow: hidden; }
+  .backdrop { position: absolute; right: 0; top: 0; width: 75%; height: 80%; z-index: 0; background: url(maktab.jpg) center 35%/cover; filter: brightness(.6) saturate(.95) contrast(1.05);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 30%, #000 75%), linear-gradient(0deg, transparent 0%, rgba(0,0,0,.5) 35%, #000 80%);
+    -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 30%, #000 75%), linear-gradient(0deg, transparent 0%, rgba(0,0,0,.5) 35%, #000 80%); mask-composite: intersect; }
+  .backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(210deg, rgba(233,165,80,.32), transparent 45%), rgba(6,10,28,.25); }
+  .aurora { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .aurora i { position: absolute; border-radius: 50%; filter: blur(8rem); animation: drift 40s ease-in-out infinite alternate; }
+  .aurora i:nth-child(1) { width: 55rem; height: 32rem; left: -18rem; bottom: -14rem; background: #2438b8; opacity: .55; }
+  .aurora i:nth-child(2) { width: 40rem; height: 24rem; left: 30rem; bottom: -18rem; background: #3a55ff; opacity: .28; animation-duration: 52s; }
+  @keyframes drift { to { transform: translate(8rem, -3rem) scale(1.15); } }
+  .topbar, #stage, .bottombar { position: relative; z-index: 2; }
 
-  /* Slaydlar */
-  main { position: relative; overflow: hidden; }
-  .slide { position: absolute; inset: 0; padding: 3rem 4.5rem 2.6rem; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s ease, filter 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); transform: scale(1.03); filter: blur(.6rem); }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 3.2rem; }
+  .pill { display: inline-flex; align-items: center; gap: 1rem; height: 3.8rem; padding: 0 1.6rem; border-radius: 3rem; background: rgba(8,12,32,.55); border: 1px solid var(--line-2); backdrop-filter: blur(1.2rem); font-size: 1.25rem; color: var(--ink-2); font-weight: 500; }
+  .pill svg { font-size: 1.5rem; color: var(--gold); }
+  .pill .sep { width: 1px; height: 1.6rem; background: var(--line-2); }
+  .pill b { color: #fff; font-weight: 600; }
+  .pill .wx svg { font-size: 1.8rem; }
+  .roundbtn { width: 3.8rem; height: 3.8rem; border-radius: 50%; display: grid; place-items: center; background: rgba(8,12,32,.55); border: 1px solid var(--line-2); color: var(--gold); font-size: 1.6rem; }
+  .topright { display: flex; gap: 1rem; align-items: center; }
+
+  /* ---------- Slaydlar ---------- */
+  #stage { overflow: hidden; }
+  .slide { position: absolute; inset: 0; padding: 1.4rem 3.2rem 1rem; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s ease, filter 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); transform: scale(1.02); filter: blur(.5rem); }
   .slide.on { opacity: 1; transform: none; filter: none; }
-  .slide.off { opacity: 0; transform: scale(.97); filter: blur(.6rem); }
-  /* Elementlar ketma-ket paydo bo'ladi */
-  .slide .up { opacity: 0; transform: translateY(2.2rem); }
-  .slide.on .up { animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.25s + var(--i, 0) * .08s); }
+  .slide.off { opacity: 0; transform: scale(.98); filter: blur(.5rem); }
+  .slide .up { opacity: 0; transform: translateY(2rem); }
+  .slide.on .up { animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.25s + var(--i, 0) * .07s); }
   @keyframes up { to { opacity: 1; transform: none; } }
 
-  .kicker { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--caps); font-size: 1.05rem; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
-  .kicker::before { content: ""; width: 3.4rem; height: 1px; background: var(--gold); }
-  h1 { font-family: var(--serif); font-weight: 700; font-size: 5rem; line-height: 1.02; margin: 1rem 0 0; letter-spacing: -.01em; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 3rem; }
+  .kicker { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
+  .kicker::after { content: ""; width: 3rem; height: 1px; background: var(--gold); box-shadow: 3.8rem 0 0 rgba(228,183,90,.5); margin-right: 4rem; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: 5.2rem; line-height: 1.04; margin: .9rem 0 0; letter-spacing: -.005em; }
   h1 em, .gold { font-style: italic; font-weight: 500; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .1em; }
-  .glass { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 1.8rem; backdrop-filter: blur(1rem); }
+  .sub { font-size: 1.35rem; line-height: 1.5; color: var(--ink-2); margin-top: 1rem; max-width: 46rem; }
+  .figure { display: flex; align-items: center; gap: 1.6rem; padding-bottom: .4rem; }
+  .figure .n { font-family: var(--serif); font-size: 8rem; font-weight: 600; line-height: .9; }
+  .figure .l { font-size: 1.3rem; color: var(--ink-2); line-height: 1.45; }
+  .figure .l b { display: block; color: #fff; font-size: 1.6rem; font-weight: 600; }
+  .figure svg.big { font-size: 6.4rem; color: var(--gold); stroke-width: 1.2; filter: drop-shadow(0 0 1.6rem rgba(228,183,90,.45)); }
+
+  .card { position: relative; border-radius: 1.6rem; background: linear-gradient(180deg, rgba(18,26,64,.74), rgba(9,13,36,.78)); border: 1px solid var(--line); backdrop-filter: blur(1.2rem); box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 1.6rem 3.6rem rgba(0,0,0,.32); }
+  .card.hl { border-color: rgba(228,183,90,.7); background: linear-gradient(180deg, rgba(60,46,22,.55), rgba(18,18,34,.8)); box-shadow: 0 0 0 1px rgba(228,183,90,.18), 0 0 3rem rgba(228,183,90,.16), inset 0 1px 0 rgba(255,255,255,.07); }
+  .card.glow { overflow: hidden; border-color: rgba(143,162,255,.35); background: radial-gradient(70% 90% at 50% 120%, rgba(79,107,255,.7), transparent 70%), linear-gradient(180deg, rgba(30,44,130,.88), rgba(12,18,60,.92)); box-shadow: 0 0 4rem rgba(79,107,255,.25), inset 0 1px 0 rgba(255,255,255,.12); }
+  .card-h { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 1.4rem; font-weight: 600; }
+  .card-h .t { display: flex; align-items: center; gap: .8rem; }
+  .card-h .t svg { color: var(--gold); font-size: 1.6rem; }
+  .seg { display: flex; padding: .3rem; border-radius: 2rem; background: rgba(255,255,255,.05); border: 1px solid var(--line); font-size: 1rem; color: var(--ink-3); font-weight: 600; }
+  .seg span { padding: .35rem .9rem; border-radius: 2rem; }
+  .seg span.on { background: rgba(255,255,255,.1); color: #fff; }
+  .badge { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .9rem; border-radius: 2rem; font-size: 1rem; font-weight: 600; background: rgba(255,255,255,.06); color: var(--ink-2); border: 1px solid var(--line); }
+  .badge.gold { background: var(--gold-grad); color: #1b1404; border: 0; -webkit-text-fill-color: #1b1404; }
+  .dot { width: .7rem; height: .7rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(79,214,156,.6); animation: pulse 2s infinite; flex: none; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 .7rem rgba(79,214,156,0); } 100% { box-shadow: 0 0 0 0 rgba(79,214,156,0); } }
+  .stripes { position: relative; height: 1.5rem; border-radius: 1rem; background: rgba(255,255,255,.07); overflow: hidden; }
+  .stripes b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 1rem; background: repeating-linear-gradient(-45deg, rgba(255,255,255,.38) 0 .35rem, rgba(255,255,255,.08) .35rem .8rem), linear-gradient(90deg, #5d78ff, #9fb0ff); transition: width 1s; animation: slide 1.4s linear infinite; background-size: 1.13rem 1.13rem, 100% 100%; }
+  @keyframes slide { to { background-position: 1.13rem 0, 0 0; } }
 
   /* 1. Qabul */
-  .adm { display: grid; grid-template-columns: 40rem 1fr; gap: 3.5rem; flex: 1; min-height: 0; }
-  .adm-l { display: flex; flex-direction: column; }
-  .total { display: flex; align-items: baseline; gap: 1.2rem; margin-top: 1.8rem; }
-  .total b { font-family: var(--serif); font-size: 9rem; line-height: .9; font-weight: 700; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .total span { font-size: 1.6rem; color: var(--ink-2); font-weight: 500; line-height: 1.3; }
-  .qrcard { margin-top: auto; display: flex; gap: 1.6rem; align-items: center; padding: 1.4rem; border-radius: 1.8rem; background: #fff; color: var(--bg); box-shadow: 0 2rem 5rem rgba(0,0,0,.35); }
-  .qrcard img { width: 11rem; height: 11rem; image-rendering: pixelated; flex: none; }
-  .qrcard .cap { font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
-  .qrcard .ttl { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; line-height: 1.15; margin: .35rem 0 .7rem; }
-  .qrcard .ph { font-family: var(--caps); font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.45; }
-  .grades { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1.1rem; }
-  .g { position: relative; border-radius: 1.6rem; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-  .g .num { font-family: var(--serif); font-size: 4.4rem; font-weight: 700; line-height: 1; }
-  .g .num small { font-family: var(--sans); font-size: 1.15rem; font-weight: 600; color: var(--ink-3); margin-left: .3rem; letter-spacing: .02em; }
-  .g .seat { display: inline-flex; align-items: center; gap: .6rem; align-self: flex-start; padding: .45rem 1rem; border-radius: 2rem; font-size: 1.15rem; font-weight: 600; }
-  .g.open { background: linear-gradient(160deg, rgba(79,214,156,.16), rgba(79,214,156,.04)); border: 1px solid rgba(79,214,156,.35); }
-  .g.open .seat { background: rgba(79,214,156,.18); color: var(--green); }
-  .g.open .seat::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(79,214,156,.6); animation: pulse 2s infinite; }
-  @keyframes pulse { 70% { box-shadow: 0 0 0 .8rem rgba(79,214,156,0); } 100% { box-shadow: 0 0 0 0 rgba(79,214,156,0); } }
-  .g.open .seat b { font-size: 1.6rem; color: #fff; }
-  .g.full { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); }
-  .g.full .num { color: rgba(255,255,255,.35); }
-  .g.full .seat { color: var(--ink-3); background: rgba(255,255,255,.05); }
-  .g .note { position: absolute; top: 1.3rem; right: 1.4rem; font-size: .9rem; color: var(--gold); font-weight: 600; text-align: right; max-width: 8rem; line-height: 1.25; }
-  .g.cta { background: var(--gold-grad); color: var(--bg); justify-content: center; }
-  .g.cta b { font-family: var(--serif); font-size: 2.1rem; line-height: 1.1; }
-  .g.cta span { font-size: 1.1rem; font-weight: 600; margin-top: .5rem; opacity: .8; }
+  .adm { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 24rem; gap: 1.4rem; margin-top: 2.2rem; }
+  .grades { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(2, 1fr); gap: 1.2rem; }
+  .g { padding: 1.3rem 1.3rem 1.2rem; display: flex; flex-direction: column; justify-content: space-between; text-align: center; align-items: center; }
+  .g .gr { font-size: 1.35rem; font-weight: 600; display: flex; align-items: center; gap: .6rem; }
+  .g .gr small { font-size: 1rem; color: var(--ink-3); font-weight: 500; }
+  .g .num { font-family: var(--serif); font-size: 4.6rem; font-weight: 600; line-height: 1; }
+  .g .lbl { font-size: 1.05rem; color: var(--ink-2); }
+  .g.full { opacity: .55; }
+  .g.full .num { color: rgba(255,255,255,.45); }
+  .g .note { font-size: .9rem; color: var(--gold); font-weight: 600; line-height: 1.25; }
+  .g.cta { background: var(--gold-grad); border: 0; color: #1b1404; justify-content: center; gap: .8rem; }
+  .g.cta b { font-family: var(--serif); font-size: 1.7rem; line-height: 1.15; }
+  .g.cta svg { font-size: 2.2rem; }
+  .qr { padding: 2rem 1.8rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .qr .tile { background: #fff; padding: 1rem; border-radius: 1.4rem; box-shadow: 0 1.4rem 3rem rgba(0,0,0,.35); margin-top: 1.4rem; }
+  .qr .tile img { display: block; width: 12.5rem; height: 12.5rem; image-rendering: pixelated; }
+  .qr .ttl { font-family: var(--serif); font-size: 2rem; font-weight: 600; line-height: 1.15; }
+  .qr .cap { font-size: 1.1rem; color: var(--ink-2); margin-top: .5rem; }
+  .qr .ph { margin-top: auto; width: 100%; display: flex; flex-direction: column; gap: .6rem; }
+  .qr .ph div { display: flex; align-items: center; justify-content: center; gap: .7rem; padding: .7rem; border-radius: 1rem; background: rgba(255,255,255,.08); font-family: var(--caps); font-weight: 700; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+  .qr .ph svg { color: var(--gold-2); font-size: 1.3rem; }
 
   /* 2. Bugun */
-  .today { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4rem; flex: 1; min-height: 0; }
-  .bigclock { font-family: var(--caps); font-weight: 700; font-size: 13rem; line-height: .95; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin-top: 2rem; }
-  .bigclock span { color: var(--gold); }
-  .bigday { font-family: var(--serif); font-size: 3.6rem; font-weight: 700; margin-top: 1.4rem; }
-  .bigday em { font-weight: 500; }
-  .nowcard { margin-top: auto; padding: 1.8rem 2rem; }
-  .nowcard .lbl { font-family: var(--caps); font-size: .95rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-  .nowcard .val { font-size: 2.2rem; font-weight: 600; margin-top: .5rem; }
-  .nowcard .track { height: .55rem; border-radius: 1rem; background: rgba(255,255,255,.1); margin-top: 1.2rem; overflow: hidden; }
-  .nowcard .track b { display: block; height: 100%; background: var(--gold-grad); border-radius: 1rem; transition: width 1s; }
-  .wxrow { display: flex; gap: 1.2rem; margin-top: 1.4rem; }
-  .wxrow .chip { font-size: 1.4rem; padding: .8rem 1.5rem; }
-  .bells { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-content: start; padding-top: 1rem; }
-  .shift { padding: 1.6rem 1.4rem; }
-  .shift h3 { margin: 0 0 1rem .4rem; font-family: var(--caps); font-size: 1rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
-  .bell { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; border-radius: 1rem; font-size: 1.45rem; font-weight: 500; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .bell + .bell { border-top: 1px solid rgba(255,255,255,.05); }
+  .today { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto 1fr; gap: 1.4rem; margin-top: 2rem; }
+  .tl { grid-column: 1 / -1; padding: 1.5rem 2rem 1.3rem; }
+  .tl .rows { position: relative; margin-top: 1.3rem; }
+  .tl .row { display: grid; grid-template-columns: 7rem 1fr; align-items: center; height: 2.6rem; }
+  .tl .row span { font-size: 1rem; color: var(--ink-3); font-weight: 600; letter-spacing: .04em; }
+  .tl .lane { position: relative; height: 1.5rem; }
+  .tl .lane i { position: absolute; top: 0; bottom: 0; border-radius: .5rem; background: rgba(143,162,255,.22); border: 1px solid rgba(143,162,255,.3); }
+  .tl .lane i.past { background: rgba(255,255,255,.08); border-color: transparent; }
+  .tl .lane i.cur { background: var(--gold-grad); border: 0; box-shadow: 0 0 1.6rem rgba(228,183,90,.5); }
+  .tl .axis { position: relative; margin-left: 7rem; height: 1.6rem; margin-top: .4rem; border-top: 1px dashed var(--line-2); }
+  .tl .axis span { position: absolute; top: .4rem; transform: translateX(-50%); font-size: .95rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .tl .nowline { position: absolute; top: -.6rem; bottom: -.2rem; width: 2px; margin-left: -1px; background: linear-gradient(var(--gold), rgba(228,183,90,.1)); }
+  .tl .nowline::before { content: attr(data-t); position: absolute; top: -2.3rem; left: 50%; transform: translateX(-50%); padding: .2rem .7rem; border-radius: 1rem; background: var(--gold-grad); color: #1b1404; font-size: .95rem; font-weight: 700; font-family: var(--caps); white-space: nowrap; }
+  .tl .nowline::after { content: ""; position: absolute; top: -.4rem; left: 50%; width: .9rem; height: .9rem; margin-left: -.45rem; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 0 .35rem rgba(228,183,90,.25), 0 0 1.4rem var(--gold); }
+  .nowcard { padding: 2rem; display: flex; flex-direction: column; }
+  .nowcard .lbl { font-family: var(--caps); font-size: .9rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-2); font-weight: 700; display: flex; align-items: center; gap: .7rem; }
+  .nowcard .val { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; line-height: 1.15; margin-top: 1.1rem; }
+  .nowcard .det { font-size: 1.3rem; color: var(--ink-2); margin-top: .6rem; }
+  .nowcard .left { margin-top: auto; display: flex; align-items: baseline; gap: .9rem; }
+  .nowcard .left b { font-family: var(--serif); font-size: 5.4rem; font-weight: 600; line-height: 1; }
+  .nowcard .left span { font-size: 1.25rem; color: var(--ink-2); }
+  .nowcard .left + .prog { margin-top: 1.2rem; }
+  .nowcard .prog { margin-top: auto; display: flex; align-items: center; gap: 1rem; }
+  .nowcard .prog .stripes { flex: 1; }
+  .nowcard .prog em { font-style: normal; padding: .3rem .8rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,.3); font-size: 1rem; font-weight: 700; font-family: var(--caps); }
+  .shift { padding: 1.5rem 1.4rem; display: flex; flex-direction: column; min-height: 0; }
+  .bell-list { margin-top: .9rem; display: flex; flex-direction: column; gap: .2rem; }
+  .s-bugun h1 { font-size: 4.8rem; }
+  .bell { display: flex; justify-content: space-between; align-items: center; padding: .38rem .8rem; border-radius: 1rem; font-size: 1.25rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .bell .n { display: flex; align-items: center; gap: .9rem; }
+  .bell .n i { width: 2.2rem; height: 2.2rem; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 1rem; font-weight: 700; font-family: var(--caps); background: rgba(255,255,255,.06); border: 1px solid var(--line); color: #fff; }
   .bell b { font-weight: 600; color: #fff; }
-  .bell.cur { background: var(--gold-grad); color: var(--bg); border-color: transparent; box-shadow: 0 .8rem 2rem rgba(228,183,90,.25); }
-  .bell.cur b { color: var(--bg); }
-  .bell.past { opacity: .35; }
+  .bell.cur { background: var(--gold-grad); color: #1b1404; box-shadow: 0 .8rem 2rem rgba(228,183,90,.25); }
+  .bell.cur b, .bell.cur .n i { color: #1b1404; }
+  .bell.cur .n i { background: rgba(255,255,255,.35); border-color: transparent; }
+  .bell.past { opacity: .38; }
 
   /* 3. Yutuqlar */
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.6rem; flex: 1; margin-top: 2.4rem; min-height: 0; }
-  .card { position: relative; padding: 2rem; display: flex; gap: 1.8rem; align-items: center; overflow: hidden; }
-  .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, rgba(228,183,90,.6), transparent 45%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
-  .avatar { width: 8rem; height: 8rem; border-radius: 50%; flex: none; padding: .3rem; background: var(--gold-grad); }
-  .avatar div { width: 100%; height: 100%; border-radius: 50%; background: var(--bg-2); display: grid; place-items: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; color: var(--gold-2); overflow: hidden; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.4rem; flex: 1; margin-top: 2.2rem; min-height: 0; }
+  .ach { padding: 1.8rem; display: flex; gap: 1.6rem; align-items: center; overflow: hidden; }
+  .ach .corner { position: absolute; top: 1.2rem; right: 1.2rem; width: 3.2rem; height: 3.2rem; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--gold); font-size: 1.5rem; }
+  .avatar { width: 8rem; height: 8rem; border-radius: 50%; flex: none; padding: .28rem; background: var(--gold-grad); box-shadow: 0 0 2.4rem rgba(228,183,90,.25); }
+  .avatar div { width: 100%; height: 100%; border-radius: 50%; background: #0d1436; display: grid; place-items: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--gold-2); overflow: hidden; border: .25rem solid #0d1436; }
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .card .what { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .card .who { font-size: 1.5rem; font-weight: 600; margin-top: .7rem; }
-  .card .cls { display: inline-block; margin-top: .5rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .14em; color: var(--ink-3); }
-  .card .laurel { position: absolute; right: -1.5rem; bottom: -2rem; width: 10rem; opacity: .07; }
+  .ach .what { font-family: var(--serif); font-size: 2.2rem; font-weight: 600; line-height: 1.12; padding-right: 2.4rem; }
+  .ach .what.long { font-size: 1.7rem; line-height: 1.2; }
+  .ach .who { font-size: 1.35rem; font-weight: 600; margin-top: .8rem; color: var(--ink-2); }
+  .ach .badge { margin-top: .7rem; }
 
-  /* 4. Tadbirlar: vaqt chizig'i */
-  .timeline { position: relative; margin-top: 2.6rem; flex: 1; display: flex; flex-direction: column; gap: 1.3rem; padding-left: 3rem; }
-  .timeline::before { content: ""; position: absolute; left: .55rem; top: 1rem; bottom: 1rem; width: 2px; background: linear-gradient(var(--gold), rgba(228,183,90,.05)); }
-  .ev { position: relative; display: grid; grid-template-columns: 10rem 1fr auto; gap: 2.4rem; align-items: center; padding: 1.5rem 2.2rem; }
-  .ev::before { content: ""; position: absolute; left: -3rem; top: 50%; width: 1.3rem; height: 1.3rem; margin-top: -.65rem; border-radius: 50%; background: var(--bg); border: .3rem solid var(--gold); }
-  .ev .d { text-align: center; }
-  .ev .d b { display: block; font-family: var(--serif); font-size: 3.6rem; line-height: 1; font-weight: 700; }
-  .ev .d span { font-family: var(--caps); font-size: 1rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
-  .ev .t { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.15; }
-  .ev .s { font-size: 1.4rem; color: var(--ink-2); margin-top: .4rem; }
-  .ev .soon { font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: .6rem 1.2rem; border-radius: 2rem; background: var(--gold-grad); color: var(--bg); }
-  .ev .left { font-size: 1.2rem; color: var(--ink-3); font-weight: 600; }
+  /* 4. Tadbirlar */
+  .evwrap { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 27rem; gap: 1.4rem; margin-top: 2.2rem; }
+  .evlist { display: flex; flex-direction: column; gap: 1.1rem; min-height: 0; }
+  .ev { flex: 1; max-height: 11rem; display: grid; grid-template-columns: 7rem 1fr auto; gap: 1.8rem; align-items: center; padding: 1.2rem 1.8rem 1.2rem 1.3rem; }
+  .ev .d { width: 7rem; height: 7rem; border-radius: 1.4rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,.05); border: 1px solid var(--line); }
+  .ev .d b { font-family: var(--serif); font-size: 3rem; line-height: 1; font-weight: 600; }
+  .ev .d span { font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-top: .3rem; }
+  .ev.glow .d { background: linear-gradient(160deg, #6f86ff, #3346d6); border: 0; box-shadow: 0 1rem 2.4rem rgba(40,60,200,.5); }
+  .ev.glow .d span { color: #fff; }
+  .ev .when { display: flex; align-items: center; gap: .6rem; font-size: 1.05rem; color: var(--blue-2); font-weight: 600; }
+  .ev .when::before { content: ""; width: .9rem; height: .9rem; border-radius: 50%; border: .2rem solid currentColor; }
+  .ev .t { font-family: var(--serif); font-size: 2.1rem; font-weight: 600; line-height: 1.15; margin-top: .3rem; }
+  .ev .s { font-size: 1.25rem; color: var(--ink-2); margin-top: .3rem; }
+  .ev .wd { font-size: 1.1rem; color: var(--ink-3); font-weight: 600; text-align: right; }
+  .evside { display: flex; flex-direction: column; gap: 1.4rem; min-height: 0; }
+  .next { padding: 1.8rem; }
+  .next .lbl { font-family: var(--caps); font-size: .85rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-2); font-weight: 700; }
+  .next .cd { display: flex; align-items: baseline; gap: .8rem; margin-top: .8rem; }
+  .next .cd b { font-family: var(--serif); font-size: 6rem; line-height: 1; font-weight: 600; }
+  .next .cd span { font-size: 1.4rem; color: var(--ink-2); }
+  .next .nt { font-size: 1.45rem; font-weight: 600; margin-top: .6rem; line-height: 1.3; }
+  .cal { flex: 1; padding: 1.5rem 1.6rem; display: flex; flex-direction: column; }
+  .cal .grid { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); gap: .25rem; margin-top: 1rem; text-align: center; align-content: space-between; }
+  .cal .grid .w { font-size: .85rem; color: var(--ink-3); font-weight: 700; font-family: var(--caps); }
+  .cal .grid span { position: relative; font-size: 1.1rem; color: var(--ink-2); height: 2.3rem; line-height: 2.3rem; border-radius: 50%; }
+  .cal .grid span.o { color: rgba(255,255,255,.15); }
+  .cal .grid span.td { background: var(--gold-grad); color: #1b1404; font-weight: 700; }
+  .cal .grid span.ev1::after { content: ""; position: absolute; left: 50%; bottom: .05rem; width: .45rem; height: .45rem; margin-left: -.225rem; border-radius: 50%; background: var(--blue-2); box-shadow: 0 0 .6rem var(--blue); }
+  .cal .grid span.ev1 { color: #fff; font-weight: 700; }
 
-  /* 5. Maktab haqida: to'liq ekran rasm */
+  /* 5. Maktab haqida */
   .slide.hero { padding: 0; }
-  .hero .bg { position: absolute; inset: 0; background: url(maktab.jpg) center/cover; transform: scale(1.12); }
-  .hero.on .bg { animation: kenburns 20s ease-out forwards; }
-  @keyframes kenburns { from { transform: scale(1.12) translateX(2%); } to { transform: scale(1.0) translateX(0); } }
-  .hero .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,16,48,.97) 0%, rgba(11,16,48,.88) 38%, rgba(11,16,48,.25) 70%, rgba(11,16,48,.1) 100%), linear-gradient(0deg, rgba(11,16,48,.85), transparent 40%); }
-  .hero .inner { position: relative; padding: 3rem 4.5rem 2.6rem; height: 100%; display: flex; flex-direction: column; max-width: 76rem; }
-  .hero h1 { font-size: 5.6rem; max-width: 60rem; }
-  .stats { display: flex; gap: 3.4rem; margin-top: auto; }
-  .stat b { display: block; font-family: var(--serif); font-size: 4rem; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .stat span { display: block; font-size: 1.2rem; color: var(--ink-2); font-weight: 500; margin-top: .5rem; max-width: 14rem; }
-  .clubs { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.4rem; }
-  .clubs span { padding: .75rem 1.4rem; border-radius: 3rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(.6rem); font-size: 1.3rem; font-weight: 600; }
+  .hero .bg { position: absolute; inset: 0; background: url(maktab.jpg) center 30%/cover; transform: scale(1.1); filter: brightness(.8); }
+  .hero.on .bg { animation: kenburns 22s ease-out forwards; }
+  @keyframes kenburns { from { transform: scale(1.1) translateX(2%); } to { transform: scale(1.0) translateX(0); } }
+  .hero .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,10,28,.96) 0%, rgba(6,10,28,.8) 36%, rgba(6,10,28,.2) 70%, rgba(6,10,28,.15) 100%), linear-gradient(0deg, rgba(6,10,28,.95) 8%, transparent 55%), linear-gradient(210deg, rgba(233,165,80,.25), transparent 40%); }
+  .hero .inner { position: relative; padding: 1.4rem 3.2rem 1rem; height: 100%; display: flex; flex-direction: column; }
+  .hero h1 { font-size: 5.6rem; max-width: 52rem; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: auto; }
+  .stat { padding: 1.4rem 1.6rem; }
+  .stat b { display: block; font-family: var(--serif); font-size: 3.4rem; font-weight: 600; line-height: 1; }
+  .stat span { display: block; font-size: 1.15rem; color: var(--ink-2); margin-top: .5rem; }
+  .clubs { margin-top: 1.2rem; padding: 1.3rem 1.8rem; }
+  .clubs .row { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+  .club { display: flex; align-items: center; gap: 1rem; font-size: 1.2rem; font-weight: 600; }
+  .club i { width: 3.8rem; height: 3.8rem; border-radius: 50%; display: grid; place-items: center; font-size: 1.7rem; color: var(--gold-2); background: radial-gradient(circle at 30% 25%, rgba(143,162,255,.45), rgba(30,44,130,.6)); border: 1px solid rgba(143,162,255,.4); box-shadow: 0 0 1.6rem rgba(79,107,255,.3); }
 
   /* 6. Tug'ilgan kunlar */
   .bday { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
   .bday h1 { font-size: 6.4rem; }
-  .bday .names { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem; margin-top: 3rem; max-width: 100rem; }
+  .gift { width: 9rem; height: 9rem; border-radius: 50%; display: grid; place-items: center; font-size: 4.4rem; color: var(--gold-2); background: radial-gradient(circle at 30% 25%, rgba(143,162,255,.5), rgba(30,44,130,.7)); border: 1px solid rgba(143,162,255,.45); box-shadow: 0 0 5rem rgba(79,107,255,.45); animation: bob 3s ease-in-out infinite; }
+  .gift svg { stroke-width: 1.3; }
+  @keyframes bob { 50% { transform: translateY(-1rem) rotate(4deg); } }
+  .bday .kicker { margin-top: 2rem; }
+  .bday .names { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem; margin-top: 3rem; max-width: 90rem; }
   .bday .p { padding: 1.6rem 2.6rem; }
-  .bday .p b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; }
-  .bday .p span { font-family: var(--caps); font-size: 1rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-  .balloon { font-size: 6rem; animation: bob 3s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translateY(-1.2rem) rotate(4deg); } }
+  .bday .p b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 600; }
+  .bday .p span { font-family: var(--caps); font-size: .95rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
   .confetti { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   .confetti i { position: absolute; top: -2rem; width: .7rem; height: 1.3rem; border-radius: .2rem; animation: fall linear infinite; opacity: .85; }
-  @keyframes fall { to { transform: translateY(80rem) rotate(600deg); } }
+  @keyframes fall { to { transform: translateY(70rem) rotate(600deg); } }
 
-  /* Pastki panel */
-  footer { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2rem; padding: 0 4.5rem; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.15)); border-top: 1px solid rgba(255,255,255,.07); }
-  .tag { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
-  .tag::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: #ff5a5f; animation: pulse-r 1.6s infinite; }
-  @keyframes pulse-r { 0% { box-shadow: 0 0 0 0 rgba(255,90,95,.6); } 70% { box-shadow: 0 0 0 .7rem rgba(255,90,95,0); } 100% { box-shadow: 0 0 0 0 rgba(255,90,95,0); } }
+  /* ---------- Pastki e'lonlar ---------- */
+  .bottombar { padding: 0 3.2rem 1.6rem; display: flex; align-items: flex-end; }
+  .news { flex: 1; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 1.4rem; height: 3.8rem; padding: 0 .4rem 0 .4rem; border-radius: 3rem; background: rgba(8,12,32,.7); border: 1px solid var(--line-2); backdrop-filter: blur(1.2rem); }
+  .news .tag { display: inline-flex; align-items: center; gap: .7rem; height: 3rem; padding: 0 1.3rem 0 .4rem; border-radius: 2rem; background: var(--gold-grad); color: #1b1404; font-family: var(--caps); font-size: .9rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+  .news .tag i { width: 2.3rem; height: 2.3rem; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.4); font-size: 1.3rem; }
   .ticker { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
-  .ticker .run { display: inline-block; padding-left: 100%; animation: tick linear infinite; font-size: 1.4rem; font-weight: 500; color: var(--ink-2); }
+  .ticker .run { display: inline-block; padding-left: 100%; animation: tick linear infinite; font-size: 1.35rem; font-weight: 500; color: var(--ink-2); }
   .ticker .run span::after { content: "✦"; color: var(--gold); margin: 0 2.4rem; font-size: 1rem; vertical-align: middle; }
   @keyframes tick { to { transform: translateX(-100%); } }
-  .offline { position: fixed; right: 1rem; bottom: 5.2rem; font-size: .9rem; color: var(--ink-3); background: rgba(0,0,0,.4); padding: .3rem .8rem; border-radius: .5rem; display: none; }
+  .offline { position: fixed; right: 1rem; bottom: .4rem; font-size: .9rem; color: var(--ink-3); background: rgba(0,0,0,.4); padding: .3rem .8rem; border-radius: .5rem; display: none; z-index: 9; }
 </style>
 </head>
 <body>
-<div class="aurora"><i></i><i></i><i></i></div>
-<header>
+<aside>
   <div class="brand">
     <div class="crest"><img src="logo.png" alt=""></div>
-    <div><b>Oxford International School</b><small>Xush kelibsiz · Welcome</small></div>
+    <b>OXFORD</b>
+    <small>International School</small>
   </div>
-  <div class="now">
-    <div class="chip" id="wxTop" style="display:none"></div>
-    <div class="date" id="dateTop"></div>
-    <div class="clock" id="clockTop">--:--</div>
+  <nav id="nav"></nav>
+  <div class="side-bottom">
+    <div class="clockcard">
+      <div class="clock" id="clockTop">--:--</div>
+      <div class="day" id="dayTop"></div>
+      <div class="date" id="dateTop"></div>
+    </div>
+    <div class="motto" id="motto">Kelajak bilan bugundan tanishing.</div>
+    <svg class="skyline" viewBox="0 0 180 46" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+      <path d="M0 45h180"/>
+      <path d="M8 45V22h5v23M10.5 22v-4M22 45V30h14v15"/>
+      <path d="M44 45V24h28v21M44 24q14-20 28 0M58 6v-2M58 10q-3 3 0 4q3-1 0-4"/>
+      <path d="M78 45V14h4v31M80 14v-4M88 45V28h22v17M88 28q11-14 22 0M99 16v-2"/>
+      <path d="M118 45V14h4v31M120 14v-4M130 45V32h18v13M154 45V26h5v19M156.5 26v-4M166 45V34h12v11"/>
+    </svg>
   </div>
-  <div class="stories" id="stories"></div>
-</header>
-<main id="stage"></main>
-<footer>
-  <div class="tag">E'lon</div>
-  <div class="ticker"><div class="run" id="ticker"></div></div>
-</footer>
+</aside>
+<div class="main">
+  <div class="backdrop"></div>
+  <div class="aurora"><i></i><i></i></div>
+  <div class="topbar">
+    <div class="pill" id="wxPill"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b id="city"></b><span id="wxTop" style="display:contents"></span></div>
+    <div class="topright">
+      <div class="pill" id="phonePill"></div>
+      <div class="roundbtn"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></div>
+    </div>
+  </div>
+  <main id="stage"></main>
+  <div class="bottombar">
+    <div class="news" id="news">
+      <div class="tag"><i><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></i>E'lonlar</div>
+      <div class="ticker"><div class="run" id="ticker"></div></div>
+    </div>
+  </div>
+</div>
 <div class="offline" id="offline">namuna ma'lumot</div>
 
 <script src="config.js"></script>
@@ -223,6 +318,7 @@
 (() => {
   const C = Object.assign({ SLIDE_SECONDS: 12, REFRESH_MINUTES: 5 }, window.TV_CONFIG || {});
   const MONTHS = ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"];
+  const MONTHS_CAP = MONTHS.map(m => m[0].toUpperCase() + m.slice(1));
   const MON3 = ["yan","fev","mar","apr","may","iyun","iyul","avg","sen","okt","noy","dek"];
   const DAYS = ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"];
   const SHEETS = ["Qabul","Qongiroqlar","Yutuqlar","Tadbirlar","Maktab","Tugilgan kunlar","Elonlar","Sozlamalar"];
@@ -230,7 +326,45 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const cur$ = (sel) => { const l = $("stage").lastElementChild; return l ? l.querySelector(sel) : null; };
   const pad = (n) => String(n).padStart(2, "0");
-  const LAUREL = `<svg class="laurel" viewBox="0 0 100 100" fill="#e4b75a"><path d="M50 92c-18-6-32-22-34-44 6 8 14 14 22 16-8-8-12-18-12-30 6 10 14 16 22 18-6-8-8-18-6-28 6 10 10 20 10 32 2 12 0 24-2 36zm0 0c18-6 32-22 34-44-6 8-14 14-22 16 8-8 12-18 12-30-6 10-14 16-22 18 6-8 8-18 6-28-6 10-10 20-10 32-2 12 0 24 2 36z"/></svg>`;
+  // Tekshirish uchun: ?soat=10:30 sahifani shu vaqtdek ko'rsatadi
+  const FAKE = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get("soat") || "");
+  const OFFSET = FAKE ? (() => { const t = new Date(); t.setHours(+FAKE[1], +FAKE[2], 0, 0); return t - Date.now(); })() : 0;
+  const NOW = () => new Date(Date.now() + OFFSET);
+
+  // ---------- Ikonkalar (chiziqli SVG) ----------
+  const P = {
+    qabul: '<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7M19 8v6M16 11h6"/>',
+    bugun: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    yutuq: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+    tadbir: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+    maktab: '<path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-5h4v5M12 5V2"/>',
+    bday: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M12 8c-1.5-3-5-3-5 0zm0 0c1.5-3 5-3 5 0z"/>',
+    phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    scan: '<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/>',
+    star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+    pulse: '<path d="M3 12h4l3-7 4 14 3-7h4"/>',
+    list: '<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',
+    robot: '<rect x="5" y="7" width="14" height="12" rx="2"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/>',
+    chess: '<path d="M8 21h8M9 18h6M10 18l1-7h2l1 7M12 4a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5"/>',
+    code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+    ball: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3 3 9.8 3 12.8 0M5.6 18.4c3-3 9.8-3 12.8 0"/>',
+    chat: '<path d="M4 5h11v8H8l-4 3zM15 9h5v8l-3-2h-6v-2"/>',
+    music: '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+    math: '<path d="M5 7h6M8 4v6M14 6h5M14 16h5M14 19h5M5 15l5 5M10 15l-5 5"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    partly: '<path d="M8 2.5V4M3 8.5H1.5M4.1 4.6l1 1M11.9 4.6l-1 1"/><circle cx="8" cy="8.5" r="3"/><path d="M9 20h8a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.5 1.2A2.9 2.9 0 0 0 9 20z"/>',
+    cloud: '<path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.3 3.3 0 0 0 7 18z"/>',
+    rain: '<path d="M7 15h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.3 3.3 0 0 0 7 15zM8 21l1-2M12 21l1-2M16 21l1-2"/>',
+    snow: '<path d="M7 15h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.3 3.3 0 0 0 7 15zM8 19h.01M12 21h.01M16 19h.01"/>',
+    fog: '<path d="M4 9h16M6 13h12M4 17h16"/>',
+    storm: '<path d="M7 15h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.3 3.3 0 0 0 7 15zM13 15l-2 4h3l-2 4"/>'
+  };
+  const I = (k, cls = "") => `<svg class="i ${cls}" viewBox="0 0 24 24">${P[k] || P.star}</svg>`;
+  const clubIcon = (s) => { s = (s || "").toLowerCase();
+    return /robot/.test(s) ? "robot" : /shaxmat|chess/.test(s) ? "chess" : /it\b|dastur|kod/.test(s) ? "code" : /ingliz|til|english/.test(s) ? "globe"
+      : /sport|futbol|basket|suzish/.test(s) ? "ball" : /debat|notiq/.test(s) ? "chat" : /musiqa|xor/.test(s) ? "music" : /matem/.test(s) ? "math" : "star"; };
 
   let DATA = window.TV_DEMO, usingDemo = true, weather = null;
 
@@ -272,9 +406,9 @@
   }
 
   // ---------- Ob-havo (Open-Meteo, kalitsiz) ----------
-  const WX = (c) => c === 0 ? ["☀️","Ochiq"] : c <= 2 ? ["⛅","Qisman bulutli"] : c === 3 ? ["☁️","Bulutli"]
-    : c <= 48 ? ["🌫️","Tuman"] : c <= 57 ? ["🌦️","Mayda yomg'ir"] : c <= 67 ? ["🌧️","Yomg'ir"]
-    : c <= 77 ? ["❄️","Qor"] : c <= 82 ? ["🌧️","Jala"] : c <= 86 ? ["🌨️","Qor"] : ["⛈️","Momaqaldiroq"];
+  const WX = (c) => c === 0 ? ["sun","Ochiq"] : c <= 2 ? ["partly","Qisman bulutli"] : c === 3 ? ["cloud","Bulutli"]
+    : c <= 48 ? ["fog","Tuman"] : c <= 57 ? ["rain","Mayda yomg'ir"] : c <= 67 ? ["rain","Yomg'ir"]
+    : c <= 77 ? ["snow","Qor"] : c <= 82 ? ["rain","Jala"] : c <= 86 ? ["snow","Qor"] : ["storm","Momaqaldiroq"];
   const deg = (t) => `${t > 0 ? "+" : ""}${t}°`;
   async function loadWeather() {
     if (!C.CITY) return;
@@ -288,44 +422,57 @@
   }
 
   // ---------- Vaqt ----------
-  const fmtDate = (d) => `${d.getDate()}-${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
   const toMin = (s) => { const m = /(\d{1,2})[:.](\d{2})/.exec(s || ""); return m ? +m[1] * 60 + +m[2] : null; };
+  const hm = (m) => `${pad(Math.floor(m / 60))}:${pad(Math.round(m % 60))}`;
   function tick() {
-    const d = new Date(), hh = pad(d.getHours()), mm = pad(d.getMinutes());
+    const d = NOW(), hh = pad(d.getHours()), mm = pad(d.getMinutes());
     $("clockTop").innerHTML = `${hh}<span>:</span>${mm}`;
-    $("dateTop").innerHTML = `<b>${DAYS[d.getDay()]}</b>${fmtDate(d)}`;
-    const w = $("wxTop");
-    if (weather) { w.style.display = ""; w.innerHTML = `<span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${esc(C.CITY.name)}</span>`; }
-    const bc = cur$(".bigclock");
-    if (bc) { bc.innerHTML = `${hh}<span>:</span>${mm}`; paintBells(); }
+    $("dayTop").textContent = DAYS[d.getDay()];
+    $("dateTop").textContent = `${d.getDate()}-${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
+    $("city").textContent = C.CITY ? C.CITY.name : "";
+    $("wxTop").innerHTML = weather ? `<span class="sep"></span><span class="wx" style="display:contents">${I(WX(weather.code)[0])}</span><b>${deg(weather.t)}</b><span>${WX(weather.code)[1]}</span>` : "";
+    paintBells();
   }
   function bellState() {
-    const d = new Date(), now = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
+    const d = NOW(), now = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
     const list = rows("Qongiroqlar").map(r => ({ shift: r[0], n: r[1], a: toMin(r[2]), b: toMin(r[3]), as: r[2], bs: r[3] })).filter(x => x.a != null && x.b != null);
-    let label = "Holat", status = "", pct = null;
+    let label = "Holat", status = "", det = "", pct = null, left = null, leftTxt = "";
     const cur = list.find(x => now >= x.a && now < x.b);
     if (d.getDay() === 0) status = "Bugun dam olish kuni";
-    else if (cur) { label = "Hozir dars"; status = `${cur.shift} · ${cur.n}-dars, ${cur.bs} gacha`; pct = (now - cur.a) / (cur.b - cur.a); }
+    else if (cur) { label = "Hozir dars"; status = `${cur.shift}, ${cur.n}-dars`; det = `${cur.as} – ${cur.bs}`; pct = (now - cur.a) / (cur.b - cur.a); left = Math.ceil(cur.b - now); leftTxt = "daqiqadan so'ng qo'ng'iroq"; }
     else {
       const next = list.filter(x => x.a > now).sort((p, q) => p.a - q.a)[0];
       const prev = list.filter(x => x.b <= now).sort((p, q) => q.b - p.b)[0];
-      if (next && prev) { label = "Tanaffus"; status = `Keyingisi: ${next.shift}, ${next.n}-dars ${next.as} da`; pct = (now - prev.b) / (next.a - prev.b); }
-      else if (next) { label = "Tez orada"; status = `Darslar ${next.as} da boshlanadi`; }
-      else if (list.length) status = "Bugungi darslar tugadi";
+      if (next && prev) { label = "Tanaffus"; status = `Keyingisi: ${next.n}-dars`; det = `${next.shift}, ${next.as} da boshlanadi`; pct = (now - prev.b) / (next.a - prev.b); left = Math.ceil(next.a - now); leftTxt = "daqiqadan so'ng dars"; }
+      else if (next) { label = "Tez orada"; status = "Darslar boshlanmoqda"; det = `${next.shift}, ${next.n}-dars ${next.as} da`; if (next.a - now <= 120) { left = Math.ceil(next.a - now); leftTxt = "daqiqadan so'ng"; } }
+      else if (list.length) { status = "Bugungi darslar tugadi"; det = "Ertaga ko'rishguncha!"; }
     }
-    return { list, now, cur, label, status, pct };
+    return { list, now, cur, label, status, det, pct, left, leftTxt };
   }
   function paintBells() {
-    const box = cur$(".bells"); if (!box) return;
-    const { list, now, cur, label, status, pct } = bellState();
+    const box = cur$(".today"); if (!box) return;
+    const { list, now, cur, label, status, det, pct, left, leftTxt } = bellState();
     const nc = cur$(".nowcard");
-    if (nc) {
-      nc.style.display = status ? "" : "none";
-      nc.innerHTML = `<div class="lbl">${label}</div><div class="val">${esc(status)}</div>${pct != null ? `<div class="track"><b style="width:${Math.round(pct * 100)}%"></b></div>` : ""}`;
-    }
+    if (nc) nc.innerHTML = `<div class="lbl">${I("pulse")}${label}</div><div class="val">${esc(status || "—")}</div><div class="det">${esc(det)}</div>
+      ${left != null ? `<div class="left"><b>${left}</b><span>${leftTxt}</span></div>` : ""}
+      ${pct != null ? `<div class="prog"><div class="stripes"><b style="width:${Math.max(4, Math.round(pct * 100))}%"></b></div><em>${Math.round(pct * 100)}%</em></div>` : ""}`;
     const shifts = [...new Set(list.map(x => x.shift))];
-    box.innerHTML = shifts.map(s => `<div class="shift glass"><h3>${esc(s)}</h3>${list.filter(x => x.shift === s).map(x =>
-      `<div class="bell ${x === cur ? "cur" : x.b <= now ? "past" : ""}"><span><b>${esc(x.n)}</b>-dars</span><span>${esc(x.as)} – ${esc(x.bs)}</span></div>`).join("")}</div>`).join("");
+    box.querySelectorAll(".shift").forEach((el, k) => {
+      const s = shifts[k]; if (!s) { el.style.visibility = "hidden"; return; }
+      el.innerHTML = `<div class="card-h"><span class="t">${I("list")}${esc(s)}</span><span class="badge">${list.filter(x => x.shift === s).length} ta dars</span></div>
+        <div class="bell-list">${list.filter(x => x.shift === s).map(x =>
+        `<div class="bell ${x === cur ? "cur" : x.b <= now ? "past" : ""}"><span class="n"><i>${esc(x.n)}</i>dars</span><b>${esc(x.as)} – ${esc(x.bs)}</b></div>`).join("")}</div>`;
+    });
+    const tl = cur$(".tl .rows");
+    if (tl && list.length) {
+      const lo = Math.floor(Math.min(...list.map(x => x.a)) / 60) * 60, hi = Math.ceil(Math.max(...list.map(x => x.b)) / 60) * 60;
+      const X = (m) => ((m - lo) / (hi - lo) * 100).toFixed(2) + "%";
+      let ticks = ""; for (let h = lo; h <= hi; h += 60) ticks += `<span style="left:${X(h)}">${hm(h)}</span>`;
+      const inRange = now >= lo && now <= hi && NOW().getDay() !== 0;
+      tl.innerHTML = shifts.map(s => `<div class="row"><span>${esc(s).toUpperCase()}</span><div class="lane">${list.filter(x => x.shift === s).map(x =>
+          `<i class="${x === cur ? "cur" : x.b <= now ? "past" : ""}" style="left:${X(x.a)};width:calc(${X(x.b)} - ${X(x.a)})"></i>`).join("")}</div></div>`).join("")
+        + `<div class="axis">${ticks}${inRange ? `<div class="nowline" data-t="${hm(Math.floor(now))}" style="left:${X(now)};top:-${shifts.length * 2.6 + .4}rem"></div>` : ""}</div>`;
+    }
   }
 
   // ---------- Slaydlar ----------
@@ -337,6 +484,17 @@
     return null;
   }
   const gradeNum = (s) => { const m = /(\d+)/.exec(s || ""); return m ? m[1] : s; };
+  const daysWord = (n) => n === 0 ? "Bugun" : n === 1 ? "Ertaga" : `${n} kundan so'ng`;
+
+  function calendar(evDays, today) {
+    const y = today.getFullYear(), mo = today.getMonth(), first = new Date(y, mo, 1), shift = (first.getDay() + 6) % 7, dim = new Date(y, mo + 1, 0).getDate();
+    let cells = ["Du","Se","Ch","Pa","Ju","Sh","Ya"].map(w => `<div class="w">${w}</div>`).join("");
+    const prevDim = new Date(y, mo, 0).getDate();
+    for (let i = shift; i > 0; i--) cells += `<span class="o">${prevDim - i + 1}</span>`;
+    for (let d = 1; d <= dim; d++) cells += `<span class="${d === today.getDate() ? "td" : ""} ${evDays.has(d) ? "ev1" : ""}">${d}</span>`;
+    const rest = (7 - (shift + dim) % 7) % 7; for (let d = 1; d <= rest; d++) cells += `<span class="o">${d}</span>`;
+    return `<div class="card-h"><span class="t">${I("tadbir")}${MONTHS_CAP[mo]} ${y}</span><span class="seg"><span class="on">Oy</span></span></div><div class="grid">${cells}</div>`;
+  }
 
   function buildSlides() {
     const S = [];
@@ -345,113 +503,144 @@
     if (adm.length) {
       const total = adm.reduce((s, r) => s + (parseInt(r[1]) || 0), 0);
       const tiles = adm.slice(0, 11).map((r, i) => { const v = parseInt(r[1]) || 0; return `
-        <div class="g up ${v > 0 ? "open" : "full"}" style="--i:${i + 3}">
-          ${r[2] ? `<div class="note">${esc(r[2])}</div>` : ""}
-          <div class="num">${esc(gradeNum(r[0]))}<small>-sinf</small></div>
-          <div class="seat">${v > 0 ? `<b>${v}</b> bo'sh joy` : "To'lgan"}</div>
+        <div class="g card up ${v > 0 ? "open hl" : "full"}" style="--i:${i + 3}">
+          <div class="gr">${esc(gradeNum(r[0]))}-sinf ${v > 0 ? `<span class="dot"></span>` : ""}</div>
+          <div class="num">${v}</div>
+          ${r[2] && v > 0 ? `<div class="note">${esc(r[2])}</div>` : `<div class="lbl">${v > 0 ? "bo'sh joy" : "To'lgan"}</div>`}
         </div>`; }).join("");
-      S.push({ key: "qabul", html: `
-        <div class="adm">
-          <div class="adm-l">
+      S.push({ key: "qabul", nav: "qabul", html: `
+        <div class="head">
+          <div>
             <span class="kicker up">Qabul 2026–2027</span>
             <h1 class="up" style="--i:1">Qabul <em>ochiq</em></h1>
-            <div class="total up" style="--i:2"><b>${total}</b><span>ta bo'sh o'rin<br>barcha sinflarda</span></div>
-            <div class="qrcard up" style="--i:4">
-              <img src="qr.png" alt="">
-              <div><div class="cap">Onlayn ariza</div><div class="ttl">Telefoningiz bilan skanerlang</div>
-                <div class="ph">${(C.PHONES || []).map(esc).join("<br>")}</div></div>
-            </div>
+            <div class="sub up" style="--i:2">Farzandingiz uchun joyni oldindan band qiling. Har bir sinfdagi bo'sh o'rinlar soni quyida.</div>
           </div>
-          <div class="grades">${tiles}${adm.length <= 11 ? `<div class="g cta up" style="--i:14"><b>Farzandingiz uchun joyni band qiling</b><span>Savollar bo'lsa, qabul bo'limiga murojaat qiling</span></div>` : ""}</div>
+          <div class="figure up" style="--i:2">${I("qabul", "big")}<div class="n">${total}</div><div class="l"><b>bo'sh o'rin</b>barcha sinflarda</div></div>
+        </div>
+        <div class="adm">
+          <div class="grades">${tiles}${adm.length <= 11 ? `<div class="g card cta up" style="--i:14"><b>Joyni band qiling</b>${I("arrow")}</div>` : ""}</div>
+          <div class="qr card glow up" style="--i:6">
+            <div class="ttl">Onlayn ariza</div>
+            <div class="cap">Telefon kamerasi bilan skanerlang</div>
+            <div class="tile"><img src="qr.png" alt=""></div>
+            <div class="ph">${(C.PHONES || []).map(p => `<div>${I("phone")}${esc(p)}</div>`).join("")}</div>
+          </div>
         </div>` });
     }
     // 2. Bugun
-    const d0 = new Date();
-    S.push({ key: "bugun", html: `
-      <div class="today">
-        <div style="display:flex;flex-direction:column;min-height:0">
-          <span class="kicker up">Bugun</span>
-          <div class="bigclock up" style="--i:1">--:--</div>
-          <div class="bigday up" style="--i:2">${DAYS[d0.getDay()]}, <em class="gold">${d0.getDate()}-${MONTHS[d0.getMonth()]}</em></div>
-          ${weather ? `<div class="wxrow up" style="--i:3"><div class="chip"><span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${WX(weather.code)[1]}</span></div><div class="chip">Kun davomida ${deg(weather.min)} … ${deg(weather.max)}</div></div>` : ""}
-          <div class="nowcard glass up" style="--i:4"></div>
+    const d0 = NOW();
+    S.push({ key: "bugun", nav: "bugun", cls: "s-bugun", html: `
+      <div class="head">
+        <div>
+          <span class="kicker up">Bugungi kun</span>
+          <h1 class="up" style="--i:1">${DAYS[d0.getDay()]}, <em>${d0.getDate()}-${MONTHS[d0.getMonth()]}</em></h1>
         </div>
-        <div class="bells up" style="--i:3"></div>
+        ${weather ? `<div class="figure up" style="--i:2">${I(WX(weather.code)[0], "big")}<div class="n">${deg(weather.t)}</div><div class="l"><b>${WX(weather.code)[1]}</b>Kun davomida ${deg(weather.min)} … ${deg(weather.max)}</div></div>` : ""}
+      </div>
+      <div class="today">
+        <div class="tl card up" style="--i:3"><div class="card-h"><span class="t">${I("bugun")}Kun davomida</span><span class="seg"><span class="on">Bugun</span></span></div><div class="rows"></div></div>
+        <div class="nowcard card glow up" style="--i:4"></div>
+        <div class="shift card up" style="--i:5"></div>
+        <div class="shift card up" style="--i:6"></div>
       </div>`, after: tick });
     // 3. Yutuqlar (6 tadan)
-    chunk(rows("Yutuqlar"), 6).forEach((part, k, all) => S.push({ key: "yutuq" + k, html: `
-      <span class="kicker up">Faxrimiz${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
-      <h1 class="up" style="--i:1">O'quvchilarimiz <em>yutuqlari</em></h1>
+    chunk(rows("Yutuqlar"), 6).forEach((part, k, all) => S.push({ key: "yutuq" + k, nav: "yutuq", html: `
+      <div class="head">
+        <div>
+          <span class="kicker up">Faxrimiz${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
+          <h1 class="up" style="--i:1">O'quvchilarimiz <em>yutuqlari</em></h1>
+        </div>
+        <div class="figure up" style="--i:2">${I("yutuq", "big")}<div class="n">${rows("Yutuqlar").length}</div><div class="l"><b>ta yutuq</b>biz ular bilan faxrlanamiz</div></div>
+      </div>
       <div class="cards">${part.map((r, i) => `
-        <div class="card glass up" style="--i:${i + 2}">${LAUREL}
+        <div class="ach card ${i === 0 ? "glow" : ""} up" style="--i:${i + 2}">
+          <div class="corner">${I("star")}</div>
           <div class="avatar"><div>${r[3] ? `<img src="${esc(r[3])}" alt="" onerror="this.parentNode.textContent='${esc(initials(r[0] || "?"))}'">` : esc(initials(r[0] || "?"))}</div></div>
-          <div><div class="what">${esc(r[2])}</div><div class="who">${esc(r[0])}</div><div class="cls">${esc(r[1])}</div></div>
+          <div><div class="what${(r[2] || "").length > 22 ? " long" : ""}">${esc(r[2])}</div><div class="who">${esc(r[0])}</div>${r[1] ? `<span class="badge">${esc(r[1])}</span>` : ""}</div>
         </div>`).join("")}
       </div>` }));
     // 4. Tadbirlar
-    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const today = NOW(); today.setHours(0, 0, 0, 0);
     const evs = rows("Tadbirlar").map(r => ({ d: parseDate(r[0]), t: r[1], s: r[2] })).filter(e => e.t && (!e.d || e.d >= today)).sort((a, b) => (a.d || 0) - (b.d || 0));
-    chunk(evs, 4).forEach((part, k, all) => S.push({ key: "tadbir" + k, html: `
-      <span class="kicker up">Yangiliklar va tadbirlar${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
-      <h1 class="up" style="--i:1">Yaqin <em>kunlarda</em></h1>
-      <div class="timeline">${part.map((e, i) => { const days = e.d ? Math.round((e.d - today) / 864e5) : null; return `
-        <div class="ev glass up" style="--i:${i + 2}">
-          <div class="d">${e.d ? `<b>${e.d.getDate()}</b><span>${MON3[e.d.getMonth()]}</span>` : `<b>✦</b>`}</div>
-          <div><div class="t">${esc(e.t)}</div>${e.s ? `<div class="s">${esc(e.s)}</div>` : ""}</div>
-          ${days === 0 ? `<span class="soon">Bugun</span>` : days === 1 ? `<span class="soon">Ertaga</span>` : days != null ? `<span class="left">${days} kundan so'ng</span>` : ""}
-        </div>`; }).join("")}
-      </div>` }));
+    const evDays = new Set(evs.filter(e => e.d && e.d.getMonth() === today.getMonth() && e.d.getFullYear() === today.getFullYear()).map(e => e.d.getDate()));
+    chunk(evs, 4).forEach((part, k, all) => { const first = evs[0], fd = first && first.d ? Math.round((first.d - today) / 864e5) : null; S.push({ key: "tadbir" + k, nav: "tadbir", html: `
+      <div class="head">
+        <div>
+          <span class="kicker up">Yangiliklar va tadbirlar${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
+          <h1 class="up" style="--i:1">Yaqin <em>kunlarda</em></h1>
+        </div>
+      </div>
+      <div class="evwrap">
+        <div class="evlist">${part.map((e, i) => { const days = e.d ? Math.round((e.d - today) / 864e5) : null; return `
+          <div class="ev card ${k === 0 && i === 0 ? "glow" : ""} up" style="--i:${i + 2}">
+            <div class="d">${e.d ? `<b>${e.d.getDate()}</b><span>${MON3[e.d.getMonth()]}</span>` : `<b>✦</b>`}</div>
+            <div><div class="when">${days != null ? daysWord(days) : "Tez orada"}</div><div class="t">${esc(e.t)}</div>${e.s ? `<div class="s">${esc(e.s)}</div>` : ""}</div>
+            <div class="wd">${e.d ? DAYS[e.d.getDay()] : ""}</div>
+          </div>`; }).join("")}
+        </div>
+        <div class="evside">
+          ${first ? `<div class="next card hl up" style="--i:3"><div class="lbl">Eng yaqin tadbir</div>
+            <div class="cd">${fd === 0 ? `<b class="gold">Bugun</b>` : fd === 1 ? `<b class="gold">Ertaga</b>` : fd != null ? `<b>${fd}</b><span>kun qoldi</span>` : `<b>✦</b>`}</div>
+            <div class="nt">${esc(first.t)}</div></div>` : ""}
+          <div class="cal card up" style="--i:4">${calendar(evDays, today)}</div>
+        </div>
+      </div>` }); });
     // 5. Maktab haqida
     const mk = rows("Maktab"), typ = (t) => mk.filter(r => (r[0] || "").toLowerCase().startsWith(t));
     if (mk.length) {
       const motto = typ("shior")[0];
-      S.push({ key: "maktab", cls: "hero", html: `
+      if (motto) $("motto").textContent = motto[1] + ".";
+      S.push({ key: "maktab", nav: "maktab", cls: "hero", html: `
         <div class="bg"></div><div class="shade"></div>
         <div class="inner">
           <span class="kicker up">Maktab haqida</span>
           <h1 class="up" style="--i:1">${motto ? esc(motto[1]).replace(/(\S+)$/, "<em>$1</em>") : "Oxford International <em>School</em>"}</h1>
-          ${typ("togarak").length ? `<div class="clubs up" style="--i:2">${typ("togarak").map(r => `<span>${esc(r[1])}</span>`).join("")}</div>` : ""}
-          <div class="stats">${typ("raqam").slice(0, 4).map((r, i) => `<div class="stat up" style="--i:${i + 3}"><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div>`).join("")}</div>
+          <div class="sub up" style="--i:2">Oxford International School: zamonaviy ta'lim, xalqaro standartlar va har bir o'quvchiga e'tibor.</div>
+          <div class="stats">${typ("raqam").slice(0, 4).map((r, i) => `<div class="stat card up" style="--i:${i + 3}"><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div>`).join("")}</div>
+          ${typ("togarak").length ? `<div class="clubs card up" style="--i:8"><div class="card-h"><span class="t">${I("star")}To'garaklar</span><span class="badge">${typ("togarak").length} ta yo'nalish</span></div>
+            <div class="row">${typ("togarak").slice(0, 7).map(r => `<div class="club"><i>${I(clubIcon(r[1]))}</i>${esc(r[1])}</div>`).join("")}</div></div>` : ""}
         </div>` });
     }
     // 6. Tug'ilgan kunlar (faqat bugun bo'lsa)
     const dm = `${pad(today.getDate())}.${pad(today.getMonth() + 1)}`;
     const bd = rows("Tugilgan kunlar").filter(r => { const m = /(\d{1,2})[./-](\d{1,2})/.exec(r[2] || ""); return m && `${pad(m[1])}.${pad(m[2])}` === dm; });
-    if (bd.length) S.push({ key: "bday", html: `
-      <div class="confetti">${Array.from({ length: 46 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${["#f6dc9c","#e4b75a","#4fd69c","#7d95ff","#ff8fb1"][i % 5]};animation-duration:${6 + (i % 5)}s;animation-delay:-${(i * 0.7) % 6}s"></i>`).join("")}</div>
+    if (bd.length) S.push({ key: "bday", nav: "bday", html: `
+      <div class="confetti">${Array.from({ length: 46 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${["#f6dc9c","#e4b75a","#8fa2ff","#4f6bff","#ffffff"][i % 5]};animation-duration:${6 + (i % 5)}s;animation-delay:-${(i * 0.7) % 6}s"></i>`).join("")}</div>
       <div class="bday">
-        <div class="balloon up">🎈</div>
-        <span class="kicker up" style="--i:1;margin-top:1.4rem">Bugun tug'ilgan kun</span>
+        <div class="gift up">${I("bday")}</div>
+        <span class="kicker up" style="--i:1">Bugun tug'ilgan kun</span>
         <h1 class="up" style="--i:2">Tavalludingiz <em>muborak!</em></h1>
-        <div class="names">${bd.map((r, i) => `<div class="p glass up" style="--i:${i + 3}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div>
+        <div class="names">${bd.map((r, i) => `<div class="p card hl up" style="--i:${i + 3}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div>
       </div>` });
     return S;
   }
 
   // ---------- Aylantirish ----------
+  const NAV = { qabul: "Qabul", bugun: "Bugungi kun", yutuq: "Yutuqlar", tadbir: "Tadbirlar", maktab: "Maktab haqida", bday: "Tug'ilgan kun" };
   let slides = [], idx = -1, timer = null;
   function paintTicker() {
     const items = rows("Elonlar").map(r => r[0]).filter(Boolean);
     const el = $("ticker");
     el.innerHTML = items.map(t => `<span>${esc(t)}</span>`).join("");
     el.style.animationDuration = Math.max(25, el.textContent.length * 0.2) + "s";
-    document.querySelector("footer").style.visibility = items.length ? "" : "hidden";
+    $("news").style.visibility = items.length ? "" : "hidden";
   }
-  function paintStories(secs) {
-    $("stories").innerHTML = slides.map((_, i) => `<i class="${i < idx ? "done" : ""}"><b></b></i>`).join("");
-    const b = $("stories").children[idx]?.firstChild; if (!b) return;
-    requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; });
+  function paintNav(secs) {
+    const keys = [...new Set(slides.map(s => s.nav))], curKey = slides[idx]?.nav;
+    $("nav").innerHTML = keys.map(k => `<div class="it ${k === curKey ? "on" : ""}">${I(k)}<span>${NAV[k]}</span><div class="pg"><b></b></div></div>`).join("");
+    const b = $("nav").querySelector(".it.on .pg b"); if (!b) return;
+    requestAnimationFrame(() => requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; }));
   }
   function show(next) {
     const stage = $("stage"), secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
     if (!slides.length) return;
     idx = next % slides.length;
-    stage.querySelectorAll(".slide.on").forEach(old => { old.classList.remove("on"); old.classList.add("off"); setTimeout(() => old.remove(), 1100); });
+    stage.querySelectorAll(".slide:not(.off)").forEach(old => { old.classList.remove("on"); old.classList.add("off"); setTimeout(() => old.remove(), 1100); });
     const s = slides[idx], el = document.createElement("section");
     el.className = "slide " + (s.cls || ""); el.innerHTML = s.html; stage.appendChild(el);
     if (s.after) s.after();
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("on")));
-    paintStories(secs);
+    paintNav(secs);
     clearTimeout(timer);
     if (only) return;
     timer = setTimeout(() => {
@@ -463,6 +652,8 @@
     await loadSheets();
     $("offline").style.display = usingDemo ? "block" : "none";
     paintTicker();
+    $("phonePill").innerHTML = (C.PHONES || []).length ? `${I("phone")}<span>Qabul bo'limi</span><span class="sep"></span><b>${esc(C.PHONES[C.PHONES.length - 1])}</b>` : "";
+    $("phonePill").style.display = (C.PHONES || []).length ? "" : "none";
     slides = buildSlides();
   }
 
