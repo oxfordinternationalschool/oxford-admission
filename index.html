@@ -352,6 +352,12 @@
     .sicon svg.i { width: 18px; height: 18px; }
     .shead h3 { font-size: 1.05rem; white-space: nowrap; overflow: hidden; line-height: 1.25; }
     .shead p { display: none; }
+    /* Ro'yxat telefonda pastdan chiqadigan oyna: sahifa joyidan qimirlamaydi */
+    .dd-list { position: fixed !important; left: 10px; right: 10px; top: auto !important; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 60;
+      max-height: 70vh; border-radius: 26px !important; padding: 10px !important; box-shadow: 0 -10px 40px rgba(20,26,51,.25); animation: sheet .2s ease-out; }
+    @keyframes sheet { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+    body.dd-sheet-open::after { content: ""; position: fixed; inset: 0; background: rgba(15,20,40,.35); z-index: 55; }
+
     .nav { border-top: 0; padding-top: 4px; }
     .step { gap: 18px; }
     .hero h2 { margin: 0; }
@@ -698,17 +704,19 @@
     this.opts.items().forEach(function (it, i) { if (it.v === val) idx = i; });
     this.setActive(idx, true);
     this.list.focus({ preventScroll: true });
-    this.list.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (window.innerWidth > 640) this.list.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    else document.body.classList.add('dd-sheet-open');
   };
   Dropdown.prototype.close = function (silent) {
     this.list.hidden = true; this.root.classList.remove('open'); this.btn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('dd-sheet-open');
     if (!silent) this.btn.focus();
   };
   Dropdown.prototype.setActive = function (i, scroll) {
     var prev = this.list.querySelector('.dd-opt.active'); if (prev) prev.classList.remove('active');
     var li = this.list.querySelector('[data-i="' + i + '"]'); if (!li) return;
     this.active = i; li.classList.add('active'); this.list.setAttribute('aria-activedescendant', li.id);
-    if (scroll) li.scrollIntoView({ block: 'nearest' });
+    if (scroll && window.innerWidth > 640) li.scrollIntoView({ block: 'nearest' });
   };
   Dropdown.prototype.key = function (e) {
     var n = this.opts.items().length;
