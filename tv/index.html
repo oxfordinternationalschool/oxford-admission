@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<base href="/tv/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oxford International School · Reception</title>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  /* Shriftlar sayt ichida: internet sekin bo'lsa ham dizayn buzilmaydi */
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-SemiBold.ttf); font-weight: 600; }
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-MediumItalic.ttf); font-weight: 500; font-style: italic; }
+  @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-SemiBold.ttf); font-weight: 600; }
+  @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: "Inter"; src: url(fonts/Inter-Medium.otf); font-weight: 500; }
+  @font-face { font-family: "Inter"; src: url(fonts/Inter-SemiBold.otf); font-weight: 600; }
+
+  :root {
+    --bg: #0b1030; --bg-2: #121a45;
+    --gold: #e4b75a; --gold-2: #f6dc9c; --gold-deep: #b8862f;
+    --white: #ffffff; --ink-2: #c7cde6; --ink-3: #8790b8;
+    --glass: rgba(255,255,255,.055); --glass-line: rgba(255,255,255,.10);
+    --green: #4fd69c;
+    --serif: "Playfair", Georgia, serif;
+    --sans: "Inter", "Segoe UI", system-ui, sans-serif;
+    --caps: "Montserrat", "Segoe UI", sans-serif;
+    --gold-grad: linear-gradient(135deg, #f6dc9c 0%, #e4b75a 45%, #b8862f 100%);
+  }
+  h1, .g .num, .total b, .card .what, .ev .d b, .ev .t, .stat b, .bday .p b, .bigday, .brand b, .qrcard .ttl, .g.cta b, .avatar div { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+  html { font-size: min(calc(100vw / 120), calc(100vh / 67.5)); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
+  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-rows: 8rem 1fr 4.6rem; height: 100vh; position: relative; }
+
+  /* Jonli fon: sekin suzuvchi nurlar */
+  .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(120rem 70rem at 50% 120%, var(--bg-2), var(--bg)); }
+  .aurora i { position: absolute; border-radius: 50%; filter: blur(7rem); opacity: .55; animation: drift 40s ease-in-out infinite alternate; }
+  .aurora i:nth-child(1) { width: 60rem; height: 40rem; left: -15rem; top: -20rem; background: #2b3a9c; }
+  .aurora i:nth-child(2) { width: 45rem; height: 35rem; right: -12rem; top: 10rem; background: #6b4a12; opacity: .35; animation-duration: 55s; }
+  .aurora i:nth-child(3) { width: 50rem; height: 30rem; left: 30rem; bottom: -22rem; background: #1d2a7a; animation-duration: 47s; }
+  @keyframes drift { to { transform: translate(8rem, 5rem) scale(1.15); } }
+  .aurora::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 3.2rem 3.2rem; mask-image: linear-gradient(180deg, #000, transparent 70%); }
+
+  /* Yuqori panel */
+  header { display: flex; align-items: center; justify-content: space-between; padding: 0 4.5rem; position: relative; }
+  .brand { display: flex; align-items: center; gap: 1.5rem; }
+  .crest { width: 5rem; height: 5rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .25rem rgba(228,183,90,.35), 0 1rem 3rem rgba(0,0,0,.35); }
+  .crest img { height: 3.7rem; }
+  .brand b { display: block; font-family: var(--serif); font-weight: 700; font-size: 2.1rem; letter-spacing: .01em; line-height: 1.1; }
+  .brand small { display: block; font-family: var(--caps); font-size: .85rem; font-weight: 600; letter-spacing: .38em; text-transform: uppercase; color: var(--gold); margin-top: .35rem; }
+  .now { display: flex; align-items: center; gap: 2.4rem; }
+  .chip { display: flex; align-items: center; gap: .8rem; padding: .7rem 1.3rem; border-radius: 3rem; background: var(--glass); border: 1px solid var(--glass-line); font-size: 1.25rem; color: var(--ink-2); font-weight: 600; }
+  .chip .t { color: #fff; font-weight: 600; font-size: 1.5rem; }
+  .now .date { text-align: right; font-size: 1.15rem; color: var(--ink-2); font-weight: 500; line-height: 1.4; }
+  .now .date b { display: block; color: var(--gold); font-family: var(--caps); font-size: .9rem; letter-spacing: .25em; text-transform: uppercase; font-weight: 700; }
+  .now .clock { font-family: var(--caps); font-size: 3.6rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .02em; line-height: 1; }
+  .now .clock span { animation: blink 2s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+
+  /* Hikoya uslubidagi progress (har slayd uchun bo'lak) */
+  .stories { position: absolute; left: 4.5rem; right: 4.5rem; bottom: 0; display: flex; gap: .6rem; }
+  .stories i { flex: 1; height: .28rem; border-radius: 1rem; background: rgba(255,255,255,.13); overflow: hidden; position: relative; }
+  .stories i b { position: absolute; inset: 0; width: 0; background: var(--gold-grad); border-radius: 1rem; }
+  .stories i.done b { width: 100%; }
+
+  /* Slaydlar */
+  main { position: relative; overflow: hidden; }
+  .slide { position: absolute; inset: 0; padding: 3rem 4.5rem 2.6rem; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s ease, filter 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); transform: scale(1.03); filter: blur(.6rem); }
+  .slide.on { opacity: 1; transform: none; filter: none; }
+  .slide.off { opacity: 0; transform: scale(.97); filter: blur(.6rem); }
+  /* Elementlar ketma-ket paydo bo'ladi */
+  .slide .up { opacity: 0; transform: translateY(2.2rem); }
+  .slide.on .up { animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.25s + var(--i, 0) * .08s); }
+  @keyframes up { to { opacity: 1; transform: none; } }
+
+  .kicker { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--caps); font-size: 1.05rem; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
+  .kicker::before { content: ""; width: 3.4rem; height: 1px; background: var(--gold); }
+  h1 { font-family: var(--serif); font-weight: 700; font-size: 5rem; line-height: 1.02; margin: 1rem 0 0; letter-spacing: -.01em; }
+  h1 em, .gold { font-style: italic; font-weight: 500; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .1em; }
+  .glass { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 1.8rem; backdrop-filter: blur(1rem); }
+
+  /* 1. Qabul */
+  .adm { display: grid; grid-template-columns: 40rem 1fr; gap: 3.5rem; flex: 1; min-height: 0; }
+  .adm-l { display: flex; flex-direction: column; }
+  .total { display: flex; align-items: baseline; gap: 1.2rem; margin-top: 1.8rem; }
+  .total b { font-family: var(--serif); font-size: 9rem; line-height: .9; font-weight: 700; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .total span { font-size: 1.6rem; color: var(--ink-2); font-weight: 500; line-height: 1.3; }
+  .qrcard { margin-top: auto; display: flex; gap: 1.6rem; align-items: center; padding: 1.4rem; border-radius: 1.8rem; background: #fff; color: var(--bg); box-shadow: 0 2rem 5rem rgba(0,0,0,.35); }
+  .qrcard img { width: 11rem; height: 11rem; image-rendering: pixelated; flex: none; }
+  .qrcard .cap { font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
+  .qrcard .ttl { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; line-height: 1.15; margin: .35rem 0 .7rem; }
+  .qrcard .ph { font-family: var(--caps); font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.45; }
+  .grades { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1.1rem; }
+  .g { position: relative; border-radius: 1.6rem; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+  .g .num { font-family: var(--serif); font-size: 4.4rem; font-weight: 700; line-height: 1; }
+  .g .num small { font-family: var(--sans); font-size: 1.15rem; font-weight: 600; color: var(--ink-3); margin-left: .3rem; letter-spacing: .02em; }
+  .g .seat { display: inline-flex; align-items: center; gap: .6rem; align-self: flex-start; padding: .45rem 1rem; border-radius: 2rem; font-size: 1.15rem; font-weight: 600; }
+  .g.open { background: linear-gradient(160deg, rgba(79,214,156,.16), rgba(79,214,156,.04)); border: 1px solid rgba(79,214,156,.35); }
+  .g.open .seat { background: rgba(79,214,156,.18); color: var(--green); }
+  .g.open .seat::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(79,214,156,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 .8rem rgba(79,214,156,0); } 100% { box-shadow: 0 0 0 0 rgba(79,214,156,0); } }
+  .g.open .seat b { font-size: 1.6rem; color: #fff; }
+  .g.full { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); }
+  .g.full .num { color: rgba(255,255,255,.35); }
+  .g.full .seat { color: var(--ink-3); background: rgba(255,255,255,.05); }
+  .g .note { position: absolute; top: 1.3rem; right: 1.4rem; font-size: .9rem; color: var(--gold); font-weight: 600; text-align: right; max-width: 8rem; line-height: 1.25; }
+  .g.cta { background: var(--gold-grad); color: var(--bg); justify-content: center; }
+  .g.cta b { font-family: var(--serif); font-size: 2.1rem; line-height: 1.1; }
+  .g.cta span { font-size: 1.1rem; font-weight: 600; margin-top: .5rem; opacity: .8; }
+
+  /* 2. Bugun */
+  .today { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4rem; flex: 1; min-height: 0; }
+  .bigclock { font-family: var(--caps); font-weight: 700; font-size: 13rem; line-height: .95; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin-top: 2rem; }
+  .bigclock span { color: var(--gold); }
+  .bigday { font-family: var(--serif); font-size: 3.6rem; font-weight: 700; margin-top: 1.4rem; }
+  .bigday em { font-weight: 500; }
+  .nowcard { margin-top: auto; padding: 1.8rem 2rem; }
+  .nowcard .lbl { font-family: var(--caps); font-size: .95rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .nowcard .val { font-size: 2.2rem; font-weight: 600; margin-top: .5rem; }
+  .nowcard .track { height: .55rem; border-radius: 1rem; background: rgba(255,255,255,.1); margin-top: 1.2rem; overflow: hidden; }
+  .nowcard .track b { display: block; height: 100%; background: var(--gold-grad); border-radius: 1rem; transition: width 1s; }
+  .wxrow { display: flex; gap: 1.2rem; margin-top: 1.4rem; }
+  .wxrow .chip { font-size: 1.4rem; padding: .8rem 1.5rem; }
+  .bells { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-content: start; padding-top: 1rem; }
+  .shift { padding: 1.6rem 1.4rem; }
+  .shift h3 { margin: 0 0 1rem .4rem; font-family: var(--caps); font-size: 1rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .bell { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; border-radius: 1rem; font-size: 1.45rem; font-weight: 500; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .bell + .bell { border-top: 1px solid rgba(255,255,255,.05); }
+  .bell b { font-weight: 600; color: #fff; }
+  .bell.cur { background: var(--gold-grad); color: var(--bg); border-color: transparent; box-shadow: 0 .8rem 2rem rgba(228,183,90,.25); }
+  .bell.cur b { color: var(--bg); }
+  .bell.past { opacity: .35; }
+
+  /* 3. Yutuqlar */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.6rem; flex: 1; margin-top: 2.4rem; min-height: 0; }
+  .card { position: relative; padding: 2rem; display: flex; gap: 1.8rem; align-items: center; overflow: hidden; }
+  .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, rgba(228,183,90,.6), transparent 45%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .avatar { width: 8rem; height: 8rem; border-radius: 50%; flex: none; padding: .3rem; background: var(--gold-grad); }
+  .avatar div { width: 100%; height: 100%; border-radius: 50%; background: var(--bg-2); display: grid; place-items: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; color: var(--gold-2); overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .card .what { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .card .who { font-size: 1.5rem; font-weight: 600; margin-top: .7rem; }
+  .card .cls { display: inline-block; margin-top: .5rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .14em; color: var(--ink-3); }
+  .card .laurel { position: absolute; right: -1.5rem; bottom: -2rem; width: 10rem; opacity: .07; }
+
+  /* 4. Tadbirlar: vaqt chizig'i */
+  .timeline { position: relative; margin-top: 2.6rem; flex: 1; display: flex; flex-direction: column; gap: 1.3rem; padding-left: 3rem; }
+  .timeline::before { content: ""; position: absolute; left: .55rem; top: 1rem; bottom: 1rem; width: 2px; background: linear-gradient(var(--gold), rgba(228,183,90,.05)); }
+  .ev { position: relative; display: grid; grid-template-columns: 10rem 1fr auto; gap: 2.4rem; align-items: center; padding: 1.5rem 2.2rem; }
+  .ev::before { content: ""; position: absolute; left: -3rem; top: 50%; width: 1.3rem; height: 1.3rem; margin-top: -.65rem; border-radius: 50%; background: var(--bg); border: .3rem solid var(--gold); }
+  .ev .d { text-align: center; }
+  .ev .d b { display: block; font-family: var(--serif); font-size: 3.6rem; line-height: 1; font-weight: 700; }
+  .ev .d span { font-family: var(--caps); font-size: 1rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+  .ev .t { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.15; }
+  .ev .s { font-size: 1.4rem; color: var(--ink-2); margin-top: .4rem; }
+  .ev .soon { font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: .6rem 1.2rem; border-radius: 2rem; background: var(--gold-grad); color: var(--bg); }
+  .ev .left { font-size: 1.2rem; color: var(--ink-3); font-weight: 600; }
+
+  /* 5. Maktab haqida: to'liq ekran rasm */
+  .slide.hero { padding: 0; }
+  .hero .bg { position: absolute; inset: 0; background: url(maktab.jpg) center/cover; transform: scale(1.12); }
+  .hero.on .bg { animation: kenburns 20s ease-out forwards; }
+  @keyframes kenburns { from { transform: scale(1.12) translateX(2%); } to { transform: scale(1.0) translateX(0); } }
+  .hero .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,16,48,.97) 0%, rgba(11,16,48,.88) 38%, rgba(11,16,48,.25) 70%, rgba(11,16,48,.1) 100%), linear-gradient(0deg, rgba(11,16,48,.85), transparent 40%); }
+  .hero .inner { position: relative; padding: 3rem 4.5rem 2.6rem; height: 100%; display: flex; flex-direction: column; max-width: 76rem; }
+  .hero h1 { font-size: 5.6rem; max-width: 60rem; }
+  .stats { display: flex; gap: 3.4rem; margin-top: auto; }
+  .stat b { display: block; font-family: var(--serif); font-size: 4rem; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat span { display: block; font-size: 1.2rem; color: var(--ink-2); font-weight: 500; margin-top: .5rem; max-width: 14rem; }
+  .clubs { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.4rem; }
+  .clubs span { padding: .75rem 1.4rem; border-radius: 3rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(.6rem); font-size: 1.3rem; font-weight: 600; }
+
+  /* 6. Tug'ilgan kunlar */
+  .bday { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .bday h1 { font-size: 6.4rem; }
+  .bday .names { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem; margin-top: 3rem; max-width: 100rem; }
+  .bday .p { padding: 1.6rem 2.6rem; }
+  .bday .p b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; }
+  .bday .p span { font-family: var(--caps); font-size: 1rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .balloon { font-size: 6rem; animation: bob 3s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-1.2rem) rotate(4deg); } }
+  .confetti { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .confetti i { position: absolute; top: -2rem; width: .7rem; height: 1.3rem; border-radius: .2rem; animation: fall linear infinite; opacity: .85; }
+  @keyframes fall { to { transform: translateY(80rem) rotate(600deg); } }
+
+  /* Pastki panel */
+  footer { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2rem; padding: 0 4.5rem; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.15)); border-top: 1px solid rgba(255,255,255,.07); }
+  .tag { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+  .tag::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: #ff5a5f; animation: pulse-r 1.6s infinite; }
+  @keyframes pulse-r { 0% { box-shadow: 0 0 0 0 rgba(255,90,95,.6); } 70% { box-shadow: 0 0 0 .7rem rgba(255,90,95,0); } 100% { box-shadow: 0 0 0 0 rgba(255,90,95,0); } }
+  .ticker { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+  .ticker .run { display: inline-block; padding-left: 100%; animation: tick linear infinite; font-size: 1.4rem; font-weight: 500; color: var(--ink-2); }
+  .ticker .run span::after { content: "✦"; color: var(--gold); margin: 0 2.4rem; font-size: 1rem; vertical-align: middle; }
+  @keyframes tick { to { transform: translateX(-100%); } }
+  .offline { position: fixed; right: 1rem; bottom: 5.2rem; font-size: .9rem; color: var(--ink-3); background: rgba(0,0,0,.4); padding: .3rem .8rem; border-radius: .5rem; display: none; }
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i><i></i></div>
+<header>
+  <div class="brand">
+    <div class="crest"><img src="logo.png" alt=""></div>
+    <div><b>Oxford International School</b><small>Xush kelibsiz · Welcome</small></div>
+  </div>
+  <div class="now">
+    <div class="chip" id="wxTop" style="display:none"></div>
+    <div class="date" id="dateTop"></div>
+    <div class="clock" id="clockTop">--:--</div>
+  </div>
+  <div class="stories" id="stories"></div>
+</header>
+<main id="stage"></main>
+<footer>
+  <div class="tag">E'lon</div>
+  <div class="ticker"><div class="run" id="ticker"></div></div>
+</footer>
+<div class="offline" id="offline">namuna ma'lumot</div>
+
+<script src="config.js"></script>
+<script src="demo.js"></script>
+<script>
+(() => {
+  const C = Object.assign({ SLIDE_SECONDS: 12, REFRESH_MINUTES: 5 }, window.TV_CONFIG || {});
+  const MONTHS = ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"];
+  const MON3 = ["yan","fev","mar","apr","may","iyun","iyul","avg","sen","okt","noy","dek"];
+  const DAYS = ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"];
+  const SHEETS = ["Qabul","Qongiroqlar","Yutuqlar","Tadbirlar","Maktab","Tugilgan kunlar","Elonlar","Sozlamalar"];
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const cur$ = (sel) => { const l = $("stage").lastElementChild; return l ? l.querySelector(sel) : null; };
+  const pad = (n) => String(n).padStart(2, "0");
+  const LAUREL = `<svg class="laurel" viewBox="0 0 100 100" fill="#e4b75a"><path d="M50 92c-18-6-32-22-34-44 6 8 14 14 22 16-8-8-12-18-12-30 6 10 14 16 22 18-6-8-8-18-6-28 6 10 10 20 10 32 2 12 0 24-2 36zm0 0c18-6 32-22 34-44-6 8-14 14-22 16 8-8 12-18 12-30-6 10-14 16-22 18 6-8 8-18 6-28-6 10-10 20-10 32-2 12 0 24 2 36z"/></svg>`;
+
+  let DATA = window.TV_DEMO, usingDemo = true, weather = null;
+
+  // ---------- Ma'lumot: Google Sheet (har varaq CSV) ----------
+  function parseCSV(text) {
+    const rows = []; let row = [], cell = "", q = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (q) { if (ch === '"') { if (text[i+1] === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+      else if (ch !== "\r") cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows.map(r => r.map(c => c.trim())).filter(r => r.some(c => c !== ""));
+  }
+  async function loadSheets() {
+    if (!C.SHEET_ID) return;
+    try {
+      const out = {};
+      await Promise.all(SHEETS.map(async (name) => {
+        const url = `https://docs.google.com/spreadsheets/d/${C.SHEET_ID}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
+        const r = await fetch(url, { cache: "no-store" });
+        if (!r.ok) throw new Error(name + " " + r.status);
+        out[name] = parseCSV(await r.text());
+      }));
+      DATA = out; usingDemo = false;
+      try { localStorage.setItem("tvData", JSON.stringify(out)); } catch (e) {}
+    } catch (e) {
+      console.warn("Sheet o'qilmadi, oxirgi saqlangan ma'lumot ishlatiladi:", e);
+      try { const c = JSON.parse(localStorage.getItem("tvData") || "null"); if (c) { DATA = c; usingDemo = false; } } catch (e2) {}
+    }
+  }
+  const rows = (name) => (DATA[name] || []).slice(1).filter(r => r.some(Boolean));
+  function setting(key, def) {
+    const r = rows("Sozlamalar").find(r => (r[0] || "").toLowerCase() === key);
+    return r && r[1] ? r[1] : def;
+  }
+
+  // ---------- Ob-havo (Open-Meteo, kalitsiz) ----------
+  const WX = (c) => c === 0 ? ["☀️","Ochiq"] : c <= 2 ? ["⛅","Qisman bulutli"] : c === 3 ? ["☁️","Bulutli"]
+    : c <= 48 ? ["🌫️","Tuman"] : c <= 57 ? ["🌦️","Mayda yomg'ir"] : c <= 67 ? ["🌧️","Yomg'ir"]
+    : c <= 77 ? ["❄️","Qor"] : c <= 82 ? ["🌧️","Jala"] : c <= 86 ? ["🌨️","Qor"] : ["⛈️","Momaqaldiroq"];
+  const deg = (t) => `${t > 0 ? "+" : ""}${t}°`;
+  async function loadWeather() {
+    if (!C.CITY) return;
+    try {
+      const u = `https://api.open-meteo.com/v1/forecast?latitude=${C.CITY.lat}&longitude=${C.CITY.lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
+      const j = await (await fetch(u)).json();
+      weather = { t: Math.round(j.current.temperature_2m), code: j.current.weather_code,
+                  max: Math.round(j.daily.temperature_2m_max[0]), min: Math.round(j.daily.temperature_2m_min[0]) };
+    } catch (e) { weather = null; }
+    tick();
+  }
+
+  // ---------- Vaqt ----------
+  const fmtDate = (d) => `${d.getDate()}-${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
+  const toMin = (s) => { const m = /(\d{1,2})[:.](\d{2})/.exec(s || ""); return m ? +m[1] * 60 + +m[2] : null; };
+  function tick() {
+    const d = new Date(), hh = pad(d.getHours()), mm = pad(d.getMinutes());
+    $("clockTop").innerHTML = `${hh}<span>:</span>${mm}`;
+    $("dateTop").innerHTML = `<b>${DAYS[d.getDay()]}</b>${fmtDate(d)}`;
+    const w = $("wxTop");
+    if (weather) { w.style.display = ""; w.innerHTML = `<span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${esc(C.CITY.name)}</span>`; }
+    const bc = cur$(".bigclock");
+    if (bc) { bc.innerHTML = `${hh}<span>:</span>${mm}`; paintBells(); }
+  }
+  function bellState() {
+    const d = new Date(), now = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
+    const list = rows("Qongiroqlar").map(r => ({ shift: r[0], n: r[1], a: toMin(r[2]), b: toMin(r[3]), as: r[2], bs: r[3] })).filter(x => x.a != null && x.b != null);
+    let label = "Holat", status = "", pct = null;
+    const cur = list.find(x => now >= x.a && now < x.b);
+    if (d.getDay() === 0) status = "Bugun dam olish kuni";
+    else if (cur) { label = "Hozir dars"; status = `${cur.shift} · ${cur.n}-dars, ${cur.bs} gacha`; pct = (now - cur.a) / (cur.b - cur.a); }
+    else {
+      const next = list.filter(x => x.a > now).sort((p, q) => p.a - q.a)[0];
+      const prev = list.filter(x => x.b <= now).sort((p, q) => q.b - p.b)[0];
+      if (next && prev) { label = "Tanaffus"; status = `Keyingisi: ${next.shift}, ${next.n}-dars ${next.as} da`; pct = (now - prev.b) / (next.a - prev.b); }
+      else if (next) { label = "Tez orada"; status = `Darslar ${next.as} da boshlanadi`; }
+      else if (list.length) status = "Bugungi darslar tugadi";
+    }
+    return { list, now, cur, label, status, pct };
+  }
+  function paintBells() {
+    const box = cur$(".bells"); if (!box) return;
+    const { list, now, cur, label, status, pct } = bellState();
+    const nc = cur$(".nowcard");
+    if (nc) {
+      nc.style.display = status ? "" : "none";
+      nc.innerHTML = `<div class="lbl">${label}</div><div class="val">${esc(status)}</div>${pct != null ? `<div class="track"><b style="width:${Math.round(pct * 100)}%"></b></div>` : ""}`;
+    }
+    const shifts = [...new Set(list.map(x => x.shift))];
+    box.innerHTML = shifts.map(s => `<div class="shift glass"><h3>${esc(s)}</h3>${list.filter(x => x.shift === s).map(x =>
+      `<div class="bell ${x === cur ? "cur" : x.b <= now ? "past" : ""}"><span><b>${esc(x.n)}</b>-dars</span><span>${esc(x.as)} – ${esc(x.bs)}</span></div>`).join("")}</div>`).join("");
+  }
+
+  // ---------- Slaydlar ----------
+  const initials = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+  const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
+  function parseDate(s) {
+    const m = /(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})/.exec(s || ""); if (m) return new Date(+(m[3].length === 2 ? "20" + m[3] : m[3]), +m[2] - 1, +m[1]);
+    const iso = /(\d{4})-(\d{2})-(\d{2})/.exec(s || ""); if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3]);
+    return null;
+  }
+  const gradeNum = (s) => { const m = /(\d+)/.exec(s || ""); return m ? m[1] : s; };
+
+  function buildSlides() {
+    const S = [];
+    // 1. Qabul
+    const adm = rows("Qabul");
+    if (adm.length) {
+      const total = adm.reduce((s, r) => s + (parseInt(r[1]) || 0), 0);
+      const tiles = adm.slice(0, 11).map((r, i) => { const v = parseInt(r[1]) || 0; return `
+        <div class="g up ${v > 0 ? "open" : "full"}" style="--i:${i + 3}">
+          ${r[2] ? `<div class="note">${esc(r[2])}</div>` : ""}
+          <div class="num">${esc(gradeNum(r[0]))}<small>-sinf</small></div>
+          <div class="seat">${v > 0 ? `<b>${v}</b> bo'sh joy` : "To'lgan"}</div>
+        </div>`; }).join("");
+      S.push({ key: "qabul", html: `
+        <div class="adm">
+          <div class="adm-l">
+            <span class="kicker up">Qabul 2026–2027</span>
+            <h1 class="up" style="--i:1">Qabul <em>ochiq</em></h1>
+            <div class="total up" style="--i:2"><b>${total}</b><span>ta bo'sh o'rin<br>barcha sinflarda</span></div>
+            <div class="qrcard up" style="--i:4">
+              <img src="qr.png" alt="">
+              <div><div class="cap">Onlayn ariza</div><div class="ttl">Telefoningiz bilan skanerlang</div>
+                <div class="ph">${(C.PHONES || []).map(esc).join("<br>")}</div></div>
+            </div>
+          </div>
+          <div class="grades">${tiles}${adm.length <= 11 ? `<div class="g cta up" style="--i:14"><b>Farzandingiz uchun joyni band qiling</b><span>Savollar bo'lsa, qabul bo'limiga murojaat qiling</span></div>` : ""}</div>
+        </div>` });
+    }
+    // 2. Bugun
+    const d0 = new Date();
+    S.push({ key: "bugun", html: `
+      <div class="today">
+        <div style="display:flex;flex-direction:column;min-height:0">
+          <span class="kicker up">Bugun</span>
+          <div class="bigclock up" style="--i:1">--:--</div>
+          <div class="bigday up" style="--i:2">${DAYS[d0.getDay()]}, <em class="gold">${d0.getDate()}-${MONTHS[d0.getMonth()]}</em></div>
+          ${weather ? `<div class="wxrow up" style="--i:3"><div class="chip"><span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${WX(weather.code)[1]}</span></div><div class="chip">Kun davomida ${deg(weather.min)} … ${deg(weather.max)}</div></div>` : ""}
+          <div class="nowcard glass up" style="--i:4"></div>
+        </div>
+        <div class="bells up" style="--i:3"></div>
+      </div>`, after: tick });
+    // 3. Yutuqlar (6 tadan)
+    chunk(rows("Yutuqlar"), 6).forEach((part, k, all) => S.push({ key: "yutuq" + k, html: `
+      <span class="kicker up">Faxrimiz${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
+      <h1 class="up" style="--i:1">O'quvchilarimiz <em>yutuqlari</em></h1>
+      <div class="cards">${part.map((r, i) => `
+        <div class="card glass up" style="--i:${i + 2}">${LAUREL}
+          <div class="avatar"><div>${r[3] ? `<img src="${esc(r[3])}" alt="" onerror="this.parentNode.textContent='${esc(initials(r[0] || "?"))}'">` : esc(initials(r[0] || "?"))}</div></div>
+          <div><div class="what">${esc(r[2])}</div><div class="who">${esc(r[0])}</div><div class="cls">${esc(r[1])}</div></div>
+        </div>`).join("")}
+      </div>` }));
+    // 4. Tadbirlar
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const evs = rows("Tadbirlar").map(r => ({ d: parseDate(r[0]), t: r[1], s: r[2] })).filter(e => e.t && (!e.d || e.d >= today)).sort((a, b) => (a.d || 0) - (b.d || 0));
+    chunk(evs, 4).forEach((part, k, all) => S.push({ key: "tadbir" + k, html: `
+      <span class="kicker up">Yangiliklar va tadbirlar${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
+      <h1 class="up" style="--i:1">Yaqin <em>kunlarda</em></h1>
+      <div class="timeline">${part.map((e, i) => { const days = e.d ? Math.round((e.d - today) / 864e5) : null; return `
+        <div class="ev glass up" style="--i:${i + 2}">
+          <div class="d">${e.d ? `<b>${e.d.getDate()}</b><span>${MON3[e.d.getMonth()]}</span>` : `<b>✦</b>`}</div>
+          <div><div class="t">${esc(e.t)}</div>${e.s ? `<div class="s">${esc(e.s)}</div>` : ""}</div>
+          ${days === 0 ? `<span class="soon">Bugun</span>` : days === 1 ? `<span class="soon">Ertaga</span>` : days != null ? `<span class="left">${days} kundan so'ng</span>` : ""}
+        </div>`; }).join("")}
+      </div>` }));
+    // 5. Maktab haqida
+    const mk = rows("Maktab"), typ = (t) => mk.filter(r => (r[0] || "").toLowerCase().startsWith(t));
+    if (mk.length) {
+      const motto = typ("shior")[0];
+      S.push({ key: "maktab", cls: "hero", html: `
+        <div class="bg"></div><div class="shade"></div>
+        <div class="inner">
+          <span class="kicker up">Maktab haqida</span>
+          <h1 class="up" style="--i:1">${motto ? esc(motto[1]).replace(/(\S+)$/, "<em>$1</em>") : "Oxford International <em>School</em>"}</h1>
+          ${typ("togarak").length ? `<div class="clubs up" style="--i:2">${typ("togarak").map(r => `<span>${esc(r[1])}</span>`).join("")}</div>` : ""}
+          <div class="stats">${typ("raqam").slice(0, 4).map((r, i) => `<div class="stat up" style="--i:${i + 3}"><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div>`).join("")}</div>
+        </div>` });
+    }
+    // 6. Tug'ilgan kunlar (faqat bugun bo'lsa)
+    const dm = `${pad(today.getDate())}.${pad(today.getMonth() + 1)}`;
+    const bd = rows("Tugilgan kunlar").filter(r => { const m = /(\d{1,2})[./-](\d{1,2})/.exec(r[2] || ""); return m && `${pad(m[1])}.${pad(m[2])}` === dm; });
+    if (bd.length) S.push({ key: "bday", html: `
+      <div class="confetti">${Array.from({ length: 46 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${["#f6dc9c","#e4b75a","#4fd69c","#7d95ff","#ff8fb1"][i % 5]};animation-duration:${6 + (i % 5)}s;animation-delay:-${(i * 0.7) % 6}s"></i>`).join("")}</div>
+      <div class="bday">
+        <div class="balloon up">🎈</div>
+        <span class="kicker up" style="--i:1;margin-top:1.4rem">Bugun tug'ilgan kun</span>
+        <h1 class="up" style="--i:2">Tavalludingiz <em>muborak!</em></h1>
+        <div class="names">${bd.map((r, i) => `<div class="p glass up" style="--i:${i + 3}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div>
+      </div>` });
+    return S;
+  }
+
+  // ---------- Aylantirish ----------
+  let slides = [], idx = -1, timer = null;
+  function paintTicker() {
+    const items = rows("Elonlar").map(r => r[0]).filter(Boolean);
+    const el = $("ticker");
+    el.innerHTML = items.map(t => `<span>${esc(t)}</span>`).join("");
+    el.style.animationDuration = Math.max(25, el.textContent.length * 0.2) + "s";
+    document.querySelector("footer").style.visibility = items.length ? "" : "hidden";
+  }
+  function paintStories(secs) {
+    $("stories").innerHTML = slides.map((_, i) => `<i class="${i < idx ? "done" : ""}"><b></b></i>`).join("");
+    const b = $("stories").children[idx]?.firstChild; if (!b) return;
+    requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; });
+  }
+  function show(next) {
+    const stage = $("stage"), secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
+    if (!slides.length) return;
+    idx = next % slides.length;
+    stage.querySelectorAll(".slide.on").forEach(old => { old.classList.remove("on"); old.classList.add("off"); setTimeout(() => old.remove(), 1100); });
+    const s = slides[idx], el = document.createElement("section");
+    el.className = "slide " + (s.cls || ""); el.innerHTML = s.html; stage.appendChild(el);
+    if (s.after) s.after();
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("on")));
+    paintStories(secs);
+    clearTimeout(timer);
+    if (only) return;
+    timer = setTimeout(() => {
+      if (idx === slides.length - 1) slides = buildSlides(); // har aylanishda yangi ma'lumot
+      show(idx + 1);
+    }, secs * 1000);
+  }
+  async function refresh() {
+    await loadSheets();
+    $("offline").style.display = usingDemo ? "block" : "none";
+    paintTicker();
+    slides = buildSlides();
+  }
+
+  // Bitta slaydni ko'rish: ?slayd=qabul (tekshirish uchun)
+  const only = new URLSearchParams(location.search).get("slayd");
+
+  (async () => {
+    tick(); setInterval(tick, 1000);
+    await refresh();
+    if (only) { idx = Math.max(0, slides.findIndex(s => s.key.startsWith(only))); show(idx); }
+    else show(0);
+    loadWeather().then(() => { if (only) { slides = buildSlides(); show(idx); } }); setInterval(loadWeather, 30 * 60000);
+    setInterval(refresh, (C.REFRESH_MINUTES || 5) * 60000);
+    // Har kuni tunda soat 3 da sahifa to'liq yangilanadi
+    setInterval(() => { if (new Date().getHours() === 3 && performance.now() > 3600e3) location.reload(); }, 600000);
+  })();
+})();
+</script>
+</body>
+</html>
