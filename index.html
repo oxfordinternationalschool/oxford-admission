@@ -302,6 +302,14 @@
     .hero .meta { display: none; }
     .open-chip { display: none; }
     .hero-crest { display: none !important; }
+    /* Bosqich sarlavhasi: bir qatorda, dumaloq ikonka */
+    .shead { display: grid; grid-template-columns: 38px 1fr; align-items: center; column-gap: 12px; }
+    .shead > div:last-child { display: contents; }
+    .sicon { width: 38px; height: 38px; border-radius: 50%; box-shadow: inset 0 0 0 1px #cdd9fb; }
+    .sicon svg.i { width: 18px; height: 18px; }
+    .shead h3 { font-size: 1.05rem; white-space: nowrap; overflow: hidden; line-height: 1.25; }
+    .shead p { grid-column: 1 / -1; margin: 2px 0 0; padding: 8px 12px; background: var(--soft); border-radius: 10px; font-size: .8rem; }
+    .step { gap: 18px; }
     .hero h2 { margin: 0; }
     .progress { padding-top: 0; padding-bottom: 0; border-bottom: 0; background: transparent; }
     .prow { display: none; }
@@ -829,5 +837,24 @@
   render();
 })();
 </script>
+<script>
+/* Telefonda bosqich sarlavhasini bir qatorga sig'dirish */
+(function(){
+  function fit(){
+    document.querySelectorAll('.shead h3').forEach(function(h){
+      h.style.fontSize='';
+      if (window.innerWidth > 640 || !h.offsetParent) return;
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      while (h.scrollWidth > h.clientWidth && fs > 11) { fs -= 0.5; h.style.fontSize = fs + 'px'; }
+    });
+  }
+  var f=document.getElementById('f');
+  if (f) new MutationObserver(function(){ requestAnimationFrame(fit); }).observe(f,{subtree:true,attributes:true,attributeFilter:['hidden'],childList:true,characterData:true});
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  setTimeout(fit, 300);
+})();
+</script>
+
 </body>
 </html>
