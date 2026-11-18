@@ -7,214 +7,242 @@
 <title>Oxford International School · Reception</title>
 <link rel="icon" type="image/png" href="logo.png">
 <style>
-  /* Shriftlar sayt ichida: internet sekin bo'lsa ham dizayn buzilmaydi */
-  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-SemiBold.ttf); font-weight: 600; }
-  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-Bold.ttf); font-weight: 700; }
-  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-MediumItalic.ttf); font-weight: 500; font-style: italic; }
+  /* Shriftlar sayt ichida (internetga bog'liq emas) */
+  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-500.woff2) format("woff2"); font-weight: 500; }
+  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-600.woff2) format("woff2"); font-weight: 600; }
+  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-500i.woff2) format("woff2"); font-weight: 500; font-style: italic; }
   @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-SemiBold.ttf); font-weight: 600; }
   @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-Bold.ttf); font-weight: 700; }
   @font-face { font-family: "Inter"; src: url(fonts/Inter-Medium.otf); font-weight: 500; }
   @font-face { font-family: "Inter"; src: url(fonts/Inter-SemiBold.otf); font-weight: 600; }
 
   :root {
-    --bg: #0b1030; --bg-2: #121a45;
-    --gold: #e4b75a; --gold-2: #f6dc9c; --gold-deep: #b8862f;
-    --white: #ffffff; --ink-2: #c7cde6; --ink-3: #8790b8;
-    --glass: rgba(255,255,255,.055); --glass-line: rgba(255,255,255,.10);
-    --green: #4fd69c;
-    --serif: "Playfair", Georgia, serif;
+    --bg: #070a16; --side: #0a0e1d;
+    --gold: #d9a94e; --gold-2: #f2d08a; --gold-soft: rgba(217,169,78,.14);
+    --blue: #4c6fff;
+    --white: #f7f4ee; --ink-2: #c3c6d6; --ink-3: #848aa3;
+    --line: rgba(255,255,255,.08);
+    --serif: "Cormorant", Georgia, serif;
     --sans: "Inter", "Segoe UI", system-ui, sans-serif;
     --caps: "Montserrat", "Segoe UI", sans-serif;
-    --gold-grad: linear-gradient(135deg, #f6dc9c 0%, #e4b75a 45%, #b8862f 100%);
   }
-  h1, .g .num, .total b, .card .what, .ev .d b, .ev .t, .stat b, .bday .p b, .bigday, .brand b, .qrcard .ttl, .g.cta b, .avatar div { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
   html { font-size: min(calc(100vw / 120), calc(100vh / 67.5)); }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
-  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-rows: 8rem 1fr 4.6rem; height: 100vh; position: relative; }
+  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-columns: 21rem 1fr; height: 100vh; }
+  svg.i { width: 1.5rem; height: 1.5rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .serif { font-family: var(--serif); }
+  h1, .what, .quote p, .status .big, .bday .card b, .qr .t { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+  /* Katta raqamlar: tekis (lining) raqamli sans shrift */
+  .bignum .n, .tile .val, .cd .num, .stats b { font-family: var(--sans) !important; font-weight: 500 !important; letter-spacing: -.04em; font-variant-numeric: lining-nums tabular-nums; }
+  .gold { color: var(--gold-2); }
 
-  /* Jonli fon: sekin suzuvchi nurlar */
-  .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: radial-gradient(120rem 70rem at 50% 120%, var(--bg-2), var(--bg)); }
-  .aurora i { position: absolute; border-radius: 50%; filter: blur(7rem); opacity: .55; animation: drift 40s ease-in-out infinite alternate; }
-  .aurora i:nth-child(1) { width: 60rem; height: 40rem; left: -15rem; top: -20rem; background: #2b3a9c; }
-  .aurora i:nth-child(2) { width: 45rem; height: 35rem; right: -12rem; top: 10rem; background: #6b4a12; opacity: .35; animation-duration: 55s; }
-  .aurora i:nth-child(3) { width: 50rem; height: 30rem; left: 30rem; bottom: -22rem; background: #1d2a7a; animation-duration: 47s; }
-  @keyframes drift { to { transform: translate(8rem, 5rem) scale(1.15); } }
-  .aurora::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 3.2rem 3.2rem; mask-image: linear-gradient(180deg, #000, transparent 70%); }
+  /* ---------- Yon panel ---------- */
+  aside { background: linear-gradient(180deg, #0c1122, #080b18); border-right: 1px solid var(--line); padding: 2.6rem 1.8rem 2.2rem; display: flex; flex-direction: column; position: relative; z-index: 2; }
+  .logo { text-align: center; }
+  .logo img { height: 5.4rem; filter: drop-shadow(0 .6rem 1.6rem rgba(217,169,78,.25)); }
+  .logo b { display: block; font-family: var(--serif); font-weight: 600; font-size: 2rem; letter-spacing: .32em; margin-top: 1rem; padding-left: .32em; }
+  .logo small { display: block; font-family: var(--caps); font-size: .68rem; letter-spacing: .34em; color: var(--ink-3); margin-top: .3rem; text-transform: uppercase; }
+  nav { margin-top: 3rem; display: flex; flex-direction: column; gap: .5rem; }
+  nav a { position: relative; display: flex; align-items: center; gap: 1.1rem; padding: 1rem 1.2rem; border-radius: 1rem; color: var(--ink-2); font-size: 1.2rem; font-weight: 500; border: 1px solid transparent; overflow: hidden; transition: all .5s; }
+  nav a svg { color: var(--ink-3); }
+  nav a.on { color: #fff; background: linear-gradient(90deg, rgba(217,169,78,.20), rgba(217,169,78,.05)); border-color: rgba(217,169,78,.35); }
+  nav a.on svg { color: var(--gold-2); }
+  nav a .bar { position: absolute; left: 1.2rem; right: 1.2rem; bottom: .35rem; height: 2px; border-radius: 2px; background: rgba(255,255,255,.08); display: none; }
+  nav a.on .bar { display: block; }
+  nav a .bar b { display: block; height: 100%; width: 0; background: var(--gold); border-radius: 2px; }
+  .side-time { margin-top: auto; padding: 1.4rem 1.2rem; border-radius: 1.2rem; background: rgba(255,255,255,.035); border: 1px solid var(--line); }
+  .side-time .t { font-family: var(--caps); font-weight: 700; font-size: 3.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+  .side-time .t span { color: var(--gold); animation: blink 2s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .side-time .d { font-size: 1.05rem; color: var(--ink-2); margin-top: .6rem; }
+  .side-time .d b { font-family: var(--caps); display: block; font-size: .75rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: .2rem; }
+  .tagline { margin-top: 2rem; padding: 0 1rem; font-family: var(--serif); font-style: italic; font-size: 1.45rem; line-height: 1.3; color: var(--ink-2); }
+  .tagline i { display: inline-block; width: 1.6rem; height: 1px; background: var(--gold); margin: 1rem .5rem 0 0; vertical-align: middle; }
+  .skyline { margin-top: 1rem; width: 100%; height: 5rem; color: rgba(217,169,78,.55); }
 
-  /* Yuqori panel */
-  header { display: flex; align-items: center; justify-content: space-between; padding: 0 4.5rem; position: relative; }
-  .brand { display: flex; align-items: center; gap: 1.5rem; }
-  .crest { width: 5rem; height: 5rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .25rem rgba(228,183,90,.35), 0 1rem 3rem rgba(0,0,0,.35); }
-  .crest img { height: 3.7rem; }
-  .brand b { display: block; font-family: var(--serif); font-weight: 700; font-size: 2.1rem; letter-spacing: .01em; line-height: 1.1; }
-  .brand small { display: block; font-family: var(--caps); font-size: .85rem; font-weight: 600; letter-spacing: .38em; text-transform: uppercase; color: var(--gold); margin-top: .35rem; }
-  .now { display: flex; align-items: center; gap: 2.4rem; }
-  .chip { display: flex; align-items: center; gap: .8rem; padding: .7rem 1.3rem; border-radius: 3rem; background: var(--glass); border: 1px solid var(--glass-line); font-size: 1.25rem; color: var(--ink-2); font-weight: 600; }
-  .chip .t { color: #fff; font-weight: 600; font-size: 1.5rem; }
-  .now .date { text-align: right; font-size: 1.15rem; color: var(--ink-2); font-weight: 500; line-height: 1.4; }
-  .now .date b { display: block; color: var(--gold); font-family: var(--caps); font-size: .9rem; letter-spacing: .25em; text-transform: uppercase; font-weight: 700; }
-  .now .clock { font-family: var(--caps); font-size: 3.6rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .02em; line-height: 1; }
-  .now .clock span { animation: blink 2s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: .25; } }
+  /* ---------- Asosiy qism ---------- */
+  .main { position: relative; display: grid; grid-template-rows: 6.6rem 1fr; min-width: 0; overflow: hidden; }
+  .photo { position: absolute; top: 0; right: 0; width: 66%; height: 64%; background: url(maktab.jpg) center 35%/cover; filter: brightness(.62) saturate(1.15) contrast(1.05); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(0deg, transparent 0%, #000 45%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(0deg, transparent 0%, #000 45%); mask-composite: intersect; transition: opacity 1s; }
+  .photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 85% 10%, rgba(255,170,70,.35), transparent 70%), linear-gradient(180deg, rgba(7,10,22,.15), rgba(7,10,22,.6)); }
+  .main.nophoto .photo { opacity: 0; }
+  .glowbg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(50rem 30rem at 15% 110%, rgba(76,111,255,.10), transparent 70%); }
 
-  /* Hikoya uslubidagi progress (har slayd uchun bo'lak) */
-  .stories { position: absolute; left: 4.5rem; right: 4.5rem; bottom: 0; display: flex; gap: .6rem; }
-  .stories i { flex: 1; height: .28rem; border-radius: 1rem; background: rgba(255,255,255,.13); overflow: hidden; position: relative; }
-  .stories i b { position: absolute; inset: 0; width: 0; background: var(--gold-grad); border-radius: 1rem; }
-  .stories i.done b { width: 100%; }
+  .top { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 0 3rem; }
+  .pill { display: flex; align-items: center; gap: .9rem; height: 3.6rem; padding: 0 1.4rem; border-radius: 3rem; background: rgba(10,14,29,.72); border: 1px solid rgba(255,255,255,.1); backdrop-filter: blur(1rem); font-size: 1.1rem; color: var(--ink-2); }
+  .newsbar { flex: 1; max-width: 62rem; min-width: 0; }
+  .newsbar .ic { width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold-2); flex: none; }
+  .newsbar .ic svg { width: 1.2rem; height: 1.2rem; }
+  .ticker { flex: 1; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 95%, transparent); }
+  .ticker .run { display: inline-block; padding-left: 100%; animation: tick linear infinite; }
+  .ticker .run span::after { content: "✦"; color: var(--gold); margin: 0 2rem; font-size: .8rem; vertical-align: middle; }
+  @keyframes tick { to { transform: translateX(-100%); } }
+  .top .right { display: flex; gap: 1rem; }
+  .top .right svg { color: var(--gold-2); width: 1.3rem; height: 1.3rem; }
+  .top .right b { color: #fff; font-weight: 600; }
 
-  /* Slaydlar */
-  main { position: relative; overflow: hidden; }
-  .slide { position: absolute; inset: 0; padding: 3rem 4.5rem 2.6rem; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s ease, filter 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1); transform: scale(1.03); filter: blur(.6rem); }
-  .slide.on { opacity: 1; transform: none; filter: none; }
-  .slide.off { opacity: 0; transform: scale(.97); filter: blur(.6rem); }
-  /* Elementlar ketma-ket paydo bo'ladi */
-  .slide .up { opacity: 0; transform: translateY(2.2rem); }
-  .slide.on .up { animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.25s + var(--i, 0) * .08s); }
+  /* ---------- Slaydlar ---------- */
+  #stage { position: relative; z-index: 1; overflow: hidden; }
+  .slide { position: absolute; inset: 0; padding: 1.2rem 3rem 2.4rem; display: flex; flex-direction: column; gap: 1.6rem; opacity: 0; transition: opacity .9s ease; }
+  .slide.on { opacity: 1; }
+  .up { opacity: 0; transform: translateY(1.6rem); }
+  .slide.on .up { animation: up .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(.15s + var(--i, 0) * .07s); }
   @keyframes up { to { opacity: 1; transform: none; } }
 
-  .kicker { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--caps); font-size: 1.05rem; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
-  .kicker::before { content: ""; width: 3.4rem; height: 1px; background: var(--gold); }
-  h1 { font-family: var(--serif); font-weight: 700; font-size: 5rem; line-height: 1.02; margin: 1rem 0 0; letter-spacing: -.01em; }
-  h1 em, .gold { font-style: italic; font-weight: 500; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .1em; }
-  .glass { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 1.8rem; backdrop-filter: blur(1rem); }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 3rem; min-height: 19rem; }
+  .kicker { display: flex; align-items: center; gap: 1rem; font-family: var(--caps); font-size: .9rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .kicker::after { content: ""; width: 4rem; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 5.8rem; line-height: .98; margin: 1.1rem 0 0; letter-spacing: -.005em; }
+  h1 em { font-style: italic; color: var(--gold-2); }
+  .lead { font-size: 1.3rem; line-height: 1.5; color: var(--ink-2); margin: 1.2rem 0 0; max-width: 40rem; }
+  .bignum { text-align: left; min-width: 22rem; padding-bottom: .4rem; }
+  .bignum .loc { display: flex; align-items: center; gap: .6rem; font-size: 1.15rem; color: #fff; font-weight: 500; }
+  .bignum .loc svg { color: var(--gold-2); width: 1.3rem; height: 1.3rem; }
+  .bignum .row { display: flex; align-items: center; gap: 1.4rem; margin-top: .8rem; }
+  .bignum .row svg { width: 6rem; height: 6rem; color: var(--gold-2); stroke-width: 1.2; }
+  .bignum .n { font-size: 8.4rem; line-height: .85; }
+  .bignum .s { font-size: 1.25rem; color: var(--ink-2); margin-top: .6rem; }
+  .bignum .s b { color: #fff; font-weight: 600; }
 
-  /* 1. Qabul */
-  .adm { display: grid; grid-template-columns: 40rem 1fr; gap: 3.5rem; flex: 1; min-height: 0; }
-  .adm-l { display: flex; flex-direction: column; }
-  .total { display: flex; align-items: baseline; gap: 1.2rem; margin-top: 1.8rem; }
-  .total b { font-family: var(--serif); font-size: 9rem; line-height: .9; font-weight: 700; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .total span { font-size: 1.6rem; color: var(--ink-2); font-weight: 500; line-height: 1.3; }
-  .qrcard { margin-top: auto; display: flex; gap: 1.6rem; align-items: center; padding: 1.4rem; border-radius: 1.8rem; background: #fff; color: var(--bg); box-shadow: 0 2rem 5rem rgba(0,0,0,.35); }
-  .qrcard img { width: 11rem; height: 11rem; image-rendering: pixelated; flex: none; }
-  .qrcard .cap { font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
-  .qrcard .ttl { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; line-height: 1.15; margin: .35rem 0 .7rem; }
-  .qrcard .ph { font-family: var(--caps); font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.45; }
-  .grades { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); gap: 1.1rem; }
-  .g { position: relative; border-radius: 1.6rem; padding: 1.3rem 1.5rem; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-  .g .num { font-family: var(--serif); font-size: 4.4rem; font-weight: 700; line-height: 1; }
-  .g .num small { font-family: var(--sans); font-size: 1.15rem; font-weight: 600; color: var(--ink-3); margin-left: .3rem; letter-spacing: .02em; }
-  .g .seat { display: inline-flex; align-items: center; gap: .6rem; align-self: flex-start; padding: .45rem 1rem; border-radius: 2rem; font-size: 1.15rem; font-weight: 600; }
-  .g.open { background: linear-gradient(160deg, rgba(79,214,156,.16), rgba(79,214,156,.04)); border: 1px solid rgba(79,214,156,.35); }
-  .g.open .seat { background: rgba(79,214,156,.18); color: var(--green); }
-  .g.open .seat::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(79,214,156,.6); animation: pulse 2s infinite; }
-  @keyframes pulse { 70% { box-shadow: 0 0 0 .8rem rgba(79,214,156,0); } 100% { box-shadow: 0 0 0 0 rgba(79,214,156,0); } }
-  .g.open .seat b { font-size: 1.6rem; color: #fff; }
-  .g.full { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); }
-  .g.full .num { color: rgba(255,255,255,.35); }
-  .g.full .seat { color: var(--ink-3); background: rgba(255,255,255,.05); }
-  .g .note { position: absolute; top: 1.3rem; right: 1.4rem; font-size: .9rem; color: var(--gold); font-weight: 600; text-align: right; max-width: 8rem; line-height: 1.25; }
-  .g.cta { background: var(--gold-grad); color: var(--bg); justify-content: center; }
-  .g.cta b { font-family: var(--serif); font-size: 2.1rem; line-height: 1.1; }
-  .g.cta span { font-size: 1.1rem; font-weight: 600; margin-top: .5rem; opacity: .8; }
+  .card { position: relative; border-radius: 1.4rem; background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.022)); border: 1px solid var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 1.2rem 3rem rgba(0,0,0,.25); overflow: hidden; }
+  .card.hl { border-color: rgba(217,169,78,.75); background: linear-gradient(180deg, rgba(217,169,78,.18), rgba(217,169,78,.04)); box-shadow: 0 0 2.6rem rgba(217,169,78,.16), inset 0 1px 0 rgba(255,255,255,.08); }
+  .card.glow::before { content: ""; position: absolute; left: 10%; right: 10%; bottom: -6rem; height: 9rem; background: radial-gradient(closest-side, rgba(76,111,255,.55), transparent); pointer-events: none; }
+  .card h4 { display: flex; align-items: center; gap: .7rem; margin: 0; font-size: 1.25rem; font-weight: 600; }
+  .card h4 svg { color: var(--gold-2); width: 1.4rem; height: 1.4rem; }
+  .seg { display: inline-flex; padding: .3rem; border-radius: 2rem; background: rgba(0,0,0,.3); border: 1px solid var(--line); font-size: .95rem; }
+  .seg span { padding: .45rem 1.1rem; border-radius: 2rem; color: var(--ink-3); }
+  .seg span.on { background: rgba(255,255,255,.1); color: #fff; }
 
-  /* 2. Bugun */
-  .today { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4rem; flex: 1; min-height: 0; }
-  .bigclock { font-family: var(--caps); font-weight: 700; font-size: 13rem; line-height: .95; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin-top: 2rem; }
-  .bigclock span { color: var(--gold); }
-  .bigday { font-family: var(--serif); font-size: 3.6rem; font-weight: 700; margin-top: 1.4rem; }
-  .bigday em { font-weight: 500; }
-  .nowcard { margin-top: auto; padding: 1.8rem 2rem; }
-  .nowcard .lbl { font-family: var(--caps); font-size: .95rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-  .nowcard .val { font-size: 2.2rem; font-weight: 600; margin-top: .5rem; }
-  .nowcard .track { height: .55rem; border-radius: 1rem; background: rgba(255,255,255,.1); margin-top: 1.2rem; overflow: hidden; }
-  .nowcard .track b { display: block; height: 100%; background: var(--gold-grad); border-radius: 1rem; transition: width 1s; }
-  .wxrow { display: flex; gap: 1.2rem; margin-top: 1.4rem; }
-  .wxrow .chip { font-size: 1.4rem; padding: .8rem 1.5rem; }
-  .bells { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-content: start; padding-top: 1rem; }
-  .shift { padding: 1.6rem 1.4rem; }
-  .shift h3 { margin: 0 0 1rem .4rem; font-family: var(--caps); font-size: 1rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
-  .bell { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; border-radius: 1rem; font-size: 1.45rem; font-weight: 500; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-  .bell + .bell { border-top: 1px solid rgba(255,255,255,.05); }
-  .bell b { font-weight: 600; color: #fff; }
-  .bell.cur { background: var(--gold-grad); color: var(--bg); border-color: transparent; box-shadow: 0 .8rem 2rem rgba(228,183,90,.25); }
-  .bell.cur b { color: var(--bg); }
-  .bell.past { opacity: .35; }
+  /* Gorizontal kartalar qatori (prognoz uslubida) */
+  .strip { display: grid; gap: .9rem; }
+  .tile { padding: 1.2rem 1rem; display: flex; flex-direction: column; gap: .3rem; min-height: 11.5rem; }
+  .tile .top-l { display: flex; justify-content: space-between; align-items: center; gap: .4rem; font-size: 1.12rem; font-weight: 600; white-space: nowrap; }
+  .tile .top-l svg { width: 1.4rem; height: 1.4rem; color: var(--gold-2); }
+  .tile .sub { font-size: .95rem; color: var(--ink-3); }
+  .tile .val { margin-top: auto; font-size: 2.9rem; line-height: 1; white-space: nowrap; }
+  .tile .val small { font-family: var(--sans); font-size: 1rem; color: var(--ink-3); margin-left: .4rem; }
+  .tile.dim { opacity: .45; }
+  .tile.dim .val { color: var(--ink-3); font-size: 2.2rem; }
 
-  /* 3. Yutuqlar */
-  .cards { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.6rem; flex: 1; margin-top: 2.4rem; min-height: 0; }
-  .card { position: relative; padding: 2rem; display: flex; gap: 1.8rem; align-items: center; overflow: hidden; }
-  .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, rgba(228,183,90,.6), transparent 45%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
-  .avatar { width: 8rem; height: 8rem; border-radius: 50%; flex: none; padding: .3rem; background: var(--gold-grad); }
-  .avatar div { width: 100%; height: 100%; border-radius: 50%; background: var(--bg-2); display: grid; place-items: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; color: var(--gold-2); overflow: hidden; }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .card .what { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .card .who { font-size: 1.5rem; font-weight: 600; margin-top: .7rem; }
-  .card .cls { display: inline-block; margin-top: .5rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .14em; color: var(--ink-3); }
-  .card .laurel { position: absolute; right: -1.5rem; bottom: -2rem; width: 10rem; opacity: .07; }
+  .bottom { flex: 1; display: grid; gap: 1.4rem; min-height: 0; }
+  .pad { padding: 1.6rem 1.8rem; display: flex; flex-direction: column; }
+  .list { margin-top: 1rem; display: flex; flex-direction: column; }
+  .list div { display: flex; align-items: center; gap: 1rem; padding: .72rem 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 1.12rem; color: var(--ink-2); }
+  .list div:last-child { border-bottom: 0; }
+  .list svg { color: var(--gold-2); width: 1.35rem; height: 1.35rem; }
+  .list b { margin-left: auto; color: #fff; font-weight: 600; }
 
-  /* 4. Tadbirlar: vaqt chizig'i */
-  .timeline { position: relative; margin-top: 2.6rem; flex: 1; display: flex; flex-direction: column; gap: 1.3rem; padding-left: 3rem; }
-  .timeline::before { content: ""; position: absolute; left: .55rem; top: 1rem; bottom: 1rem; width: 2px; background: linear-gradient(var(--gold), rgba(228,183,90,.05)); }
-  .ev { position: relative; display: grid; grid-template-columns: 10rem 1fr auto; gap: 2.4rem; align-items: center; padding: 1.5rem 2.2rem; }
-  .ev::before { content: ""; position: absolute; left: -3rem; top: 50%; width: 1.3rem; height: 1.3rem; margin-top: -.65rem; border-radius: 50%; background: var(--bg); border: .3rem solid var(--gold); }
-  .ev .d { text-align: center; }
-  .ev .d b { display: block; font-family: var(--serif); font-size: 3.6rem; line-height: 1; font-weight: 700; }
-  .ev .d span { font-family: var(--caps); font-size: 1rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
-  .ev .t { font-family: var(--serif); font-size: 2.3rem; font-weight: 700; line-height: 1.15; }
-  .ev .s { font-size: 1.4rem; color: var(--ink-2); margin-top: .4rem; }
-  .ev .soon { font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: .6rem 1.2rem; border-radius: 2rem; background: var(--gold-grad); color: var(--bg); }
-  .ev .left { font-size: 1.2rem; color: var(--ink-3); font-weight: 600; }
+  .qr { display: flex; gap: 1.6rem; align-items: center; margin: auto 0; }
+  .qr img { width: 12rem; height: 12rem; border-radius: 1rem; background: #fff; padding: .6rem; image-rendering: pixelated; flex: none; }
+  .qr .t { font-family: var(--serif); font-size: 2.1rem; line-height: 1.1; }
+  .qr .u { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1rem; font-size: 1rem; color: var(--gold-2); padding: .5rem 1rem; border-radius: 2rem; background: var(--gold-soft); }
+  .qr .u svg { width: 1.1rem; height: 1.1rem; }
 
-  /* 5. Maktab haqida: to'liq ekran rasm */
-  .slide.hero { padding: 0; }
-  .hero .bg { position: absolute; inset: 0; background: url(maktab.jpg) center/cover; transform: scale(1.12); }
-  .hero.on .bg { animation: kenburns 20s ease-out forwards; }
-  @keyframes kenburns { from { transform: scale(1.12) translateX(2%); } to { transform: scale(1.0) translateX(0); } }
-  .hero .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,16,48,.97) 0%, rgba(11,16,48,.88) 38%, rgba(11,16,48,.25) 70%, rgba(11,16,48,.1) 100%), linear-gradient(0deg, rgba(11,16,48,.85), transparent 40%); }
-  .hero .inner { position: relative; padding: 3rem 4.5rem 2.6rem; height: 100%; display: flex; flex-direction: column; max-width: 76rem; }
-  .hero h1 { font-size: 5.6rem; max-width: 60rem; }
-  .stats { display: flex; gap: 3.4rem; margin-top: auto; }
-  .stat b { display: block; font-family: var(--serif); font-size: 4rem; font-weight: 700; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .stat span { display: block; font-size: 1.2rem; color: var(--ink-2); font-weight: 500; margin-top: .5rem; max-width: 14rem; }
-  .clubs { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.4rem; }
-  .clubs span { padding: .75rem 1.4rem; border-radius: 3rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(.6rem); font-size: 1.3rem; font-weight: 600; }
+  .quote { background: url(maktab.jpg) 30% center/cover; justify-content: flex-end; }
+  .quote::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,10,22,.15), rgba(7,10,22,.92)); }
+  .quote > * { position: relative; z-index: 1; }
+  .quote small { font-family: var(--caps); font-size: .78rem; letter-spacing: .3em; color: var(--ink-2); line-height: 1.7; }
+  .quote p { font-family: var(--serif); font-size: 2.2rem; line-height: 1.15; margin: .8rem 0 0; }
+  .quote i { display: block; width: 3rem; height: 1px; background: var(--gold); margin-top: 1.2rem; }
 
-  /* 6. Tug'ilgan kunlar */
-  .bday { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .bday h1 { font-size: 6.4rem; }
-  .bday .names { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem; margin-top: 3rem; max-width: 100rem; }
-  .bday .p { padding: 1.6rem 2.6rem; }
-  .bday .p b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 700; }
-  .bday .p span { font-family: var(--caps); font-size: 1rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
-  .balloon { font-size: 6rem; animation: bob 3s ease-in-out infinite; }
-  @keyframes bob { 50% { transform: translateY(-1.2rem) rotate(4deg); } }
-  .confetti { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .confetti i { position: absolute; top: -2rem; width: .7rem; height: 1.3rem; border-radius: .2rem; animation: fall linear infinite; opacity: .85; }
-  @keyframes fall { to { transform: translateY(80rem) rotate(600deg); } }
+  /* Grafik */
+  .chart { flex: 1; min-height: 0; margin-top: .8rem; }
+  .chart svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .chart text { font-family: Inter, sans-serif; font-size: 12px; fill: #848aa3; }
+  .stripe { height: 2.6rem; border-radius: 2rem; background: rgba(0,0,0,.35); border: 1px solid var(--line); position: relative; overflow: hidden; margin-top: 1.4rem; }
+  .stripe b { position: absolute; inset: 0 auto 0 0; border-radius: 2rem; background: repeating-linear-gradient(-45deg, #d9a94e 0 .7rem, #b8862f .7rem 1.4rem); box-shadow: 0 0 1.6rem rgba(217,169,78,.35); }
+  .stripe span { position: absolute; right: .4rem; top: .35rem; bottom: .35rem; padding: 0 1rem; display: grid; place-items: center; border-radius: 2rem; background: rgba(255,255,255,.12); font-weight: 600; font-size: 1rem; }
+  .status .big { font-family: var(--serif); font-size: 2.6rem; line-height: 1.1; margin-top: 1rem; }
+  .status .meta { font-size: 1.1rem; color: var(--ink-2); margin-top: .5rem; }
 
-  /* Pastki panel */
-  footer { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2rem; padding: 0 4.5rem; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.15)); border-top: 1px solid rgba(255,255,255,.07); }
-  .tag { display: inline-flex; align-items: center; gap: .7rem; font-family: var(--caps); font-size: .95rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
-  .tag::before { content: ""; width: .7rem; height: .7rem; border-radius: 50%; background: #ff5a5f; animation: pulse-r 1.6s infinite; }
-  @keyframes pulse-r { 0% { box-shadow: 0 0 0 0 rgba(255,90,95,.6); } 70% { box-shadow: 0 0 0 .7rem rgba(255,90,95,0); } 100% { box-shadow: 0 0 0 0 rgba(255,90,95,0); } }
-  .ticker { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
-  .ticker .run { display: inline-block; padding-left: 100%; animation: tick linear infinite; font-size: 1.4rem; font-weight: 500; color: var(--ink-2); }
-  .ticker .run span::after { content: "✦"; color: var(--gold); margin: 0 2.4rem; font-size: 1rem; vertical-align: middle; }
-  @keyframes tick { to { transform: translateX(-100%); } }
-  .offline { position: fixed; right: 1rem; bottom: 5.2rem; font-size: .9rem; color: var(--ink-3); background: rgba(0,0,0,.4); padding: .3rem .8rem; border-radius: .5rem; display: none; }
+  /* Yutuqlar */
+  .achv { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 1.4rem; min-height: 0; }
+  .achv .card { display: flex; align-items: center; gap: 1.6rem; padding: 1.6rem 1.8rem; }
+  .ava { width: 7.4rem; height: 7.4rem; border-radius: 50%; flex: none; padding: .25rem; background: conic-gradient(from 210deg, #f2d08a, #b8862f, #f2d08a); box-shadow: 0 .8rem 2rem rgba(0,0,0,.4); }
+  .ava div { width: 100%; height: 100%; border-radius: 50%; background: #121833; display: grid; place-items: center; font-family: var(--serif); font-size: 2.6rem; color: var(--gold-2); overflow: hidden; }
+  .ava img { width: 100%; height: 100%; object-fit: cover; }
+  .achv .what { font-family: var(--serif); font-size: 2.1rem; line-height: 1.05; color: var(--gold-2); }
+  .achv .who { font-size: 1.35rem; font-weight: 600; margin-top: .6rem; }
+  .chip { display: inline-flex; align-items: center; gap: .5rem; margin-top: .6rem; padding: .35rem .9rem; border-radius: 2rem; font-size: .95rem; color: var(--ink-2); background: rgba(255,255,255,.07); border: 1px solid var(--line); }
+
+  /* Tadbirlar */
+  .evwrap { flex: 1; display: grid; grid-template-columns: 1fr 30rem; gap: 1.4rem; min-height: 0; }
+  .tasks { display: flex; flex-direction: column; padding: .4rem 0; }
+  .task { position: relative; flex: 1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; padding: 1.2rem 2rem; border-bottom: 1px solid var(--line); }
+  .task:last-child { border-bottom: 0; }
+  .task.first { background: linear-gradient(90deg, rgba(76,111,255,.22), rgba(76,111,255,.06)); border-radius: 1.2rem; margin: 0 .5rem; border-bottom-color: transparent; box-shadow: 0 0 3rem rgba(76,111,255,.18) inset; }
+  .task .when { display: flex; align-items: center; gap: .6rem; font-size: 1rem; color: #8fa6ff; font-weight: 600; }
+  .task .when svg { width: 1.15rem; height: 1.15rem; }
+  .task .ttl { font-size: 1.6rem; font-weight: 600; margin-top: .45rem; }
+  .task .ds { font-size: 1.1rem; color: var(--ink-3); margin-top: .35rem; }
+  .task .ds b { color: var(--ink-2); font-weight: 600; }
+  .task .badge { padding: .6rem 1.2rem; border-radius: 2rem; font-size: 1rem; font-weight: 600; background: rgba(255,255,255,.07); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+  .task .badge.go { background: var(--gold); color: #1a1406; border-color: transparent; }
+  .cd .num { font-size: 6.4rem; line-height: .9; margin-top: 1rem; }
+  .cd .num small { font-family: var(--sans); font-size: 1.3rem; color: var(--ink-2); margin-left: .6rem; }
+  .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: .35rem; margin-top: 1rem; text-align: center; font-size: 1rem; }
+  .cal span { padding: .45rem 0; border-radius: .6rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .cal .h { color: var(--ink-3); font-size: .8rem; font-family: var(--caps); letter-spacing: .1em; }
+  .cal .x { color: rgba(255,255,255,.15); }
+  .cal .ev { background: var(--gold-soft); color: var(--gold-2); font-weight: 600; box-shadow: inset 0 0 0 1px rgba(217,169,78,.5); }
+  .cal .td { background: var(--gold); color: #1a1406; font-weight: 700; }
+
+  /* Maktab haqida */
+  .hero { position: absolute; inset: 0; background: url(maktab.jpg) center/cover; filter: brightness(.7) saturate(1.1); transform: scale(1.1); }
+  .slide.on .hero { animation: kb 22s ease-out forwards; }
+  @keyframes kb { to { transform: scale(1); } }
+  .heroshade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,22,.96) 0%, rgba(7,10,22,.8) 40%, rgba(7,10,22,.15) 75%), linear-gradient(0deg, rgba(7,10,22,.95), transparent 45%); }
+  .slide > .rel { position: relative; z-index: 1; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .stats .card { padding: 1.5rem 1.6rem; }
+  .stats b { display: block; font-size: 3.2rem; font-weight: 500; line-height: 1; color: var(--gold-2); }
+  .stats span { display: block; font-size: 1.1rem; color: var(--ink-2); margin-top: .5rem; }
+  .clubs { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .clubs span { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1.4rem; border-radius: 3rem; background: rgba(10,14,29,.6); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(.8rem); font-size: 1.2rem; }
+  .clubs svg { color: var(--gold-2); width: 1.2rem; height: 1.2rem; }
+
+  /* Tug'ilgan kun */
+  .bday { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 2; }
+  .bday .cake { width: 7rem; height: 7rem; border-radius: 50%; display: grid; place-items: center; background: var(--gold-soft); box-shadow: 0 0 0 1px rgba(217,169,78,.4), 0 0 4rem rgba(217,169,78,.3); color: var(--gold-2); animation: bob 3s ease-in-out infinite; }
+  .bday .cake svg { width: 3.6rem; height: 3.6rem; }
+  @keyframes bob { 50% { transform: translateY(-.8rem); } }
+  .bday h1 { font-size: 7rem; margin-top: 1.4rem; }
+  .bday .names { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem; margin-top: 2.6rem; }
+  .bday .card { padding: 1.5rem 2.4rem; }
+  .bday .card b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 500; }
+  .bday .card span { font-size: 1.1rem; color: var(--gold-2); }
+  .confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+  .confetti i { position: absolute; top: -2rem; width: .6rem; height: 1.2rem; border-radius: .2rem; animation: fall linear infinite; opacity: .8; }
+  @keyframes fall { to { transform: translateY(75rem) rotate(600deg); } }
+
+  .offline { position: fixed; right: 1rem; bottom: .8rem; font-size: .85rem; color: var(--ink-3); background: rgba(0,0,0,.45); padding: .3rem .8rem; border-radius: .5rem; display: none; z-index: 5; }
 </style>
 </head>
 <body>
-<div class="aurora"><i></i><i></i><i></i></div>
-<header>
-  <div class="brand">
-    <div class="crest"><img src="logo.png" alt=""></div>
-    <div><b>Oxford International School</b><small>Xush kelibsiz · Welcome</small></div>
+<aside>
+  <div class="logo"><img src="logo.png" alt=""><b>OXFORD</b><small>International School</small></div>
+  <nav id="nav"></nav>
+  <div class="side-time"><div class="t" id="clock">--:--</div><div class="d" id="date"></div></div>
+  <div class="tagline">Kelajak<br>bugundan boshlanadi.<br><i></i><i></i></div>
+  <svg class="skyline" viewBox="0 0 220 60" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 58h216"/>
+    <path d="M22 58V20M28 58V20M21 20h8M25 20v-6"/>
+    <path d="M44 58V34h40v24M52 58V44a12 12 0 0 1 24 0v14M50 34c0-10 6-17 14-20 8 3 14 10 14 20"/>
+    <path d="M64 14v-5"/>
+    <path d="M100 58V26h44v32M112 58V42a10 10 0 0 1 20 0v16M108 26c0-12 7-20 14-23 7 3 14 11 14 23"/>
+    <path d="M122 3V0"/>
+    <path d="M160 58V34h40v24M168 58V44a12 12 0 0 1 24 0v14M166 34c0-10 6-17 14-20 8 3 14 10 14 20"/>
+    <path d="M206 58V20M212 58V20M205 20h8M209 20v-6"/>
+  </svg>
+</aside>
+<div class="main" id="main">
+  <div class="photo"></div><div class="glowbg"></div>
+  <div class="top">
+    <div class="pill newsbar"><span class="ic" id="newsIc"></span><div class="ticker"><div class="run" id="ticker"></div></div></div>
+    <div class="right"><div class="pill" id="wxTop"></div><div class="pill" id="phoneTop"></div></div>
   </div>
-  <div class="now">
-    <div class="chip" id="wxTop" style="display:none"></div>
-    <div class="date" id="dateTop"></div>
-    <div class="clock" id="clockTop">--:--</div>
-  </div>
-  <div class="stories" id="stories"></div>
-</header>
-<main id="stage"></main>
-<footer>
-  <div class="tag">E'lon</div>
-  <div class="ticker"><div class="run" id="ticker"></div></div>
-</footer>
+  <div id="stage"></div>
+</div>
 <div class="offline" id="offline">namuna ma'lumot</div>
 
 <script src="config.js"></script>
@@ -223,18 +251,52 @@
 (() => {
   const C = Object.assign({ SLIDE_SECONDS: 12, REFRESH_MINUTES: 5 }, window.TV_CONFIG || {});
   const MONTHS = ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"];
-  const MON3 = ["yan","fev","mar","apr","may","iyun","iyul","avg","sen","okt","noy","dek"];
+  const MONC = ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"];
   const DAYS = ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"];
   const SHEETS = ["Qabul","Qongiroqlar","Yutuqlar","Tadbirlar","Maktab","Tugilgan kunlar","Elonlar","Sozlamalar"];
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const cur$ = (sel) => { const l = $("stage").lastElementChild; return l ? l.querySelector(sel) : null; };
   const pad = (n) => String(n).padStart(2, "0");
-  const LAUREL = `<svg class="laurel" viewBox="0 0 100 100" fill="#e4b75a"><path d="M50 92c-18-6-32-22-34-44 6 8 14 14 22 16-8-8-12-18-12-30 6 10 14 16 22 18-6-8-8-18-6-28 6 10 10 20 10 32 2 12 0 24-2 36zm0 0c18-6 32-22 34-44-6 8-14 14-22 16 8-8 12-18 12-30-6 10-14 16-22 18 6-8 8-18 6-28-6 10-10 20-10 32-2 12 0 24 2 36z"/></svg>`;
+  const cur$ = (sel) => { const l = $("stage").lastElementChild; return l ? l.querySelector(sel) : null; };
+
+  // ---------- Chiziqli ikonkalar ----------
+  const P = {
+    school: '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    trophy: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+    calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    building: '<path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-5h6v5"/><path d="M9 11h.01M15 11h.01"/>',
+    cake: '<path d="M4 21h16M5 21v-7h14v7"/><path d="M5 16c2 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0M12 14v-3"/><path d="M12 8a1.5 1.5 0 0 0 1.5-1.5C13.5 5 12 3.5 12 3.5S10.5 5 10.5 6.5A1.5 1.5 0 0 0 12 8Z"/>',
+    pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+    phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+    book: '<path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 19v3H6.5"/>',
+    thermo: '<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0Z"/>',
+    drop: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>',
+    wind: '<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    cloudsun: '<path d="M12 2v1.5M5 5l1 1M19 5l-1 1M3 11h1.5"/><path d="M8 11a4 4 0 0 1 7.5-2"/><path d="M9 20h8a3.5 3.5 0 0 0 .4-7A5 5 0 0 0 8 14.5 3 3 0 0 0 9 20Z"/>',
+    cloud: '<path d="M7 19h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 12.5 3.5 3.5 0 0 0 7 19Z"/>',
+    rain: '<path d="M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 3.5 3.5 0 0 0 7 15Z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+    snow: '<path d="M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 3.5 3.5 0 0 0 7 15Z"/><path d="M8 19h.01M12 20h.01M16 19h.01M10 22h.01M14 22h.01"/>',
+    fog: '<path d="M4 9h16M3 13h18M5 17h14"/>',
+    storm: '<path d="M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 3.5 3.5 0 0 0 7 15Z"/><path d="m12 15-2 4h4l-2 4"/>',
+    sunrise: '<path d="M12 3v6M9 6l3-3 3 3M3 20h18M6 16a6 6 0 0 1 12 0"/>',
+    sunset: '<path d="M12 9V3M9 6l3 3 3-3M3 20h18M6 16a6 6 0 0 1 12 0"/>',
+    bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
+    mega: '<path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    seat: '<path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+    arrow: '<path d="M7 17 17 7M8 7h9v9"/>',
+    spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
+    qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>'
+  };
+  const I = (n, cls = "i") => `<svg class="${cls}" viewBox="0 0 24 24">${P[n] || ""}</svg>`;
 
   let DATA = window.TV_DEMO, usingDemo = true, weather = null;
 
-  // ---------- Ma'lumot: Google Sheet (har varaq CSV) ----------
+  // ---------- Ma'lumot: Google Sheet ----------
   function parseCSV(text) {
     const rows = []; let row = [], cell = "", q = false;
     for (let i = 0; i < text.length; i++) {
@@ -266,198 +328,252 @@
     }
   }
   const rows = (name) => (DATA[name] || []).slice(1).filter(r => r.some(Boolean));
-  function setting(key, def) {
-    const r = rows("Sozlamalar").find(r => (r[0] || "").toLowerCase() === key);
-    return r && r[1] ? r[1] : def;
-  }
+  const setting = (key, def) => { const r = rows("Sozlamalar").find(r => (r[0] || "").toLowerCase() === key); return r && r[1] ? r[1] : def; };
 
-  // ---------- Ob-havo (Open-Meteo, kalitsiz) ----------
-  const WX = (c) => c === 0 ? ["☀️","Ochiq"] : c <= 2 ? ["⛅","Qisman bulutli"] : c === 3 ? ["☁️","Bulutli"]
-    : c <= 48 ? ["🌫️","Tuman"] : c <= 57 ? ["🌦️","Mayda yomg'ir"] : c <= 67 ? ["🌧️","Yomg'ir"]
-    : c <= 77 ? ["❄️","Qor"] : c <= 82 ? ["🌧️","Jala"] : c <= 86 ? ["🌨️","Qor"] : ["⛈️","Momaqaldiroq"];
-  const deg = (t) => `${t > 0 ? "+" : ""}${t}°`;
+  // ---------- Ob-havo (Open-Meteo) ----------
+  const WX = (c) => c === 0 ? ["sun","Ochiq osmon"] : c <= 2 ? ["cloudsun","Qisman bulutli"] : c === 3 ? ["cloud","Bulutli"]
+    : c <= 48 ? ["fog","Tuman"] : c <= 57 ? ["rain","Mayda yomg'ir"] : c <= 67 ? ["rain","Yomg'ir"]
+    : c <= 77 ? ["snow","Qor"] : c <= 82 ? ["rain","Jala"] : c <= 86 ? ["snow","Qor"] : ["storm","Momaqaldiroq"];
+  const deg = (t) => `${t > 0 ? "+" : ""}${Math.round(t)}°`;
   async function loadWeather() {
     if (!C.CITY) return;
     try {
-      const u = `https://api.open-meteo.com/v1/forecast?latitude=${C.CITY.lat}&longitude=${C.CITY.lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
+      const u = `https://api.open-meteo.com/v1/forecast?latitude=${C.CITY.lat}&longitude=${C.CITY.lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset&timezone=auto&forecast_days=1`;
       const j = await (await fetch(u)).json();
-      weather = { t: Math.round(j.current.temperature_2m), code: j.current.weather_code,
-                  max: Math.round(j.daily.temperature_2m_max[0]), min: Math.round(j.daily.temperature_2m_min[0]) };
+      weather = { t: j.current.temperature_2m, feel: j.current.apparent_temperature, hum: j.current.relative_humidity_2m, wind: j.current.wind_speed_10m, code: j.current.weather_code,
+        max: j.daily.temperature_2m_max[0], min: j.daily.temperature_2m_min[0], uv: j.daily.uv_index_max[0],
+        rise: (j.daily.sunrise[0] || "").slice(11, 16), set: (j.daily.sunset[0] || "").slice(11, 16),
+        hourly: (j.hourly.temperature_2m || []).slice(0, 24) };
     } catch (e) { weather = null; }
     tick();
   }
 
   // ---------- Vaqt ----------
-  const fmtDate = (d) => `${d.getDate()}-${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
   const toMin = (s) => { const m = /(\d{1,2})[:.](\d{2})/.exec(s || ""); return m ? +m[1] * 60 + +m[2] : null; };
   function tick() {
-    const d = new Date(), hh = pad(d.getHours()), mm = pad(d.getMinutes());
-    $("clockTop").innerHTML = `${hh}<span>:</span>${mm}`;
-    $("dateTop").innerHTML = `<b>${DAYS[d.getDay()]}</b>${fmtDate(d)}`;
-    const w = $("wxTop");
-    if (weather) { w.style.display = ""; w.innerHTML = `<span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${esc(C.CITY.name)}</span>`; }
-    const bc = cur$(".bigclock");
-    if (bc) { bc.innerHTML = `${hh}<span>:</span>${mm}`; paintBells(); }
+    const d = new Date();
+    $("clock").innerHTML = `${pad(d.getHours())}<span>:</span>${pad(d.getMinutes())}`;
+    $("date").innerHTML = `<b>${DAYS[d.getDay()]}</b>${d.getDate()}-${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
+    $("wxTop").style.display = weather ? "" : "none";
+    if (weather) $("wxTop").innerHTML = `${I(WX(weather.code)[0])}<b>${deg(weather.t)}</b>${esc(C.CITY.name)}`;
+    if (cur$(".lessons")) paintToday();
   }
   function bellState() {
     const d = new Date(), now = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
     const list = rows("Qongiroqlar").map(r => ({ shift: r[0], n: r[1], a: toMin(r[2]), b: toMin(r[3]), as: r[2], bs: r[3] })).filter(x => x.a != null && x.b != null);
-    let label = "Holat", status = "", pct = null;
+    const shifts = [...new Set(list.map(x => x.shift))];
+    let shift = shifts[0];
+    for (const s of shifts) { const l = list.filter(x => x.shift === s); if (now >= Math.min(...l.map(x => x.a)) - 30) shift = s; }
+    let label = "Holat", big = "", meta = "", pct = null;
     const cur = list.find(x => now >= x.a && now < x.b);
-    if (d.getDay() === 0) status = "Bugun dam olish kuni";
-    else if (cur) { label = "Hozir dars"; status = `${cur.shift} · ${cur.n}-dars, ${cur.bs} gacha`; pct = (now - cur.a) / (cur.b - cur.a); }
+    if (d.getDay() === 0) { big = "Bugun dam olish kuni"; }
+    else if (cur) { label = "Hozir dars ketmoqda"; big = `${cur.shift}, ${cur.n}-dars`; meta = `${cur.as} – ${cur.bs} · ${Math.ceil(cur.b - now)} daqiqa qoldi`; pct = (now - cur.a) / (cur.b - cur.a); }
     else {
       const next = list.filter(x => x.a > now).sort((p, q) => p.a - q.a)[0];
       const prev = list.filter(x => x.b <= now).sort((p, q) => q.b - p.b)[0];
-      if (next && prev) { label = "Tanaffus"; status = `Keyingisi: ${next.shift}, ${next.n}-dars ${next.as} da`; pct = (now - prev.b) / (next.a - prev.b); }
-      else if (next) { label = "Tez orada"; status = `Darslar ${next.as} da boshlanadi`; }
-      else if (list.length) status = "Bugungi darslar tugadi";
+      if (next && prev) { label = "Tanaffus"; big = `Keyingi: ${next.n}-dars`; meta = `${next.shift} · ${next.as} da boshlanadi`; pct = (now - prev.b) / (next.a - prev.b); }
+      else if (next) { label = "Tez orada"; big = `Darslar ${next.as} da`; meta = `${next.shift} boshlanadi`; }
+      else if (list.length) { big = "Bugungi darslar tugadi"; meta = "Ertaga ko'rishguncha!"; }
     }
-    return { list, now, cur, label, status, pct };
+    return { list, shifts, shift, now, cur, label, big, meta, pct };
   }
-  function paintBells() {
-    const box = cur$(".bells"); if (!box) return;
-    const { list, now, cur, label, status, pct } = bellState();
-    const nc = cur$(".nowcard");
-    if (nc) {
-      nc.style.display = status ? "" : "none";
-      nc.innerHTML = `<div class="lbl">${label}</div><div class="val">${esc(status)}</div>${pct != null ? `<div class="track"><b style="width:${Math.round(pct * 100)}%"></b></div>` : ""}`;
-    }
-    const shifts = [...new Set(list.map(x => x.shift))];
-    box.innerHTML = shifts.map(s => `<div class="shift glass"><h3>${esc(s)}</h3>${list.filter(x => x.shift === s).map(x =>
-      `<div class="bell ${x === cur ? "cur" : x.b <= now ? "past" : ""}"><span><b>${esc(x.n)}</b>-dars</span><span>${esc(x.as)} – ${esc(x.bs)}</span></div>`).join("")}</div>`).join("");
+  function paintToday() {
+    const st = bellState(), les = cur$(".lessons"); if (!les) return;
+    const l = st.list.filter(x => x.shift === st.shift);
+    les.style.gridTemplateColumns = `repeat(${Math.max(l.length, 1)}, 1fr)`;
+    les.innerHTML = l.map(x => `<div class="card tile ${x === st.cur ? "hl" : x.b <= st.now ? "dim" : ""}">
+      <div class="top-l">${esc(x.n)}-dars ${I(x === st.cur ? "bell" : "clock")}</div><div class="sub">${x === st.cur ? "hozir" : x.b <= st.now ? "tugadi" : "kutilmoqda"}</div>
+      <div class="val">${esc(x.as)}<small>– ${esc(x.bs)}</small></div></div>`).join("");
+    const seg = cur$(".shiftseg"); if (seg) seg.innerHTML = st.shifts.map(s => `<span class="${s === st.shift ? "on" : ""}">${esc(s)}</span>`).join("");
+    const s = cur$(".status");
+    if (s) s.innerHTML = `<h4>${I("bell")} ${st.label}</h4><div class="big">${esc(st.big)}</div><div class="meta">${esc(st.meta)}</div>
+      ${st.pct != null ? `<div class="stripe"><b style="width:${Math.max(8, Math.round(st.pct * 100))}%"></b><span>${Math.round(st.pct * 100)}%</span></div>` : ""}`;
+  }
+
+  // ---------- Harorat grafigi (SVG) ----------
+  function chartSVG(h) {
+    const W = 640, H = 230, L = 34, R = 10, T = 26, B = 28, hrs = [];
+    for (let k = 6; k <= 21; k++) if (h[k] != null) hrs.push([k, h[k]]);
+    if (hrs.length < 2) return "";
+    const vals = hrs.map(p => p[1]), lo = Math.floor(Math.min(...vals) - 2), hi = Math.ceil(Math.max(...vals) + 2);
+    const x = (k) => L + (k - 6) / 15 * (W - L - R), y = (v) => T + (hi - v) / (hi - lo) * (H - T - B);
+    const pts = hrs.map(([k, v]) => [x(k), y(v)]);
+    let d = `M${pts[0][0]},${pts[0][1]}`;
+    for (let i = 1; i < pts.length; i++) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], cx = (x0 + x1) / 2; d += ` C${cx},${y0} ${cx},${y1} ${x1},${y1}`; }
+    const area = `${d} L${pts.at(-1)[0]},${H - B} L${pts[0][0]},${H - B} Z`;
+    const grid = [0, 1, 2, 3].map(i => { const v = lo + (hi - lo) * i / 3, yy = y(v); return `<line x1="${L}" x2="${W - R}" y1="${yy}" y2="${yy}" stroke="rgba(255,255,255,.07)"/><text x="0" y="${yy + 4}">${Math.round(v)}°</text>`; }).join("");
+    const xl = [6, 9, 12, 15, 18, 21].map(k => `<text x="${x(k)}" y="${H - 6}" text-anchor="middle">${pad(k)}:00</text>`).join("");
+    const nowH = new Date().getHours() + new Date().getMinutes() / 60, nk = Math.min(21, Math.max(6, nowH)), ni = Math.min(23, Math.round(nk));
+    const nx = x(nk), ny = y(h[ni] ?? vals[0]);
+    const dots = hrs.filter(([k]) => k % 3 === 0).map(([k, v]) => `<circle cx="${x(k)}" cy="${y(v)}" r="3.5" fill="#f2d08a"/>`).join("");
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+      <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a94e" stop-opacity=".55"/><stop offset="1" stop-color="#d9a94e" stop-opacity="0"/></linearGradient></defs>
+      ${grid}<path d="${area}" fill="url(#ga)"/><path d="${d}" fill="none" stroke="#f2d08a" stroke-width="2.5"/>${dots}
+      <line x1="${nx}" x2="${nx}" y1="${T - 6}" y2="${H - B}" stroke="rgba(242,208,138,.6)" stroke-dasharray="4 4"/>
+      <circle cx="${nx}" cy="${ny}" r="7" fill="#070a16" stroke="#f2d08a" stroke-width="3"/>
+      <rect x="${nx - 26}" y="${Math.max(0, ny - 36)}" width="52" height="22" rx="11" fill="#d9a94e"/><text x="${nx}" y="${Math.max(0, ny - 36) + 15}" text-anchor="middle" style="fill:#1a1406;font-weight:600">${deg(h[ni] ?? vals[0])}</text>
+      ${xl}</svg>`;
   }
 
   // ---------- Slaydlar ----------
-  const initials = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
-  const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
+  const initials = (n) => n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+  const chunk = (a, n) => { const o = []; for (let i = 0; i < a.length; i += n) o.push(a.slice(i, i + n)); return o; };
   function parseDate(s) {
     const m = /(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})/.exec(s || ""); if (m) return new Date(+(m[3].length === 2 ? "20" + m[3] : m[3]), +m[2] - 1, +m[1]);
     const iso = /(\d{4})-(\d{2})-(\d{2})/.exec(s || ""); if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3]);
     return null;
   }
-  const gradeNum = (s) => { const m = /(\d+)/.exec(s || ""); return m ? m[1] : s; };
+  const NAV = [["qabul","school","Qabul"],["bugun","clock","Bugun"],["yutuq","trophy","Yutuqlar"],["tadbir","calendar","Tadbirlar"],["maktab","building","Maktab haqida"],["bday","cake","Tabriklar"]];
+  const motto = () => { const r = rows("Maktab").find(r => (r[0] || "").toLowerCase().startsWith("shior")); return r ? r[1] : "Kelajak bugundan boshlanadi"; };
 
   function buildSlides() {
-    const S = [];
+    const S = [], today = new Date(); today.setHours(0, 0, 0, 0);
+    const D0 = new Date();
+
     // 1. Qabul
     const adm = rows("Qabul");
     if (adm.length) {
-      const total = adm.reduce((s, r) => s + (parseInt(r[1]) || 0), 0);
-      const tiles = adm.slice(0, 11).map((r, i) => { const v = parseInt(r[1]) || 0; return `
-        <div class="g up ${v > 0 ? "open" : "full"}" style="--i:${i + 3}">
-          ${r[2] ? `<div class="note">${esc(r[2])}</div>` : ""}
-          <div class="num">${esc(gradeNum(r[0]))}<small>-sinf</small></div>
-          <div class="seat">${v > 0 ? `<b>${v}</b> bo'sh joy` : "To'lgan"}</div>
-        </div>`; }).join("");
+      const seats = adm.map(r => parseInt(r[1]) || 0), total = seats.reduce((a, b) => a + b, 0), openN = seats.filter(v => v > 0).length;
       S.push({ key: "qabul", html: `
-        <div class="adm">
-          <div class="adm-l">
-            <span class="kicker up">Qabul 2026–2027</span>
-            <h1 class="up" style="--i:1">Qabul <em>ochiq</em></h1>
-            <div class="total up" style="--i:2"><b>${total}</b><span>ta bo'sh o'rin<br>barcha sinflarda</span></div>
-            <div class="qrcard up" style="--i:4">
-              <img src="qr.png" alt="">
-              <div><div class="cap">Onlayn ariza</div><div class="ttl">Telefoningiz bilan skanerlang</div>
-                <div class="ph">${(C.PHONES || []).map(esc).join("<br>")}</div></div>
-            </div>
-          </div>
-          <div class="grades">${tiles}${adm.length <= 11 ? `<div class="g cta up" style="--i:14"><b>Farzandingiz uchun joyni band qiling</b><span>Savollar bo'lsa, qabul bo'limiga murojaat qiling</span></div>` : ""}</div>
+        <div class="head">
+          <div><div class="kicker up">Qabul 2026–2027</div>
+            <h1 class="up" style="--i:1">Farzandingiz uchun<br><em>joy hali bor</em></h1>
+            <p class="lead up" style="--i:2">Qabul davom etmoqda. QR kodni skanerlab onlayn ariza qoldiring yoki qabul bo'limiga qo'ng'iroq qiling.</p></div>
+          <div class="bignum up" style="--i:3"><div class="loc">${I("pin")} Oxford International School</div>
+            <div class="row">${I("seat")}<div class="n">${total}</div></div>
+            <div class="s">bo'sh o'rin barcha sinflarda</div><div class="s">Ochiq: <b>${openN} sinf</b> &nbsp;·&nbsp; To'lgan: <b>${adm.length - openN} sinf</b></div></div>
+        </div>
+        <div class="strip" style="grid-template-columns:repeat(${adm.length},1fr)">${adm.map((r, i) => { const v = seats[i]; return `
+          <div class="card tile up ${v > 0 ? (i === seats.findIndex(s => s > 0) ? "hl" : "") : "dim"}" style="--i:${i + 4}">
+            <div class="top-l">${esc(r[0])} ${I(v > 0 ? "seat" : "lock")}</div><div class="sub">${v > 0 ? "qabul ochiq" : "to'lgan"}</div>
+            <div class="val">${v > 0 ? v : "—"}${v > 0 ? "<small>joy</small>" : ""}</div></div>`; }).join("")}</div>
+        <div class="bottom" style="grid-template-columns:1.25fr 1fr .9fr">
+          <div class="card pad glow up" style="--i:15"><h4>${I("qr")} Onlayn ariza</h4>
+            <div class="qr"><img src="qr.png" alt=""><div><div class="t serif">Telefoningiz kamerasi bilan skanerlang</div>
+              <div class="u">${I("arrow")} ${esc((C.ADMISSION_URL || "").replace(/^https?:\/\//, ""))}</div></div></div></div>
+          <div class="card pad up" style="--i:16"><h4>${I("phone")} Qabul bo'limi</h4>
+            <div class="list">${(C.PHONES || []).map((p, k) => `<div>${I("phone")} Telefon ${k + 1}<b>${esc(p)}</b></div>`).join("")}
+              <div>${I("users")} Sinflar<b>1–11</b></div><div>${I("book")} Ta'lim tili<b>O'zbek, rus</b></div></div></div>
+          <div class="card pad quote up" style="--i:17"><small>OXFORD<br>INTERNATIONAL SCHOOL</small><p>“${esc(motto())}”</p><i></i></div>
         </div>` });
     }
+
     // 2. Bugun
-    const d0 = new Date();
+    const w = weather;
     S.push({ key: "bugun", html: `
-      <div class="today">
-        <div style="display:flex;flex-direction:column;min-height:0">
-          <span class="kicker up">Bugun</span>
-          <div class="bigclock up" style="--i:1">--:--</div>
-          <div class="bigday up" style="--i:2">${DAYS[d0.getDay()]}, <em class="gold">${d0.getDate()}-${MONTHS[d0.getMonth()]}</em></div>
-          ${weather ? `<div class="wxrow up" style="--i:3"><div class="chip"><span>${WX(weather.code)[0]}</span><span class="t">${deg(weather.t)}</span><span>${WX(weather.code)[1]}</span></div><div class="chip">Kun davomida ${deg(weather.min)} … ${deg(weather.max)}</div></div>` : ""}
-          <div class="nowcard glass up" style="--i:4"></div>
-        </div>
-        <div class="bells up" style="--i:3"></div>
-      </div>`, after: tick });
-    // 3. Yutuqlar (6 tadan)
+      <div class="head">
+        <div><div class="kicker up">Bugun</div>
+          <h1 class="up" style="--i:1">${DAYS[D0.getDay()]},<br><em>${D0.getDate()}-${MONTHS[D0.getMonth()]}</em></h1>
+          <p class="lead up" style="--i:2">Dars jadvali, qo'ng'iroqlar va ob-havo, hammasi bir joyda.</p></div>
+        ${w ? `<div class="bignum up" style="--i:3"><div class="loc">${I("pin")} ${esc(C.CITY.name)}</div>
+          <div class="row">${I(WX(w.code)[0])}<div class="n">${deg(w.t)}</div></div>
+          <div class="s">${WX(w.code)[1]}</div><div class="s">Eng yuqori: <b>${deg(w.max)}</b> &nbsp;·&nbsp; Eng past: <b>${deg(w.min)}</b></div></div>` : ""}
+      </div>
+      <div class="up" style="--i:4;display:flex;justify-content:space-between;align-items:center"><h4 style="margin:0;font-size:1.3rem;display:flex;gap:.7rem;align-items:center">${I("bell")} Qo'ng'iroqlar jadvali</h4><div class="seg shiftseg"></div></div>
+      <div class="strip lessons up" style="--i:5"></div>
+      <div class="bottom" style="grid-template-columns:${w ? "1.5fr 1fr 1fr" : "1fr"}">
+        ${w ? `<div class="card pad up" style="--i:6"><div style="display:flex;justify-content:space-between;align-items:center"><h4>${I("thermo")} Kun davomida harorat</h4><div class="seg"><span class="on">Bugun</span><span>06:00–21:00</span></div></div><div class="chart">${chartSVG(w.hourly)}</div></div>
+        <div class="card pad up" style="--i:7"><h4>${I("sun")} Ob-havo tafsilotlari</h4><div class="list">
+          <div>${I("thermo")} His qilinadi<b>${deg(w.feel)}</b></div><div>${I("drop")} Namlik<b>${Math.round(w.hum)}%</b></div>
+          <div>${I("wind")} Shamol<b>${Math.round(w.wind)} km/s</b></div><div>${I("sun")} UV indeks<b>${Math.round(w.uv ?? 0)}</b></div>
+          <div>${I("sunrise")} Quyosh<b>${esc(w.rise)} – ${esc(w.set)}</b></div></div></div>` : ""}
+        <div class="card pad glow status up" style="--i:8"></div>
+      </div>`, after: paintToday });
+
+    // 3. Yutuqlar
     chunk(rows("Yutuqlar"), 6).forEach((part, k, all) => S.push({ key: "yutuq" + k, html: `
-      <span class="kicker up">Faxrimiz${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
-      <h1 class="up" style="--i:1">O'quvchilarimiz <em>yutuqlari</em></h1>
-      <div class="cards">${part.map((r, i) => `
-        <div class="card glass up" style="--i:${i + 2}">${LAUREL}
-          <div class="avatar"><div>${r[3] ? `<img src="${esc(r[3])}" alt="" onerror="this.parentNode.textContent='${esc(initials(r[0] || "?"))}'">` : esc(initials(r[0] || "?"))}</div></div>
-          <div><div class="what">${esc(r[2])}</div><div class="who">${esc(r[0])}</div><div class="cls">${esc(r[1])}</div></div>
-        </div>`).join("")}
-      </div>` }));
+      <div class="head" style="min-height:14rem">
+        <div><div class="kicker up">Faxrimiz${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</div>
+          <h1 class="up" style="--i:1">O'quvchilarimiz <em>yutuqlari</em></h1>
+          <p class="lead up" style="--i:2">Mehnat, bilim va g'alaba. Ular bilan faxrlanamiz.</p></div>
+      </div>
+      <div class="achv">${part.map((r, i) => `
+        <div class="card up ${i === 0 ? "hl" : ""}" style="--i:${i + 3}">
+          <div class="ava"><div>${r[3] ? `<img src="${esc(r[3])}" alt="" onerror="this.parentNode.textContent='${esc(initials(r[0] || "?"))}'">` : esc(initials(r[0] || "?"))}</div></div>
+          <div><div class="what">${esc(r[2])}</div><div class="who">${esc(r[0])}</div><span class="chip">${I("school")} ${esc(r[1])}</span></div>
+        </div>`).join("")}</div>` }));
+
     // 4. Tadbirlar
-    const today = new Date(); today.setHours(0, 0, 0, 0);
     const evs = rows("Tadbirlar").map(r => ({ d: parseDate(r[0]), t: r[1], s: r[2] })).filter(e => e.t && (!e.d || e.d >= today)).sort((a, b) => (a.d || 0) - (b.d || 0));
-    chunk(evs, 4).forEach((part, k, all) => S.push({ key: "tadbir" + k, html: `
-      <span class="kicker up">Yangiliklar va tadbirlar${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</span>
-      <h1 class="up" style="--i:1">Yaqin <em>kunlarda</em></h1>
-      <div class="timeline">${part.map((e, i) => { const days = e.d ? Math.round((e.d - today) / 864e5) : null; return `
-        <div class="ev glass up" style="--i:${i + 2}">
-          <div class="d">${e.d ? `<b>${e.d.getDate()}</b><span>${MON3[e.d.getMonth()]}</span>` : `<b>✦</b>`}</div>
-          <div><div class="t">${esc(e.t)}</div>${e.s ? `<div class="s">${esc(e.s)}</div>` : ""}</div>
-          ${days === 0 ? `<span class="soon">Bugun</span>` : days === 1 ? `<span class="soon">Ertaga</span>` : days != null ? `<span class="left">${days} kundan so'ng</span>` : ""}
-        </div>`; }).join("")}
-      </div>` }));
+    const evDays = new Set(evs.filter(e => e.d && e.d.getMonth() === today.getMonth()).map(e => e.d.getDate()));
+    const calendar = () => { const y = today.getFullYear(), m = today.getMonth(), first = (new Date(y, m, 1).getDay() + 6) % 7, n = new Date(y, m + 1, 0).getDate();
+      let c = ["Du","Se","Ch","Pa","Ju","Sh","Ya"].map(h => `<span class="h">${h}</span>`).join("") + Array.from({ length: first }, () => `<span class="x"></span>`).join("");
+      for (let d = 1; d <= n; d++) c += `<span class="${d === today.getDate() ? "td" : evDays.has(d) ? "ev" : ""}">${d}</span>`; return c; };
+    chunk(evs, 4).forEach((part, k, all) => { const nx = evs[0], days = nx && nx.d ? Math.round((nx.d - today) / 864e5) : null; S.push({ key: "tadbir" + k, html: `
+      <div class="head" style="min-height:14rem">
+        <div><div class="kicker up">Yangiliklar va tadbirlar${all.length > 1 ? ` · ${k + 1}/${all.length}` : ""}</div>
+          <h1 class="up" style="--i:1">Yaqin <em>kunlarda</em></h1>
+          <p class="lead up" style="--i:2">Maktabimizdagi muhim sanalar va tadbirlar.</p></div>
+      </div>
+      <div class="evwrap">
+        <div class="card tasks up" style="--i:3">${part.map((e, i) => { const dd = e.d ? Math.round((e.d - today) / 864e5) : null; return `
+          <div class="task ${i === 0 && k === 0 ? "first" : ""}"><div>
+            <div class="when">${I("calendar")} ${e.d ? `${e.d.getDate()}-${MONTHS[e.d.getMonth()]}, ${DAYS[e.d.getDay()].toLowerCase()}` : "Sana belgilanmagan"}</div>
+            <div class="ttl">${esc(e.t)}</div>${e.s ? `<div class="ds"><b>Tafsilot:</b> ${esc(e.s)}</div>` : ""}</div>
+            ${dd === 0 ? `<span class="badge go">Bugun</span>` : dd === 1 ? `<span class="badge go">Ertaga</span>` : dd != null ? `<span class="badge">${dd} kundan so'ng</span>` : ""}</div>`; }).join("")}
+        </div>
+        <div style="display:grid;grid-template-rows:auto 1fr;gap:1.4rem;min-height:0">
+          ${days != null ? `<div class="card pad hl cd up" style="--i:4"><h4>${I("clock")} Eng yaqin tadbirgacha</h4><div class="num">${days}<small>kun</small></div><div class="lead" style="margin-top:.6rem;font-size:1.15rem">${esc(nx.t)}</div></div>` : ""}
+          <div class="card pad up" style="--i:5"><h4>${I("calendar")} ${MONC[today.getMonth()]} ${today.getFullYear()}</h4><div class="cal">${calendar()}</div></div>
+        </div>
+      </div>` }); });
+
     // 5. Maktab haqida
     const mk = rows("Maktab"), typ = (t) => mk.filter(r => (r[0] || "").toLowerCase().startsWith(t));
-    if (mk.length) {
-      const motto = typ("shior")[0];
-      S.push({ key: "maktab", cls: "hero", html: `
-        <div class="bg"></div><div class="shade"></div>
-        <div class="inner">
-          <span class="kicker up">Maktab haqida</span>
-          <h1 class="up" style="--i:1">${motto ? esc(motto[1]).replace(/(\S+)$/, "<em>$1</em>") : "Oxford International <em>School</em>"}</h1>
-          ${typ("togarak").length ? `<div class="clubs up" style="--i:2">${typ("togarak").map(r => `<span>${esc(r[1])}</span>`).join("")}</div>` : ""}
-          <div class="stats">${typ("raqam").slice(0, 4).map((r, i) => `<div class="stat up" style="--i:${i + 3}"><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div>`).join("")}</div>
-        </div>` });
-    }
+    if (mk.length) S.push({ key: "maktab", full: true, html: `
+      <div class="hero"></div><div class="heroshade"></div>
+      <div class="rel head" style="min-height:24rem">
+        <div><div class="kicker up">Maktab haqida</div>
+          <h1 class="up" style="--i:1;font-size:6.6rem;max-width:62rem">${esc(motto()).replace(/(\S+)$/, "<em>$1</em>")}</h1>
+          <p class="lead up" style="--i:2">Oxford International School: 1–11-sinflar, o'zbek va rus tilida ta'lim, xalqaro imtihonlarga tayyorlov.</p></div>
+      </div>
+      ${typ("togarak").length ? `<div class="rel clubs up" style="--i:3">${typ("togarak").map(r => `<span>${I("spark")} ${esc(r[1])}</span>`).join("")}</div>` : ""}
+      <div class="rel stats" style="margin-top:auto">${typ("raqam").slice(0, 4).map((r, i) => `<div class="card up ${i === 0 ? "hl" : ""}" style="--i:${i + 4}"><b>${esc(r[1])}</b><span>${esc(r[2])}</span></div>`).join("")}</div>` });
+
     // 6. Tug'ilgan kunlar (faqat bugun bo'lsa)
     const dm = `${pad(today.getDate())}.${pad(today.getMonth() + 1)}`;
     const bd = rows("Tugilgan kunlar").filter(r => { const m = /(\d{1,2})[./-](\d{1,2})/.exec(r[2] || ""); return m && `${pad(m[1])}.${pad(m[2])}` === dm; });
     if (bd.length) S.push({ key: "bday", html: `
-      <div class="confetti">${Array.from({ length: 46 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${["#f6dc9c","#e4b75a","#4fd69c","#7d95ff","#ff8fb1"][i % 5]};animation-duration:${6 + (i % 5)}s;animation-delay:-${(i * 0.7) % 6}s"></i>`).join("")}</div>
+      <div class="confetti">${Array.from({ length: 44 }, (_, i) => `<i style="left:${(i * 37) % 100}%;background:${["#f2d08a","#d9a94e","#4c6fff","#ffffff","#b8862f"][i % 5]};animation-duration:${6 + (i % 5)}s;animation-delay:-${(i * .7) % 6}s"></i>`).join("")}</div>
       <div class="bday">
-        <div class="balloon up">🎈</div>
-        <span class="kicker up" style="--i:1;margin-top:1.4rem">Bugun tug'ilgan kun</span>
+        <div class="cake up">${I("cake")}</div>
+        <div class="kicker up" style="--i:1;margin-top:2rem">Bugun tug'ilgan kun</div>
         <h1 class="up" style="--i:2">Tavalludingiz <em>muborak!</em></h1>
-        <div class="names">${bd.map((r, i) => `<div class="p glass up" style="--i:${i + 3}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div>
+        <div class="names">${bd.map((r, i) => `<div class="card up ${i === 0 ? "hl" : ""}" style="--i:${i + 3}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join("")}</div>
       </div>` });
     return S;
   }
 
   // ---------- Aylantirish ----------
   let slides = [], idx = -1, timer = null;
+  const only = new URLSearchParams(location.search).get("slayd");
   function paintTicker() {
     const items = rows("Elonlar").map(r => r[0]).filter(Boolean);
-    const el = $("ticker");
-    el.innerHTML = items.map(t => `<span>${esc(t)}</span>`).join("");
-    el.style.animationDuration = Math.max(25, el.textContent.length * 0.2) + "s";
-    document.querySelector("footer").style.visibility = items.length ? "" : "hidden";
+    $("ticker").innerHTML = items.map(t => `<span>${esc(t)}</span>`).join("");
+    $("ticker").style.animationDuration = Math.max(25, $("ticker").textContent.length * .2) + "s";
+    document.querySelector(".newsbar").style.visibility = items.length ? "" : "hidden";
   }
-  function paintStories(secs) {
-    $("stories").innerHTML = slides.map((_, i) => `<i class="${i < idx ? "done" : ""}"><b></b></i>`).join("");
-    const b = $("stories").children[idx]?.firstChild; if (!b) return;
-    requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; });
+  function paintNav(secs) {
+    const key = slides[idx].key;
+    const present = NAV.filter(n => slides.some(s => s.key.startsWith(n[0])));
+    $("nav").innerHTML = present.map(n => `<a class="${key.startsWith(n[0]) ? "on" : ""}">${I(n[1])}${n[2]}<span class="bar"><b></b></span></a>`).join("");
+    const b = $("nav").querySelector("a.on .bar b");
+    if (b) requestAnimationFrame(() => requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; }));
   }
   function show(next) {
-    const stage = $("stage"), secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
+    const secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
     if (!slides.length) return;
     idx = next % slides.length;
-    stage.querySelectorAll(".slide.on").forEach(old => { old.classList.remove("on"); old.classList.add("off"); setTimeout(() => old.remove(), 1100); });
+    $("stage").querySelectorAll(".slide:not(.gone)").forEach(o => { o.classList.add("gone"); o.classList.remove("on"); setTimeout(() => o.remove(), 1000); });
     const s = slides[idx], el = document.createElement("section");
-    el.className = "slide " + (s.cls || ""); el.innerHTML = s.html; stage.appendChild(el);
+    el.className = "slide"; el.innerHTML = s.html; $("stage").appendChild(el);
+    $("main").classList.toggle("nophoto", !!s.full);
     if (s.after) s.after();
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("on")));
-    paintStories(secs);
+    paintNav(secs);
     clearTimeout(timer);
     if (only) return;
-    timer = setTimeout(() => {
-      if (idx === slides.length - 1) slides = buildSlides(); // har aylanishda yangi ma'lumot
-      show(idx + 1);
-    }, secs * 1000);
+    timer = setTimeout(() => { if (idx === slides.length - 1) slides = buildSlides(); show(idx + 1); }, secs * 1000);
   }
   async function refresh() {
     await loadSheets();
@@ -466,17 +582,14 @@
     slides = buildSlides();
   }
 
-  // Bitta slaydni ko'rish: ?slayd=qabul (tekshirish uchun)
-  const only = new URLSearchParams(location.search).get("slayd");
-
+  $("newsIc").innerHTML = I("mega");
+  $("phoneTop").innerHTML = (C.PHONES || []).length ? `${I("phone")}<b>${esc(C.PHONES[0])}</b>` : "";
   (async () => {
     tick(); setInterval(tick, 1000);
     await refresh();
-    if (only) { idx = Math.max(0, slides.findIndex(s => s.key.startsWith(only))); show(idx); }
-    else show(0);
-    loadWeather().then(() => { if (only) { slides = buildSlides(); show(idx); } }); setInterval(loadWeather, 30 * 60000);
+    idx = only ? Math.max(0, slides.findIndex(s => s.key.startsWith(only))) : 0; show(idx);
+    loadWeather().then(() => { slides = buildSlides(); if (only) show(idx); }); setInterval(loadWeather, 30 * 60000);
     setInterval(refresh, (C.REFRESH_MINUTES || 5) * 60000);
-    // Har kuni tunda soat 3 da sahifa to'liq yangilanadi
     setInterval(() => { if (new Date().getHours() === 3 && performance.now() > 3600e3) location.reload(); }, 600000);
   })();
 })();
