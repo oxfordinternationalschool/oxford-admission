@@ -316,6 +316,25 @@
 
   footer { text-align: center; color: var(--muted); font-size: .78rem; }
 
+  /* Yangi dizayn: telefon va kompyuter uchun bir xil */
+  .calls { position: relative; display: flex; }
+  .call-btn { display: none !important; font: inherit; cursor: pointer; }
+  .call-menu { display: flex; gap: 8px; }
+  main > .intro { display: none; }
+  .hero { min-height: 230px; background-position: center 62%; }
+  .hero .meta, .open-chip, .hero-crest { display: none !important; }
+  .hero h2 { margin: 0; }
+  .shead { display: grid; grid-template-columns: 42px 1fr; align-items: center; column-gap: 14px; }
+  .shead > div:last-child { display: contents; }
+  .sicon { width: 42px; height: 42px; border-radius: 50%; box-shadow: inset 0 0 0 1px #cdd9fb; }
+  .sicon svg.i { width: 19px; height: 19px; }
+  .shead h3 { white-space: nowrap; overflow: hidden; line-height: 1.25; }
+  .shead p { display: none; }
+  .nav { border-top: 0; padding-top: 4px; }
+  .step { gap: 18px; }
+  .progress { padding: 0 28px; border-bottom: 0; background: transparent; }
+  .prow { display: none; }
+  .bar { height: 5px; border-radius: 0; margin: 0 -28px; }
   @media (max-width: 640px) {
     .langs button span { display: none; }
     .hero { min-height: 240px; padding: 18px; }
@@ -327,7 +346,7 @@
     .btn { padding: 12px 16px; }
     #back span { display: none; }
 
-    /* Telefonda: forma birinchi, ma'lumot pastda */
+    /* Telefonda: ixcham shapka */
     .top-in { padding-block: 8px; flex-wrap: nowrap; gap: 8px; }
     .brand { gap: 8px; }
     .brand .mark { width: 38px; height: 38px; border-radius: 10px; }
@@ -336,36 +355,20 @@
     .brand small { display: none; }
     .top-r { flex-wrap: nowrap; gap: 6px; }
     .langs button { padding: 5px 7px; }
-    .call { padding: 8px 10px; gap: 0; }
-    .call > span, .call { font-size: 0; }
-    .call svg.i { width: 18px; height: 18px; }
+    .call-btn { display: flex !important; padding: 8px 10px; }
+    .call-btn svg.i { width: 18px; height: 18px; }
+    .call-menu { display: none !important; position: absolute; right: 0; top: calc(100% + 8px); z-index: 70; flex-direction: column; gap: 6px;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px; box-shadow: 0 18px 40px rgba(20,26,51,.18); }
+    .calls.open .call-menu { display: flex !important; }
+    .call-menu .call { font-size: .9rem; padding: 10px 14px; }
     main { padding-block: 14px 30px; gap: 18px; }
-    main > .card { order: 1; }
-    main > .intro { display: none; }
-    main > footer { order: 3; }
     .hero { min-height: 160px; padding: 18px 20px 16px; background-position: center 60%; }
-    .hero .meta { display: none; }
-    .open-chip { display: none; }
-    .hero-crest { display: none !important; }
-    /* Bosqich sarlavhasi: bir qatorda, dumaloq ikonka */
-    .shead { display: grid; grid-template-columns: 38px 1fr; align-items: center; column-gap: 12px; }
-    .shead > div:last-child { display: contents; }
-    .sicon { width: 38px; height: 38px; border-radius: 50%; box-shadow: inset 0 0 0 1px #cdd9fb; }
-    .sicon svg.i { width: 18px; height: 18px; }
-    .shead h3 { font-size: 1.05rem; white-space: nowrap; overflow: hidden; line-height: 1.25; }
-    .shead p { display: none; }
     /* Ro'yxat telefonda pastdan chiqadigan oyna: sahifa joyidan qimirlamaydi */
     .dd-list { position: fixed !important; left: 10px; right: 10px; top: auto !important; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 60;
       max-height: 70vh; border-radius: 26px !important; padding: 10px !important; box-shadow: 0 -10px 40px rgba(20,26,51,.25); animation: sheet .2s ease-out; }
     @keyframes sheet { from { transform: translateY(30px); opacity: 0; } to { transform: none; opacity: 1; } }
     body.dd-sheet-open::after { content: ""; position: fixed; inset: 0; background: rgba(15,20,40,.35); z-index: 55; }
-
-    .nav { border-top: 0; padding-top: 4px; }
-    .step { gap: 18px; }
-    .hero h2 { margin: 0; }
-    .progress { padding-top: 0; padding-bottom: 0; border-bottom: 0; background: transparent; }
-    .prow { display: none; }
-    .bar { height: 5px; border-radius: 0; margin: 0 -18px; }
+    .bar { margin: 0 -18px; }
     form { padding-top: 20px; padding-bottom: 22px; }
   }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -409,7 +412,13 @@
         <button type="button" data-lang="ru"><b>RU</b><span>Русский</span></button>
         <button type="button" data-lang="en"><b>EN</b><span>English</span></button>
       </div>
-      <a class="call" href="tel:+998787070880" target="_top"><svg class="i"><use href="#i-phone"/></svg><span data-t="callLbl"></span>&nbsp;+998 (78) 707-08-80</a>
+      <div class="calls" id="calls">
+        <button type="button" class="call call-btn" id="callBtn" aria-haspopup="true" aria-expanded="false" aria-label="Telefon"><svg class="i"><use href="#i-phone"/></svg></button>
+        <div class="call-menu">
+          <a class="call" href="tel:+998933398393" target="_top"><svg class="i"><use href="#i-phone"/></svg>+998 (93) 339-83-93</a>
+          <a class="call" href="tel:+998787070880" target="_top"><svg class="i"><use href="#i-phone"/></svg>+998 (78) 707-08-80</a>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -915,7 +924,7 @@
   function fit(){
     document.querySelectorAll('.shead h3').forEach(function(h){
       h.style.fontSize='';
-      if (window.innerWidth > 640 || !h.offsetParent) return;
+      if (!h.offsetParent) return;
       var fs=parseFloat(getComputedStyle(h).fontSize);
       while (h.scrollWidth > h.clientWidth && fs > 11) { fs -= 0.5; h.style.fontSize = fs + 'px'; }
     });
@@ -927,6 +936,15 @@
   setTimeout(fit, 300);
 })();
 </script>
+<script>
+(function(){
+  var c=document.getElementById('calls'), b=document.getElementById('callBtn');
+  if(!c||!b) return;
+  b.addEventListener('click',function(e){ e.stopPropagation(); var o=c.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
+  document.addEventListener('click',function(e){ if(!c.contains(e.target)){ c.classList.remove('open'); b.setAttribute('aria-expanded','false'); } });
+})();
+</script>
+
 
 </body>
 </html>
