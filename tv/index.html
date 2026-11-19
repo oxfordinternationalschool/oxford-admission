@@ -7,10 +7,10 @@
 <title>Oxford International School · Reception</title>
 <link rel="icon" type="image/png" href="logo.png">
 <style>
-  /* Shriftlar sayt ichida (internetga bog'liq emas) */
-  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-500.woff2) format("woff2"); font-weight: 500; }
-  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-600.woff2) format("woff2"); font-weight: 600; }
-  @font-face { font-family: "Cormorant"; src: url(fonts/Cormorant-500i.woff2) format("woff2"); font-weight: 500; font-style: italic; }
+  /* Shriftlar sayt ichida: internet sekin bo'lsa ham dizayn buzilmaydi */
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-SemiBold.ttf); font-weight: 600; }
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: "Playfair"; src: url(fonts/PlayfairDisplay-MediumItalic.ttf); font-weight: 500; font-style: italic; }
   @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-SemiBold.ttf); font-weight: 600; }
   @font-face { font-family: "Montserrat"; src: url(fonts/Montserrat-Bold.ttf); font-weight: 700; }
   @font-face { font-family: "Inter"; src: url(fonts/Inter-Medium.otf); font-weight: 500; }
@@ -26,40 +26,15 @@
     --serif: "Playfair", Georgia, serif;
     --sans: "Inter", "Segoe UI", system-ui, sans-serif;
     --caps: "Montserrat", "Segoe UI", sans-serif;
+    --gold-grad: linear-gradient(135deg, #f6dc9c 0%, #e4b75a 45%, #b8862f 100%);
   }
   html { font-size: min(calc(100vw / 120), calc(100vh / 67.5)); }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
-  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-columns: 21rem 1fr; height: 100vh; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+  body { font-family: var(--sans); color: var(--white); cursor: none; display: grid; grid-template-columns: 1fr; height: 100vh; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
   svg.i { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
-  /* ---------- Chap panel ---------- */
-  aside { position: relative; z-index: 3; display: flex; flex-direction: column; padding: 2.6rem 1.6rem 2rem; background: linear-gradient(180deg, rgba(10,15,38,.96), rgba(5,8,22,.98)); border-right: 1px solid var(--line); box-shadow: 1rem 0 4rem rgba(0,0,0,.35); }
-  .brand { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.1rem; }
-  .crest { width: 5.4rem; height: 5.4rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .3rem rgba(228,183,90,.28), 0 0 3rem rgba(228,183,90,.25); }
-  .crest img { height: 4rem; }
-  .brand b { font-family: var(--serif); font-weight: 600; font-size: 2rem; letter-spacing: .32em; margin-right: -.32em; line-height: 1; }
-  .brand small { font-family: var(--caps); font-size: .72rem; font-weight: 600; letter-spacing: .34em; margin-right: -.34em; text-transform: uppercase; color: var(--gold); }
-  nav { margin-top: 3.4rem; display: flex; flex-direction: column; gap: .55rem; }
-  nav .it { position: relative; display: flex; align-items: center; gap: 1.1rem; padding: 1rem 1.2rem; border-radius: 1.2rem; font-size: 1.3rem; font-weight: 500; color: var(--ink-3); border: 1px solid transparent; overflow: hidden; transition: color .6s, background .6s, border-color .6s; }
-  nav .it svg { font-size: 1.7rem; }
-  nav .it.on { color: #fff; background: linear-gradient(90deg, rgba(228,183,90,.20), rgba(228,183,90,.04)); border-color: rgba(228,183,90,.45); box-shadow: 0 0 2.4rem rgba(228,183,90,.12); }
-  nav .it.on svg { color: var(--gold); }
-  nav .it .pg { position: absolute; left: 1.2rem; right: 1.2rem; bottom: .35rem; height: .18rem; border-radius: 1rem; background: rgba(255,255,255,.08); opacity: 0; }
-  nav .it.on .pg { opacity: 1; }
-  nav .it .pg b { display: block; height: 100%; width: 0; border-radius: 1rem; background: var(--gold-grad); }
-  .side-bottom { margin-top: auto; }
-  .clockcard { padding: 1.6rem 1.4rem; border-radius: 1.6rem; background: linear-gradient(160deg, rgba(79,107,255,.22), rgba(79,107,255,.04) 60%); border: 1px solid rgba(143,162,255,.22); position: relative; overflow: hidden; }
-  .clockcard::before { content: ""; position: absolute; width: 14rem; height: 14rem; border-radius: 50%; right: -7rem; top: -7rem; background: radial-gradient(circle, rgba(79,107,255,.45), transparent 70%); }
-  .clockcard .clock { position: relative; font-family: var(--caps); font-size: 4.4rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
-  .clockcard .clock span { animation: blink 2s steps(1) infinite; color: var(--gold); }
   @keyframes blink { 50% { opacity: .25; } }
-  .clockcard .day { position: relative; margin-top: .8rem; font-family: var(--caps); font-size: .85rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
-  .clockcard .date { position: relative; margin-top: .3rem; font-size: 1.25rem; color: var(--ink-2); }
-  .motto { margin-top: 2rem; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.35rem; line-height: 1.35; color: var(--ink-2); }
-  .motto::after { content: ""; display: block; width: 3rem; height: 1px; background: var(--gold); margin-top: 1rem; box-shadow: 4rem 0 0 var(--gold); }
-  .skyline { display: block; width: 100%; margin-top: 1.4rem; color: rgba(228,183,90,.55); }
-
   /* ---------- Asosiy qism ---------- */
   .main { position: relative; display: grid; grid-template-rows: 6.8rem 1fr 5.6rem; min-width: 0; overflow: hidden; }
   .backdrop { position: absolute; right: 0; top: 0; width: 75%; height: 80%; z-index: 0; background: url(maktab.jpg) center 35%/cover; filter: brightness(.6) saturate(.95) contrast(1.05);
@@ -71,9 +46,9 @@
   .aurora i:nth-child(1) { width: 55rem; height: 32rem; left: -18rem; bottom: -14rem; background: #2438b8; opacity: .55; }
   .aurora i:nth-child(2) { width: 40rem; height: 24rem; left: 30rem; bottom: -18rem; background: #3a55ff; opacity: .28; animation-duration: 52s; }
   @keyframes drift { to { transform: translate(8rem, -3rem) scale(1.15); } }
-  .topbar, #stage, .bottombar { position: relative; z-index: 2; }
+  #stage, .bottombar { position: relative; z-index: 2; } .topbar { z-index: 2; }
 
-  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 3.2rem; }
+  .topbar { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 3.2rem; }
   .pill { display: inline-flex; align-items: center; gap: 1rem; height: 3.8rem; padding: 0 1.6rem; border-radius: 3rem; background: rgba(8,12,32,.55); border: 1px solid var(--line-2); backdrop-filter: blur(1.2rem); font-size: 1.25rem; color: var(--ink-2); font-weight: 500; }
   .pill svg { font-size: 1.5rem; color: var(--gold); }
   .pill .sep { width: 1px; height: 1.6rem; background: var(--line-2); }
@@ -81,6 +56,19 @@
   .pill .wx svg { font-size: 1.8rem; }
   .roundbtn { width: 3.8rem; height: 3.8rem; border-radius: 50%; display: grid; place-items: center; background: rgba(8,12,32,.55); border: 1px solid var(--line-2); color: var(--gold); font-size: 1.6rem; }
   .topright { display: flex; gap: 1rem; align-items: center; }
+  .topleft { display: flex; align-items: center; gap: 2rem; }
+  .brand { display: flex; align-items: center; gap: 1.1rem; }
+  .crest { width: 4.4rem; height: 4.4rem; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 .25rem rgba(228,183,90,.28), 0 0 2.4rem rgba(228,183,90,.22); }
+  .crest img { height: 3.3rem; }
+  .brand b { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.9rem; letter-spacing: .3em; line-height: 1; }
+  .brand small { display: block; font-family: var(--caps); font-size: .7rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-top: .45rem; }
+  .timepill { gap: 1.2rem; }
+  .timepill .clock { font-family: var(--caps); font-size: 2.2rem; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+  .timepill .clock span { animation: blink 2s steps(1) infinite; color: var(--gold); }
+  .timepill .dd { display: flex; flex-direction: column; line-height: 1.25; font-size: 1.05rem; }
+  .timepill .dd b { font-family: var(--caps); font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .slideprog { position: absolute; left: 3.2rem; right: 3.2rem; bottom: 0; height: .2rem; border-radius: 1rem; background: rgba(255,255,255,.07); overflow: hidden; }
+  .slideprog b { display: block; height: 100%; width: 0; background: var(--gold-grad); border-radius: 1rem; }
 
   /* ---------- Slaydlar ---------- */
   #stage { overflow: hidden; }
@@ -268,38 +256,19 @@
 </style>
 </head>
 <body>
-<aside>
-  <div class="brand">
-    <div class="crest"><img src="logo.png" alt=""></div>
-    <b>OXFORD</b>
-    <small>International School</small>
-  </div>
-  <nav id="nav"></nav>
-  <div class="side-bottom">
-    <div class="clockcard">
-      <div class="clock" id="clockTop">--:--</div>
-      <div class="day" id="dayTop"></div>
-      <div class="date" id="dateTop"></div>
-    </div>
-    <div class="motto" id="motto">Kelajak bilan bugundan tanishing.</div>
-    <svg class="skyline" viewBox="0 0 180 46" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
-      <path d="M0 45h180"/>
-      <path d="M8 45V22h5v23M10.5 22v-4M22 45V30h14v15"/>
-      <path d="M44 45V24h28v21M44 24q14-20 28 0M58 6v-2M58 10q-3 3 0 4q3-1 0-4"/>
-      <path d="M78 45V14h4v31M80 14v-4M88 45V28h22v17M88 28q11-14 22 0M99 16v-2"/>
-      <path d="M118 45V14h4v31M120 14v-4M130 45V32h18v13M154 45V26h5v19M156.5 26v-4M166 45V34h12v11"/>
-    </svg>
-  </div>
-</aside>
 <div class="main">
   <div class="backdrop"></div>
   <div class="aurora"><i></i><i></i></div>
   <div class="topbar">
-    <div class="pill" id="wxPill"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b id="city"></b><span id="wxTop" style="display:contents"></span></div>
+    <div class="topleft">
+      <div class="brand"><div class="crest"><img src="logo.png" alt=""></div><div><b>OXFORD</b><small>International School</small></div></div>
+      <div class="pill" id="wxPill"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b id="city"></b><span id="wxTop" style="display:contents"></span></div>
+    </div>
     <div class="topright">
       <div class="pill" id="phonePill"></div>
-      <div class="roundbtn"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></div>
+      <div class="pill timepill"><div class="clock" id="clockTop">--:--</div><span class="sep"></span><div class="dd"><b id="dayTop"></b><span id="dateTop"></span></div></div>
     </div>
+    <div class="slideprog"><b id="prog"></b></div>
   </div>
   <main id="stage"></main>
   <div class="bottombar">
@@ -323,6 +292,7 @@
   const SHEETS = ["Qabul","Qongiroqlar","Yutuqlar","Tadbirlar","Maktab","Tugilgan kunlar","Elonlar","Sozlamalar"];
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const cur$ = (sel) => { const l = $("stage").lastElementChild; return l ? l.querySelector(sel) : null; };
   const pad = (n) => String(n).padStart(2, "0");
   // Tekshirish uchun: ?soat=10:30 sahifani shu vaqtdek ko'rsatadi
   const FAKE = /^(\d{1,2}):(\d{2})$/.exec(new URLSearchParams(location.search).get("soat") || "");
@@ -366,7 +336,7 @@
 
   let DATA = window.TV_DEMO, usingDemo = true, weather = null;
 
-  // ---------- Ma'lumot: Google Sheet ----------
+  // ---------- Ma'lumot: Google Sheet (har varaq CSV) ----------
   function parseCSV(text) {
     const rows = []; let row = [], cell = "", q = false;
     for (let i = 0; i < text.length; i++) {
@@ -398,7 +368,10 @@
     }
   }
   const rows = (name) => (DATA[name] || []).slice(1).filter(r => r.some(Boolean));
-  const setting = (key, def) => { const r = rows("Sozlamalar").find(r => (r[0] || "").toLowerCase() === key); return r && r[1] ? r[1] : def; };
+  function setting(key, def) {
+    const r = rows("Sozlamalar").find(r => (r[0] || "").toLowerCase() === key);
+    return r && r[1] ? r[1] : def;
+  }
 
   // ---------- Ob-havo (Open-Meteo, kalitsiz) ----------
   const WX = (c) => c === 0 ? ["sun","Ochiq"] : c <= 2 ? ["partly","Qisman bulutli"] : c === 3 ? ["cloud","Bulutli"]
@@ -408,12 +381,10 @@
   async function loadWeather() {
     if (!C.CITY) return;
     try {
-      const u = `https://api.open-meteo.com/v1/forecast?latitude=${C.CITY.lat}&longitude=${C.CITY.lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset&timezone=auto&forecast_days=1`;
+      const u = `https://api.open-meteo.com/v1/forecast?latitude=${C.CITY.lat}&longitude=${C.CITY.lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
       const j = await (await fetch(u)).json();
-      weather = { t: j.current.temperature_2m, feel: j.current.apparent_temperature, hum: j.current.relative_humidity_2m, wind: j.current.wind_speed_10m, code: j.current.weather_code,
-        max: j.daily.temperature_2m_max[0], min: j.daily.temperature_2m_min[0], uv: j.daily.uv_index_max[0],
-        rise: (j.daily.sunrise[0] || "").slice(11, 16), set: (j.daily.sunset[0] || "").slice(11, 16),
-        hourly: (j.hourly.temperature_2m || []).slice(0, 24) };
+      weather = { t: Math.round(j.current.temperature_2m), code: j.current.weather_code,
+                  max: Math.round(j.daily.temperature_2m_max[0]), min: Math.round(j.daily.temperature_2m_min[0]) };
     } catch (e) { weather = null; }
     tick();
   }
@@ -473,8 +444,8 @@
   }
 
   // ---------- Slaydlar ----------
-  const initials = (n) => n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
-  const chunk = (a, n) => { const o = []; for (let i = 0; i < a.length; i += n) o.push(a.slice(i, i + n)); return o; };
+  const initials = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+  const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
   function parseDate(s) {
     const m = /(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})/.exec(s || ""); if (m) return new Date(+(m[3].length === 2 ? "20" + m[3] : m[3]), +m[2] - 1, +m[1]);
     const iso = /(\d{4})-(\d{2})-(\d{2})/.exec(s || ""); if (iso) return new Date(+iso[1], +iso[2] - 1, +iso[3]);
@@ -494,9 +465,7 @@
   }
 
   function buildSlides() {
-    const S = [], today = new Date(); today.setHours(0, 0, 0, 0);
-    const D0 = new Date();
-
+    const S = [];
     // 1. Qabul
     const adm = rows("Qabul");
     if (adm.length) {
@@ -526,7 +495,6 @@
           </div>
         </div>` });
     }
-
     // 2. Bugun
     const d0 = NOW();
     S.push({ key: "bugun", nav: "bugun", cls: "s-bugun", html: `
@@ -589,7 +557,7 @@
     const mk = rows("Maktab"), typ = (t) => mk.filter(r => (r[0] || "").toLowerCase().startsWith(t));
     if (mk.length) {
       const motto = typ("shior")[0];
-      if (motto) $("motto").textContent = motto[1] + ".";
+      
       S.push({ key: "maktab", nav: "maktab", cls: "hero", html: `
         <div class="bg"></div><div class="shade"></div>
         <div class="inner">
@@ -618,7 +586,6 @@
   // ---------- Aylantirish ----------
   const NAV = { qabul: "Qabul", bugun: "Bugungi kun", yutuq: "Yutuqlar", tadbir: "Tadbirlar", maktab: "Maktab haqida", bday: "Tug'ilgan kun" };
   let slides = [], idx = -1, timer = null;
-  const only = new URLSearchParams(location.search).get("slayd");
   function paintTicker() {
     const items = rows("Elonlar").map(r => r[0]).filter(Boolean);
     const el = $("ticker");
@@ -627,25 +594,26 @@
     $("news").style.visibility = items.length ? "" : "hidden";
   }
   function paintNav(secs) {
-    const keys = [...new Set(slides.map(s => s.nav))], curKey = slides[idx]?.nav;
-    $("nav").innerHTML = keys.map(k => `<div class="it ${k === curKey ? "on" : ""}">${I(k)}<span>${NAV[k]}</span><div class="pg"><b></b></div></div>`).join("");
-    const b = $("nav").querySelector(".it.on .pg b"); if (!b) return;
+    const b = $("prog"); if (!b) return;
+    b.style.transition = "none"; b.style.width = "0";
     requestAnimationFrame(() => requestAnimationFrame(() => { b.style.transition = `width ${secs}s linear`; b.style.width = "100%"; }));
   }
   function show(next) {
-    const secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
+    const stage = $("stage"), secs = Math.max(5, parseInt(setting("slayd_soniya", C.SLIDE_SECONDS)) || 12);
     if (!slides.length) return;
     idx = next % slides.length;
     stage.querySelectorAll(".slide:not(.off)").forEach(old => { old.classList.remove("on"); old.classList.add("off"); setTimeout(() => old.remove(), 1100); });
     const s = slides[idx], el = document.createElement("section");
-    el.className = "slide"; el.innerHTML = s.html; $("stage").appendChild(el);
-    $("main").classList.toggle("nophoto", !!s.full);
+    el.className = "slide " + (s.cls || ""); el.innerHTML = s.html; stage.appendChild(el);
     if (s.after) s.after();
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("on")));
     paintNav(secs);
     clearTimeout(timer);
     if (only) return;
-    timer = setTimeout(() => { if (idx === slides.length - 1) slides = buildSlides(); show(idx + 1); }, secs * 1000);
+    timer = setTimeout(() => {
+      if (idx === slides.length - 1) slides = buildSlides(); // har aylanishda yangi ma'lumot
+      show(idx + 1);
+    }, secs * 1000);
   }
   async function refresh() {
     await loadSheets();
@@ -656,14 +624,17 @@
     slides = buildSlides();
   }
 
-  $("newsIc").innerHTML = I("mega");
-  $("phoneTop").innerHTML = (C.PHONES || []).length ? `${I("phone")}<b>${esc(C.PHONES[0])}</b>` : "";
+  // Bitta slaydni ko'rish: ?slayd=qabul (tekshirish uchun)
+  const only = new URLSearchParams(location.search).get("slayd");
+
   (async () => {
     tick(); setInterval(tick, 1000);
     await refresh();
-    idx = only ? Math.max(0, slides.findIndex(s => s.key.startsWith(only))) : 0; show(idx);
-    loadWeather().then(() => { slides = buildSlides(); if (only) show(idx); }); setInterval(loadWeather, 30 * 60000);
+    if (only) { idx = Math.max(0, slides.findIndex(s => s.key.startsWith(only))); show(idx); }
+    else show(0);
+    loadWeather().then(() => { if (only) { slides = buildSlides(); show(idx); } }); setInterval(loadWeather, 30 * 60000);
     setInterval(refresh, (C.REFRESH_MINUTES || 5) * 60000);
+    // Har kuni tunda soat 3 da sahifa to'liq yangilanadi
     setInterval(() => { if (new Date().getHours() === 3 && performance.now() > 3600e3) location.reload(); }, 600000);
   })();
 })();
