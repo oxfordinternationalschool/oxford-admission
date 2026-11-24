@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Oxford International School: 1-sinf va 5–11-sinflarga qabul arizasi. O'zbek va rus tilida ta'lim.">
+<meta name="description" content="Oxford International School: 0-sinf (maktabgacha), 1-sinf va 5–11-sinflarga qabul arizasi. O'zbek va rus tilida ta'lim.">
 <meta property="og:title" content="Oxford International School — qabulga ariza">
-<meta property="og:description" content="1-sinf va 5–11-sinflarga qabul. Arizani 5 bosqichda to'ldiring.">
+<meta property="og:description" content="0, 1 va 5–11-sinflarga qabul. Arizani 5 bosqichda to'ldiring.">
 <meta name="theme-color" content="#1b2141">
 <link rel="icon" type="image/png" href="logo.png">
 <title>Qabulga ariza | Oxford International School</title>
@@ -555,7 +555,7 @@
   // Google Apps Script havolasi (/exec). Sahifa o'z saytingizda turganda arizalar shu manzilga yuboriladi.
   var API_URL = 'https://script.google.com/macros/s/AKfycbyEitRaF5y9SuNvyV9GuhGn0B8DF-ZX7cgtjNDc8fYWuiA-leMfjKnRs618x2eoWD_nrQ/exec';
 
-  var GRADES = [1, 5, 6, 7, 8, 9, 10, 11];
+  var GRADES = [0, 1, 5, 6, 7, 8, 9, 10, 11];
   var SOURCES = [
     { v: 'Instagram', ic: 'ig', cls: 's-ig', uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
     { v: 'Telegram', ic: 'tg', cls: 's-tg', uz: 'Telegram', ru: 'Telegram', en: 'Telegram' },
@@ -583,14 +583,14 @@
       short: ["Ma'lumotlar", 'Sinf', "Ta'lim tili", 'Telefon', "So'nggi savol"],
       next: 'Keyingisi: ', back: 'Oldingi bosqich', submit: 'Arizani yuborish', sending: 'Yuborilmoqda...',
       q1: "O'quvchining ismi va familiyasi", h1t: "Hujjatlardagi kabi to'liq yozing.",
-      q2: "O'quvchi sinfi", h2: '1-sinf hamda 5–11 sinflardan mos darajani tanlang.',
+      q2: "O'quvchi sinfi", h2: "0-sinf (maktabgacha), 1-sinf hamda 5–11 sinflardan mos darajani tanlang.",
       q3: "Qaysi tilda o'qiydi?", h3: "Sinflar o'qish tili bo'yicha shakllantiriladi.",
       q4: "Siz bilan qanday bog'lanamiz?", h4: "Qabul bo'limi shu raqamga qo'ng'iroq qiladi.",
       q5: 'Biz haqimizda qayerdan eshitdingiz?', h5: "Ro'yxatdan bitta javobni tanlang.",
       fn: 'Ism', ln: 'Familiya', fnPh: 'Masalan: Azizbek', lnPh: 'Masalan: Karimov',
-      gradeLbl: 'Sinfni tanlang', gradeHint: '1-sinf va 5–11 sinflar', gradePh: 'Sinf darajasini tanlang', gradePhSub: "Ro'yxatni ochish uchun bosing",
-      grade: function (g) { return g + '-sinf'; },
-      gP: "Boshlang'ich ta'lim", gM: "O'rta ta'lim", gH: 'Yuqori sinflar',
+      gradeLbl: 'Sinfni tanlang', gradeHint: '0, 1 va 5–11 sinflar', gradePh: 'Sinf darajasini tanlang', gradePhSub: "Ro'yxatni ochish uchun bosing",
+      grade: function (g) { return g === 0 ? "0-sinf (Maktabgacha ta'lim)" : g + '-sinf'; },
+      gK: "Maktabgacha ta'lim", gP: "Boshlang'ich ta'lim", gM: "O'rta ta'lim", gH: 'Yuqori sinflar',
       langLbl: "Ta'lim tili", uzT: "O'zbek tili", ruT: 'Rus tili',
       phoneLbl: 'Telefon raqam', phone2Lbl: "Qo'shimcha telefon raqam", optional: 'Ixtiyoriy', phoneHint: 'Ota-ona yoki vasiy raqami', srcLbl: 'Manbani tanlang', srcPh: 'Qayerdan eshitdingiz?', srcPhSub: "Ro'yxatni ochish uchun bosing", otherPh: 'Qayerdan eshitganingizni yozing',
       eName: 'Kamida 2 ta harf yozing', eGrade: 'Sinfni tanlang', eLang: "Ta'lim tilini tanlang", ePhone: '9 ta raqam kiriting, masalan 90 123 45 67', eSrc: 'Javobni tanlang yoki yozing',
@@ -608,14 +608,14 @@
       short: ['Данные', 'Класс', 'Язык обучения', 'Телефон', 'Последний вопрос'],
       next: 'Далее: ', back: 'Назад', submit: 'Отправить заявку', sending: 'Отправка...',
       q1: 'Имя и фамилия ученика', h1t: 'Пишите полностью, как в документах.',
-      q2: 'Класс ученика', h2: 'Выберите 1-й класс или 5–11 классы.',
+      q2: 'Класс ученика', h2: 'Выберите 0 класс (дошкольный), 1-й класс или 5–11 классы.',
       q3: 'На каком языке будет учиться?', h3: 'Классы формируются по языку обучения.',
       q4: 'Как с вами связаться?', h4: 'Приёмная комиссия позвонит на этот номер.',
       q5: 'Откуда вы узнали о нас?', h5: 'Выберите один вариант из списка.',
       fn: 'Имя', ln: 'Фамилия', fnPh: 'Например: Азизбек', lnPh: 'Например: Каримов',
-      gradeLbl: 'Выберите класс', gradeHint: '1 и 5–11 классы', gradePh: 'Выберите класс', gradePhSub: 'Нажмите, чтобы открыть список',
-      grade: function (g) { return g + ' класс'; },
-      gP: 'Начальная школа', gM: 'Средняя школа', gH: 'Старшие классы',
+      gradeLbl: 'Выберите класс', gradeHint: '0, 1 и 5–11 классы', gradePh: 'Выберите класс', gradePhSub: 'Нажмите, чтобы открыть список',
+      grade: function (g) { return g === 0 ? '0 класс (дошкольное образование)' : g + ' класс'; },
+      gK: 'Дошкольное образование', gP: 'Начальная школа', gM: 'Средняя школа', gH: 'Старшие классы',
       langLbl: 'Язык обучения', uzT: 'Узбекский', ruT: 'Русский',
       phoneLbl: 'Номер телефона', phone2Lbl: 'Дополнительный номер', optional: 'Необязательно', phoneHint: 'Номер родителя или опекуна', srcLbl: 'Выберите источник', srcPh: 'Откуда вы узнали?', srcPhSub: 'Нажмите, чтобы открыть список', otherPh: 'Напишите, откуда вы узнали',
       eName: 'Введите не меньше 2 букв', eGrade: 'Выберите класс', eLang: 'Выберите язык обучения', ePhone: 'Введите 9 цифр, например 90 123 45 67', eSrc: 'Выберите или напишите ответ',
@@ -633,14 +633,14 @@
       short: ['Details', 'Grade', 'Language', 'Phone', 'Last question'],
       next: 'Next: ', back: 'Back', submit: 'Submit application', sending: 'Sending...',
       q1: "Student's first and last name", h1t: 'Write it in full, as in official documents.',
-      q2: "Student's grade", h2: 'Choose grade 1 or grades 5–11.',
+      q2: "Student's grade", h2: 'Choose grade 0 (pre-school), grade 1 or grades 5–11.',
       q3: 'Language of instruction', h3: 'Classes are formed by language of instruction.',
       q4: 'How can we reach you?', h4: 'The admissions office will call this number.',
       q5: 'How did you hear about us?', h5: 'Choose one option from the list.',
       fn: 'First name', ln: 'Last name', fnPh: 'e.g. Azizbek', lnPh: 'e.g. Karimov',
-      gradeLbl: 'Select grade', gradeHint: 'Grade 1 and 5–11', gradePh: 'Select grade level', gradePhSub: 'Click to open the list',
-      grade: function (g) { return 'Grade ' + g; },
-      gP: 'Primary school', gM: 'Middle school', gH: 'Upper grades',
+      gradeLbl: 'Select grade', gradeHint: 'Grades 0, 1 and 5–11', gradePh: 'Select grade level', gradePhSub: 'Click to open the list',
+      grade: function (g) { return g === 0 ? 'Grade 0 (Pre-school)' : 'Grade ' + g; },
+      gK: 'Pre-school', gP: 'Primary school', gM: 'Middle school', gH: 'Upper grades',
       langLbl: 'Language', uzT: 'Uzbek', ruT: 'Russian',
       phoneLbl: 'Phone number', phone2Lbl: 'Additional phone number', optional: 'Optional', phoneHint: "Parent's or guardian's number", srcLbl: 'Choose a source', srcPh: 'Where did you hear about us?', srcPhSub: 'Click to open the list', otherPh: 'Tell us where you heard about us',
       eName: 'Enter at least 2 letters', eGrade: 'Choose a grade', eLang: 'Choose a language', ePhone: 'Enter 9 digits, e.g. 90 123 45 67', eSrc: 'Choose or type an answer',
@@ -754,9 +754,9 @@
     placeholder: function () { return [t('gradePh'), t('gradePhSub')]; },
     items: function () {
       return GRADES.map(function (g) {
-        var band = g === 1 ? ['g-p', t('gP')] : g <= 9 ? ['g-m', t('gM')] : ['g-h', t('gH')];
+        var band = g === 0 ? ['g-p', t('gK')] : g === 1 ? ['g-p', t('gP')] : g <= 9 ? ['g-m', t('gM')] : ['g-h', t('gH')];
         var lbl = t('grade')(g);
-        return { v: g + '-sinf', label: lbl, num: String(g), word: lbl.replace(String(g), '').replace(/^[\s-]+|[\s-]+$/g, ''), btnSub: band[1], group: band[1], icon: '<span class="oi g-m">' + g + '</span>' };
+        return { v: g + '-sinf', label: lbl, num: String(g), word: lbl.replace(String(g), '').replace(/^[\s-]+|[\s-]+$/g, ''), btnSub: g === 0 ? '' : band[1], group: band[1], icon: '<span class="oi g-m">' + g + '</span>' };
       });
     },
     get: function () { return state.sinf; },
